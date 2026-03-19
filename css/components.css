@@ -366,6 +366,7 @@
 .blog-card__category--tech { background: rgba(124, 111, 238, 0.15); color: var(--accent-tech); }
 .blog-card__category--life { background: rgba(244, 132, 95, 0.15); color: var(--accent-life); }
 .blog-card__category--travel { background: rgba(6, 214, 160, 0.15); color: var(--accent-travel); }
+.blog-card__category--medium { background: rgba(0, 171, 108, 0.15); color: #00ab6c; }
 
 .blog-card__date { font-size: 0.8rem; color: var(--text-3); }
 

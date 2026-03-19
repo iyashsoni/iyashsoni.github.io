@@ -35,6 +35,9 @@
 .blog-header--tech .blog-header__label { color: var(--accent-tech); }
 .blog-header--travel .blog-header__label { color: var(--accent-travel); }
 
+/* Medium category colour — Medium green */
+:root { --accent-medium: #00ab6c; }
+
 /* ─── Filter Bar ────────────────────────────────── */
 .blog-filters {
   display: flex;
@@ -69,6 +72,12 @@
 .filter-btn[data-filter="travel"].active {
   border-color: var(--accent-travel);
   background: rgba(6, 214, 160, 0.1);
+}
+
+.filter-btn[data-filter="medium"].active {
+  border-color: var(--accent-medium);
+  color: var(--accent-medium);
+  background: rgba(0, 171, 108, 0.1);
 }
 
 /* ─── Blog Post Grid ────────────────────────────── */

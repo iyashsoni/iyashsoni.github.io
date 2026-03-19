@@ -53,9 +53,25 @@ function initFilter() {
   });
 }
 
+function initMediumNavTab() {
+  const triggers = ['#nav-medium-tab', '#mobile-medium-tab']
+    .map(id => document.querySelector(id))
+    .filter(Boolean);
+
+  triggers.forEach(el => {
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      const btn = document.querySelector('.filter-btn[data-filter="medium"]');
+      if (btn) btn.click();
+      window.scrollTo({ top: document.querySelector('.blog-filters')?.offsetTop - 80 || 0, behavior: 'smooth' });
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initReveal();
   initCursor();
   initNav();
   initFilter();
+  initMediumNavTab();
 });
