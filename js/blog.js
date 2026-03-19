@@ -5,7 +5,7 @@ const MEDIUM_RSS_PROXY =
   'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40iyashsoni';
 
 const DEVTO_API =
-  'https://dev.to/api/articles?username=iyashsoni&per_page=30';
+  'https://dev.to/api/v1/articles?username=iyashsoni&per_page=30';
 
 function initNav() {
   const nav = qs('.nav');
@@ -142,8 +142,10 @@ async function fetchDevtoPosts() {
   }
 
   try {
-    const res = await fetch(DEVTO_API);
-    if (!res.ok) throw new Error('Network error');
+    const res = await fetch(DEVTO_API, {
+      headers: { Accept: 'application/vnd.forem.api-v1+json' }
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const items = await res.json();
     if (!Array.isArray(items) || !items.length) throw new Error('No articles');
 
@@ -156,7 +158,8 @@ async function fetchDevtoPosts() {
     const currentFilter = qs('.filter-btn.active')?.dataset.filter ?? 'all';
     applyFilter(currentFilter);
 
-  } catch {
+  } catch (err) {
+    console.error('[Dev.to]', err);
     loader.className = 'medium-loader medium-loader--error';
     loader.innerHTML =
       'Couldn\'t load Dev.to articles right now. ' +
