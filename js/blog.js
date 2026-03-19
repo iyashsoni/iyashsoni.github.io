@@ -4,8 +4,8 @@ import { qs, qsa } from './utils.js';
 const MEDIUM_RSS_PROXY =
   'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40iyashsoni';
 
-const DEVTO_API =
-  'https://dev.to/api/v1/articles?username=iyashsoni&per_page=30';
+const DEVTO_RSS_PROXY =
+  'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fdev.to%2Ffeed%2Fiyashsoni';
 
 function initNav() {
   const nav = qs('.nav');
@@ -35,15 +35,15 @@ function initNav() {
 }
 
 function applyFilter(filter) {
-  // Live query — includes dynamically inserted cards
-  const cards = qsa('.blog-card[data-category]');
+  // Live query — includes dynamically inserted cards AND loader/error divs
+  const cards = qsa('[data-category]');
   const empty = qs('.blog-empty');
   let visible = 0;
 
   cards.forEach(card => {
     const match = filter === 'all' || card.dataset.category === filter;
     card.classList.toggle('blog-card--hidden', !match);
-    if (match) visible++;
+    if (match && card.classList.contains('blog-card')) visible++;
   });
 
   if (empty) empty.classList.toggle('visible', visible === 0);
@@ -95,30 +95,24 @@ function estimateReadTime(text) {
 }
 
 function buildDevtoCard(item) {
-  const date = formatDate(item.published_at);
-  const readMins = item.reading_time_minutes ?? 1;
-  const reactions = item.public_reactions_count ?? 0;
-  const comments = item.comments_count ?? 0;
-
-  const stats = [
-    `↗ ${readMins} min read`,
-    reactions > 0 ? `♥ ${reactions}` : null,
-    comments > 0  ? `💬 ${comments}` : null,
-  ].filter(Boolean).join(' · ');
+  const text = extractText(item.description);
+  const excerpt = text.length > 200 ? text.slice(0, 200).trimEnd() + '…' : text;
+  const readMins = estimateReadTime(text);
+  const date = formatDate(item.pubDate);
 
   const article = document.createElement('article');
   article.className = 'blog-card reveal';
   article.dataset.category = 'devto';
   article.setAttribute('role', 'listitem');
   article.innerHTML = `
-    <a href="${item.url}" target="_blank" rel="noopener noreferrer" style="display:contents">
+    <a href="${item.link}" target="_blank" rel="noopener noreferrer" style="display:contents">
       <div class="blog-card__meta">
         <span class="blog-card__category blog-card__category--devto">Dev.to</span>
         <span class="blog-card__date">${date}</span>
       </div>
       <h2 class="blog-card__title">${item.title}</h2>
-      <p class="blog-card__excerpt">${item.description ?? ''}</p>
-      <span class="blog-card__read">${stats}</span>
+      <p class="blog-card__excerpt">${excerpt}</p>
+      <span class="blog-card__read">↗ ${readMins} min read</span>
     </a>
   `;
   return article;
@@ -142,12 +136,12 @@ async function fetchDevtoPosts() {
   }
 
   try {
-    const res = await fetch(DEVTO_API, {
-      headers: { Accept: 'application/vnd.forem.api-v1+json' }
-    });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const items = await res.json();
-    if (!Array.isArray(items) || !items.length) throw new Error('No articles');
+    const res = await fetch(DEVTO_RSS_PROXY);
+    if (!res.ok) throw new Error('Network error');
+    const { status, items } = await res.json();
+    if (status !== 'ok' || !Array.isArray(items) || !items.length) {
+      throw new Error('Empty or invalid feed');
+    }
 
     loader.remove();
 
