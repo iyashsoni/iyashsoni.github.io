@@ -36,10 +36,12 @@ function initTypewriter() {
   if (!el) return;
 
   const phrases = [
-    'Engineer. Thinker. Creator.',
-    'I build things that matter.',
-    'Curious about everything.',
-    'Writing my story, one line at a time.',
+    'Engineer. Thinker. Seeker.',
+    'Spearheading COS at IBM.',
+    'From Ahmedabad to Bangalore.',
+    'Chasing markets, music & meaning.',
+    'IIIT-B MTech · 10 years in tech.',
+    'Curious about everything under the sun.',
   ];
 
   const cursor = document.createElement('span');
