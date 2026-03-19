@@ -1,0 +1,212 @@
+/* ─── Blog Layout ───────────────────────────────── */
+.blog-header {
+  padding: calc(var(--nav-h) + 4rem) 0 4rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.blog-header__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.blog-header__label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.blog-header__title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.blog-header__desc {
+  font-size: 1rem;
+  color: var(--text-2);
+  max-width: 540px;
+  line-height: 1.7;
+}
+
+.blog-header--life .blog-header__label { color: var(--accent-life); }
+.blog-header--tech .blog-header__label { color: var(--accent-tech); }
+.blog-header--travel .blog-header__label { color: var(--accent-travel); }
+
+/* ─── Filter Bar ────────────────────────────────── */
+.blog-filters {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.filter-btn {
+  padding: 0.45rem 1.1rem;
+  border-radius: var(--r-full);
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid var(--border-2);
+  color: var(--text-2);
+  transition: all var(--t);
+  cursor: pointer;
+}
+
+.filter-btn:hover, .filter-btn.active {
+  border-color: var(--accent);
+  color: var(--text);
+  background: rgba(124, 111, 238, 0.1);
+}
+
+.filter-btn[data-filter="life"].active {
+  border-color: var(--accent-life);
+  background: rgba(244, 132, 95, 0.1);
+}
+
+.filter-btn[data-filter="travel"].active {
+  border-color: var(--accent-travel);
+  background: rgba(6, 214, 160, 0.1);
+}
+
+/* ─── Blog Post Grid ────────────────────────────── */
+.blog-main {
+  padding: 3rem 0 var(--section-gap);
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.blog-grid .blog-card--hidden { display: none; }
+
+/* ─── Featured Blog Card ────────────────────────── */
+.blog-card--large {
+  grid-column: span 2;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.blog-card--large .blog-card__title {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  letter-spacing: -0.02em;
+}
+
+.blog-card--large .blog-card__excerpt {
+  font-size: 1rem;
+}
+
+/* ─── Article / Post Page ───────────────────────── */
+.post-header {
+  padding: calc(var(--nav-h) + 3rem) 0 3rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.post-header__meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.8rem;
+  color: var(--text-3);
+}
+
+.post-header__title {
+  font-size: clamp(2rem, 5vw, 3.75rem);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  max-width: 820px;
+}
+
+.post-header__subtitle {
+  font-size: 1.1rem;
+  color: var(--text-2);
+  max-width: 620px;
+  line-height: 1.65;
+}
+
+.post-content {
+  padding: 4rem 0 var(--section-gap);
+  max-width: 700px;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-2);
+}
+
+.post-content p { margin-bottom: 1.5rem; }
+.post-content h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: var(--text);
+  margin: 3rem 0 1rem;
+  letter-spacing: -0.02em;
+}
+.post-content h3 {
+  font-size: 1.25rem;
+  color: var(--text);
+  margin: 2rem 0 0.75rem;
+}
+.post-content a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.post-content blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+  color: var(--text-2);
+  font-style: italic;
+}
+.post-content code {
+  background: var(--bg-card);
+  padding: 0.15em 0.4em;
+  border-radius: var(--r-sm);
+  font-size: 0.875em;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  color: var(--accent-2);
+  border: 1px solid var(--border);
+}
+.post-content pre {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 1.5rem;
+  overflow-x: auto;
+  margin: 2rem 0;
+}
+.post-content pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+/* ─── Category Nav in blog ──────────────────────── */
+.blog-cat-nav {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.blog-cat-nav a {
+  font-size: 0.8rem;
+  color: var(--text-3);
+  transition: color var(--t);
+}
+
+.blog-cat-nav a:hover, .blog-cat-nav a.active { color: var(--text); }
+.blog-cat-nav a.active { font-weight: 600; }
+
+/* ─── Empty State ───────────────────────────────── */
+.blog-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 5rem 0;
+  color: var(--text-3);
+  display: none;
+}
+
+.blog-empty.visible { display: block; }

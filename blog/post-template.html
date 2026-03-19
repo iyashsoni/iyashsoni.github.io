@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="POST_DESCRIPTION — Yash Soni">
+  <title>POST_TITLE — Yash Soni</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  <link rel="stylesheet" href="/css/pages/blog.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+
+  <nav class="nav scrolled" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner container">
+      <a href="/" class="nav__logo" aria-label="Yash Soni — home">YS</a>
+      <ul class="nav__links" role="list">
+        <li>
+          <nav class="blog-cat-nav" aria-label="Blog categories">
+            <a href="/blog/">All</a>
+            <a href="/blog/tech/">Tech</a>
+            <a href="/blog/life/">Life</a>
+            <a href="/blog/travel/">Travel</a>
+          </nav>
+        </li>
+        <li><a href="/blog/" class="btn btn--sm btn--ghost">← All posts</a></li>
+      </ul>
+      <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <nav class="nav__mobile" id="mobile-menu" aria-label="Mobile navigation">
+    <a href="/blog/">All posts</a>
+    <a href="/blog/tech/">Tech</a>
+    <a href="/blog/life/">Life</a>
+    <a href="/blog/travel/">Travel</a>
+    <a href="/">← Portfolio</a>
+  </nav>
+
+  <!-- Change category class: post-header--tech | post-header--life | post-header--travel -->
+  <header class="post-header">
+    <div class="container">
+      <div class="post-header__meta">
+        <!-- Change category link and label -->
+        <a href="/blog/tech/" class="blog-card__category blog-card__category--tech">Tech</a>
+        <span>·</span>
+        <time datetime="YYYY-MM-DD">Month DD, YYYY</time>
+        <span>·</span>
+        <span>X min read</span>
+      </div>
+      <h1 class="post-header__title">Your post title goes here</h1>
+      <p class="post-header__subtitle">A compelling subtitle that draws readers in and sets the tone for what follows.</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <article class="post-content">
+
+        <p>Your opening paragraph. Make it count — this is what determines whether readers stay or leave. Start in the middle of something. Drop them into a scene, a question, or an observation that refuses to be ignored.</p>
+
+        <h2>A section heading</h2>
+
+        <p>Your body paragraphs go here. Write the way you think. Short sentences work. So do longer ones that carry the reader through a more complex thought, building momentum as they go.</p>
+
+        <blockquote>
+          A pull quote or an important idea worth highlighting. Something that deserves its own space.
+        </blockquote>
+
+        <p>Continue your essay. Make each paragraph earn its place. Delete anything that doesn't serve the reader or the argument.</p>
+
+        <h2>Another section</h2>
+
+        <p>Keep going. Say what you came to say. Then stop.</p>
+
+        <p>Your closing paragraph. Land it cleanly. No summaries, no "in conclusion". Just a final thought that gives the reader something to carry with them.</p>
+
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <span class="footer__copy">© 2025 Yash Soni</span>
+      <a href="/blog/" class="footer__made" style="color:var(--text-3)">← All posts</a>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/blog.js"></script>
+</body>
+</html>

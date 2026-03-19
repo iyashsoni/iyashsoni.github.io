@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7c6fee" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#06d6a0" stop-opacity="0.5"/>
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7c6fee" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#06d6a0" stop-opacity="0.2"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="35%" r="40%">
+      <stop offset="0%" stop-color="#7c6fee" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#07070b" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" fill="#111119"/>
+  <rect width="400" height="400" fill="url(#glow)"/>
+  <!-- Head -->
+  <circle cx="200" cy="148" r="68" fill="url(#grad1)"/>
+  <!-- Body / Shoulders -->
+  <ellipse cx="200" cy="340" rx="115" ry="90" fill="url(#grad2)"/>
+  <ellipse cx="200" cy="290" rx="82" ry="60" fill="url(#grad1)"/>
+  <!-- Subtle border ring -->
+  <circle cx="200" cy="148" r="68" stroke="url(#grad1)" stroke-width="1" opacity="0.4"/>
+</svg>

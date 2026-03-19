@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Life writing by Yash Soni — reflections, habits, and the art of living well.">
+  <title>Life — Yash Soni</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  <link rel="stylesheet" href="/css/pages/blog.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+
+  <nav class="nav scrolled" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner container">
+      <a href="/" class="nav__logo" aria-label="Yash Soni — home">YS</a>
+      <ul class="nav__links" role="list">
+        <li>
+          <nav class="blog-cat-nav" aria-label="Blog categories">
+            <a href="/blog/">All</a>
+            <a href="/blog/tech/">Tech</a>
+            <a href="/blog/life/" class="active">Life</a>
+            <a href="/blog/travel/">Travel</a>
+          </nav>
+        </li>
+        <li><a href="/" class="btn btn--sm btn--ghost">← Portfolio</a></li>
+      </ul>
+      <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <nav class="nav__mobile" id="mobile-menu" aria-label="Mobile navigation">
+    <a href="/blog/">All posts</a>
+    <a href="/blog/tech/">Tech</a>
+    <a href="/blog/life/">Life</a>
+    <a href="/blog/travel/">Travel</a>
+    <a href="/">← Portfolio</a>
+  </nav>
+
+  <header class="blog-header blog-header--life">
+    <div class="container blog-header__inner">
+      <span class="blog-header__label reveal">Life</span>
+      <h1 class="blog-header__title reveal">On living well.</h1>
+      <p class="blog-header__desc reveal">Reflections on habits, relationships, identity, and the quieter art of being human in a noisy world.</p>
+    </div>
+  </header>
+
+  <main class="blog-main">
+    <div class="container">
+      <div class="blog-grid" role="list">
+        <!--
+          HOW TO ADD A NEW POST:
+          1. Create a new folder under /blog/life/your-post-slug/
+          2. Add an index.html in that folder (use /blog/post-template.html as a base)
+          3. Add an <article> card below linking to it
+        -->
+
+        <article class="blog-card reveal" role="listitem">
+          <a href="/blog/life/doing-nothing-well/" style="display:contents">
+            <div class="blog-card__meta">
+              <span class="blog-card__category blog-card__category--life">Life</span>
+              <span class="blog-card__date">Feb 2025</span>
+            </div>
+            <h2 class="blog-card__title">On the value of doing nothing well</h2>
+            <p class="blog-card__excerpt">A defence of rest, boredom, and the lost art of simply being present without an agenda or a productivity metric in sight.</p>
+            <span class="blog-card__read">4 min read</span>
+          </a>
+        </article>
+
+        <!-- Add new life posts above this comment -->
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <span class="footer__copy">© 2025 Yash Soni</span>
+      <a href="/blog/" class="footer__made" style="color:var(--text-3)">← All posts</a>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/blog.js"></script>
+</body>
+</html>
