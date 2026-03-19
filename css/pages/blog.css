@@ -219,3 +219,18 @@
 }
 
 .blog-empty.visible { display: block; }
+
+/* ─── Medium Loader ─────────────────────────────── */
+.medium-loader {
+  grid-column: 1 / -1;
+  padding: 3rem 0;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--text-3);
+}
+
+.medium-loader--error {
+  color: var(--text-3);
+}
+
+.medium-loader.blog-card--hidden { display: none; }

@@ -1,5 +1,8 @@
-import { initReveal, initCursor } from './animations.js';
+import { initReveal, revealElements, initCursor } from './animations.js';
 import { qs, qsa } from './utils.js';
+
+const MEDIUM_RSS_PROXY =
+  'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40iyashsoni';
 
 function initNav() {
   const nav = qs('.nav');
@@ -28,27 +31,30 @@ function initNav() {
   });
 }
 
-function initFilter() {
-  const buttons = qsa('.filter-btn');
+function applyFilter(filter) {
+  // Live query — includes dynamically inserted cards
   const cards = qsa('.blog-card[data-category]');
   const empty = qs('.blog-empty');
+  let visible = 0;
+
+  cards.forEach(card => {
+    const match = filter === 'all' || card.dataset.category === filter;
+    card.classList.toggle('blog-card--hidden', !match);
+    if (match) visible++;
+  });
+
+  if (empty) empty.classList.toggle('visible', visible === 0);
+}
+
+function initFilter() {
+  const buttons = qsa('.filter-btn');
   if (!buttons.length) return;
 
   buttons.forEach(btn => {
     btn.addEventListener('click', () => {
       buttons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-
-      const filter = btn.dataset.filter;
-      let visible = 0;
-
-      cards.forEach(card => {
-        const match = filter === 'all' || card.dataset.category === filter;
-        card.classList.toggle('blog-card--hidden', !match);
-        if (match) visible++;
-      });
-
-      if (empty) empty.classList.toggle('visible', visible === 0);
+      applyFilter(btn.dataset.filter);
     });
   });
 }
@@ -63,9 +69,99 @@ function initMediumNavTab() {
       e.preventDefault();
       const btn = document.querySelector('.filter-btn[data-filter="medium"]');
       if (btn) btn.click();
-      window.scrollTo({ top: document.querySelector('.blog-filters')?.offsetTop - 80 || 0, behavior: 'smooth' });
+      window.scrollTo({
+        top: (document.querySelector('.blog-filters')?.offsetTop ?? 0) - 80,
+        behavior: 'smooth'
+      });
     });
   });
+}
+
+function formatDate(pubDate) {
+  const d = new Date(pubDate);
+  return d.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' });
+}
+
+function extractText(html) {
+  const div = document.createElement('div');
+  div.innerHTML = html;
+  return (div.textContent || '').replace(/\s+/g, ' ').trim();
+}
+
+function estimateReadTime(text) {
+  return Math.max(1, Math.round(text.split(/\s+/).length / 200));
+}
+
+function buildMediumCard(item) {
+  const text = extractText(item.description);
+  const excerpt = text.length > 200 ? text.slice(0, 200).trimEnd() + '…' : text;
+  const readMins = estimateReadTime(text);
+  const date = formatDate(item.pubDate);
+
+  const article = document.createElement('article');
+  article.className = 'blog-card reveal';
+  article.dataset.category = 'medium';
+  article.setAttribute('role', 'listitem');
+  article.innerHTML = `
+    <a href="${item.link}" target="_blank" rel="noopener noreferrer" style="display:contents">
+      <div class="blog-card__meta">
+        <span class="blog-card__category blog-card__category--medium">Medium</span>
+        <span class="blog-card__date">${date}</span>
+      </div>
+      <h2 class="blog-card__title">${item.title}</h2>
+      <p class="blog-card__excerpt">${excerpt}</p>
+      <span class="blog-card__read">↗ ${readMins} min read</span>
+    </a>
+  `;
+  return article;
+}
+
+async function fetchMediumPosts() {
+  const grid = qs('.blog-grid');
+  const empty = qs('.blog-empty');
+  if (!grid) return;
+
+  // Insert loading indicator
+  const loader = document.createElement('div');
+  loader.id = 'medium-loader';
+  loader.dataset.category = 'medium';
+  loader.className = 'medium-loader';
+  loader.textContent = 'Loading articles from Medium…';
+  grid.insertBefore(loader, empty);
+
+  // Hide loader if current filter isn't all/medium
+  const activeFilter = qs('.filter-btn.active')?.dataset.filter ?? 'all';
+  if (activeFilter !== 'all' && activeFilter !== 'medium') {
+    loader.classList.add('blog-card--hidden');
+  }
+
+  try {
+    const res = await fetch(MEDIUM_RSS_PROXY);
+    if (!res.ok) throw new Error('Network error');
+    const { status, items } = await res.json();
+    if (status !== 'ok' || !Array.isArray(items) || !items.length) {
+      throw new Error('Empty or invalid feed');
+    }
+
+    loader.remove();
+
+    const cards = items.map(buildMediumCard);
+    cards.forEach(card => grid.insertBefore(card, empty));
+
+    // Observe reveal for new cards
+    revealElements(cards);
+
+    // Respect the currently active filter
+    const currentFilter = qs('.filter-btn.active')?.dataset.filter ?? 'all';
+    applyFilter(currentFilter);
+
+  } catch {
+    loader.className = 'medium-loader medium-loader--error';
+    loader.innerHTML =
+      'Couldn\'t load Medium articles right now. ' +
+      '<a href="https://iyashsoni.medium.com" target="_blank" rel="noopener noreferrer" ' +
+      'style="color:var(--accent)">Visit profile →</a>';
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -74,4 +170,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initNav();
   initFilter();
   initMediumNavTab();
+  fetchMediumPosts();
 });
