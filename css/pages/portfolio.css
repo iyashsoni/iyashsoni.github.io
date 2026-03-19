@@ -115,24 +115,81 @@
 /* ─── About ─────────────────────────────────────── */
 .about__grid {
   display: grid;
-  grid-template-columns: 1fr 1.1fr;
+  grid-template-columns: 0.85fr 1.15fr;
   gap: clamp(3rem, 6vw, 6rem);
   align-items: center;
 }
 
 .about__image {
   position: relative;
+  z-index: 1;
+}
+
+.about__photo-frame {
+  position: relative;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  background: linear-gradient(135deg, rgba(124, 111, 238, 0.08), rgba(6, 214, 160, 0.08));
+  border: 1px solid var(--border);
+}
+
+.about__photo-frame.no-photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/assets/images/profile-placeholder.svg') center / 55% no-repeat;
+  opacity: 0.6;
+}
+
+.about__photo[src=""] ,
+.about__photo:not([src]) {
+  display: none;
+}
+
+.about__photo-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 55%,
+    rgba(7, 7, 11, 0.6) 100%
+  );
+  pointer-events: none;
+}
+
+.about__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 12%;
+  display: block;
+  filter: grayscale(100%) contrast(1.18) brightness(1.06);
+  transition: filter 0.6s var(--ease);
+}
+
+.about__photo-frame:hover .about__photo {
+  filter: grayscale(85%) contrast(1.12) brightness(1.08);
 }
 
 .about__image-decoration {
   position: absolute;
-  bottom: -1.5rem;
-  right: -1.5rem;
-  width: 60%;
-  height: 60%;
-  border: 1px solid var(--border-2);
+  bottom: -1.25rem;
+  right: -1.25rem;
+  width: 55%;
+  height: 55%;
+  border: 1px solid rgba(124, 111, 238, 0.25);
   border-radius: var(--r-lg);
   z-index: -1;
+}
+
+.about__image-decoration::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(6, 214, 160, 0.15);
+  border-radius: calc(var(--r-lg) - 4px);
 }
 
 .about__bio {

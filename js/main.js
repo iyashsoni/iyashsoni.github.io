@@ -84,10 +84,19 @@ function initSmoothScroll() {
   });
 }
 
+function initPhotoFallback() {
+  const photo = document.querySelector('.about__photo');
+  if (!photo) return;
+  photo.addEventListener('error', () => {
+    photo.closest('.about__photo-frame').classList.add('no-photo');
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initReveal();
   initCursor();
   initNav();
   initTypewriter();
   initSmoothScroll();
+  initPhotoFallback();
 });
