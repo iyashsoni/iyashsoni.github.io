@@ -4,6 +4,9 @@ import { qs, qsa } from './utils.js';
 const MEDIUM_RSS_PROXY =
   'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40iyashsoni';
 
+const DEVTO_API =
+  'https://dev.to/api/articles?username=iyashsoni&per_page=30';
+
 function initNav() {
   const nav = qs('.nav');
   if (!nav) return;
@@ -59,22 +62,21 @@ function initFilter() {
   });
 }
 
-function initMediumNavTab() {
-  const triggers = ['#nav-medium-tab', '#mobile-medium-tab']
+function initExternalNavTab(navId, mobileId, filter) {
+  ['#' + navId, '#' + mobileId]
     .map(id => document.querySelector(id))
-    .filter(Boolean);
-
-  triggers.forEach(el => {
-    el.addEventListener('click', e => {
-      e.preventDefault();
-      const btn = document.querySelector('.filter-btn[data-filter="medium"]');
-      if (btn) btn.click();
-      window.scrollTo({
-        top: (document.querySelector('.blog-filters')?.offsetTop ?? 0) - 80,
-        behavior: 'smooth'
+    .filter(Boolean)
+    .forEach(el => {
+      el.addEventListener('click', e => {
+        e.preventDefault();
+        const btn = document.querySelector(`.filter-btn[data-filter="${filter}"]`);
+        if (btn) btn.click();
+        window.scrollTo({
+          top: (document.querySelector('.blog-filters')?.offsetTop ?? 0) - 80,
+          behavior: 'smooth'
+        });
       });
     });
-  });
 }
 
 function formatDate(pubDate) {
@@ -90,6 +92,77 @@ function extractText(html) {
 
 function estimateReadTime(text) {
   return Math.max(1, Math.round(text.split(/\s+/).length / 200));
+}
+
+function buildDevtoCard(item) {
+  const date = formatDate(item.published_at);
+  const readMins = item.reading_time_minutes ?? 1;
+  const reactions = item.public_reactions_count ?? 0;
+  const comments = item.comments_count ?? 0;
+
+  const stats = [
+    `↗ ${readMins} min read`,
+    reactions > 0 ? `♥ ${reactions}` : null,
+    comments > 0  ? `💬 ${comments}` : null,
+  ].filter(Boolean).join(' · ');
+
+  const article = document.createElement('article');
+  article.className = 'blog-card reveal';
+  article.dataset.category = 'devto';
+  article.setAttribute('role', 'listitem');
+  article.innerHTML = `
+    <a href="${item.url}" target="_blank" rel="noopener noreferrer" style="display:contents">
+      <div class="blog-card__meta">
+        <span class="blog-card__category blog-card__category--devto">Dev.to</span>
+        <span class="blog-card__date">${date}</span>
+      </div>
+      <h2 class="blog-card__title">${item.title}</h2>
+      <p class="blog-card__excerpt">${item.description ?? ''}</p>
+      <span class="blog-card__read">${stats}</span>
+    </a>
+  `;
+  return article;
+}
+
+async function fetchDevtoPosts() {
+  const grid = qs('.blog-grid');
+  const empty = qs('.blog-empty');
+  if (!grid) return;
+
+  const loader = document.createElement('div');
+  loader.id = 'devto-loader';
+  loader.dataset.category = 'devto';
+  loader.className = 'medium-loader';
+  loader.textContent = 'Loading articles from Dev.to…';
+  grid.insertBefore(loader, empty);
+
+  const activeFilter = qs('.filter-btn.active')?.dataset.filter ?? 'all';
+  if (activeFilter !== 'all' && activeFilter !== 'devto') {
+    loader.classList.add('blog-card--hidden');
+  }
+
+  try {
+    const res = await fetch(DEVTO_API);
+    if (!res.ok) throw new Error('Network error');
+    const items = await res.json();
+    if (!Array.isArray(items) || !items.length) throw new Error('No articles');
+
+    loader.remove();
+
+    const cards = items.map(buildDevtoCard);
+    cards.forEach(card => grid.insertBefore(card, empty));
+    revealElements(cards);
+
+    const currentFilter = qs('.filter-btn.active')?.dataset.filter ?? 'all';
+    applyFilter(currentFilter);
+
+  } catch {
+    loader.className = 'medium-loader medium-loader--error';
+    loader.innerHTML =
+      'Couldn\'t load Dev.to articles right now. ' +
+      '<a href="https://dev.to/iyashsoni" target="_blank" rel="noopener noreferrer" ' +
+      'style="color:var(--accent)">Visit profile →</a>';
+  }
 }
 
 function buildMediumCard(item) {
@@ -169,6 +242,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initCursor();
   initNav();
   initFilter();
-  initMediumNavTab();
+  initExternalNavTab('nav-medium-tab', 'mobile-medium-tab', 'medium');
+  initExternalNavTab('nav-devto-tab', 'mobile-devto-tab', 'devto');
   fetchMediumPosts();
+  fetchDevtoPosts();
 });
