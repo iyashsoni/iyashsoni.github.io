@@ -1,0 +1,6 @@
+#!/bin/sh
+# Auto-regenerates blog/posts.json before every commit.
+# Activate once with: npm run setup
+
+node scripts/generate-posts.js || { echo "ERROR: generate-posts.js failed"; exit 1; }
+git add blog/posts.json

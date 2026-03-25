@@ -55,27 +55,8 @@
 
   <main class="blog-main">
     <div class="container">
-      <div class="blog-grid" role="list">
-        <!--
-          HOW TO ADD A NEW POST:
-          1. Create a new folder under /blog/travel/your-post-slug/
-          2. Add an index.html in that folder (use /blog/post-template.html as a base)
-          3. Add an <article> card below linking to it
-        -->
-
-        <article class="blog-card reveal" role="listitem">
-          <a href="/blog/travel/thirty-days-without-a-plan/" style="display:contents">
-            <div class="blog-card__meta">
-              <span class="blog-card__category blog-card__category--travel">Travel</span>
-              <span class="blog-card__date">Jan 2025</span>
-            </div>
-            <h2 class="blog-card__title">Thirty days without a plan</h2>
-            <p class="blog-card__excerpt">What I found when I stopped itinerary-ing my way through a country and started actually seeing it with fresh, unhurried eyes.</p>
-            <span class="blog-card__read">7 min read</span>
-          </a>
-        </article>
-
-        <!-- Add new travel posts above this comment -->
+      <!-- Cards are injected from blog/posts.json by blog.js — no manual edits needed -->
+      <div class="blog-grid" data-local-category="travel" role="list">
       </div>
     </div>
   </main>

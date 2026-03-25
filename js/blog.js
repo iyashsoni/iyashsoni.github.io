@@ -79,6 +79,58 @@ function initExternalNavTab(navId, mobileId, filter) {
     });
 }
 
+function buildLocalCard(post) {
+  const cat   = post.category;
+  const label = cat.charAt(0).toUpperCase() + cat.slice(1);
+  const article = document.createElement('article');
+  article.className = 'blog-card reveal';
+  article.dataset.category = cat;
+  article.setAttribute('role', 'listitem');
+  article.innerHTML = `
+    <a href="${post.url}" style="display:contents">
+      <div class="blog-card__meta">
+        <span class="blog-card__category blog-card__category--${cat}">${label}</span>
+        <span class="blog-card__date">${post.dateDisplay}</span>
+      </div>
+      <h2 class="blog-card__title">${post.title}</h2>
+      <p class="blog-card__excerpt">${post.excerpt}</p>
+      <span class="blog-card__read">${post.readTime}</span>
+    </a>
+  `;
+  return article;
+}
+
+async function loadLocalPosts() {
+  const grid = qs('.blog-grid');
+  if (!grid) return;
+
+  const category = grid.dataset.localCategory;
+  if (!category) return;
+
+  try {
+    const res = await fetch('/blog/posts.json');
+    if (!res.ok) return;
+    const allPosts = await res.json();
+
+    const filtered = category === 'all'
+      ? allPosts
+      : allPosts.filter(p => p.category === category);
+
+    if (!filtered.length) return;
+
+    const empty = qs('.blog-empty');
+    const cards = filtered.map(buildLocalCard);
+    const frag  = document.createDocumentFragment();
+    cards.forEach(c => frag.appendChild(c));
+    // Insert local posts at the top of the grid (before external / empty)
+    grid.insertBefore(frag, empty ?? grid.firstChild);
+    revealElements(cards);
+
+    const activeBtn = qs('.filter-btn.active');
+    if (activeBtn) applyFilter(activeBtn.dataset.filter);
+  } catch { /* posts.json absent — skip */ }
+}
+
 function formatDate(pubDate) {
   const d = new Date(pubDate);
   return d.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' });
@@ -241,6 +293,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFilter();
   initExternalNavTab('nav-medium-tab', 'mobile-medium-tab', 'medium');
   initExternalNavTab('nav-devto-tab', 'mobile-devto-tab', 'devto');
+  loadLocalPosts();
   fetchMediumPosts();
   fetchDevtoPosts();
 });
