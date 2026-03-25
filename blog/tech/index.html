@@ -55,27 +55,8 @@
 
   <main class="blog-main">
     <div class="container">
-      <div class="blog-grid" role="list">
-        <!--
-          HOW TO ADD A NEW POST:
-          1. Create a new folder under /blog/tech/your-post-slug/
-          2. Add an index.html in that folder (use /blog/post-template.html as a base)
-          3. Add an <article> card below linking to it
-        -->
-
-        <article class="blog-card reveal" role="listitem">
-          <a href="/blog/tech/writing-software-that-lasts/" style="display:contents">
-            <div class="blog-card__meta">
-              <span class="blog-card__category blog-card__category--tech">Tech</span>
-              <span class="blog-card__date">Mar 2025</span>
-            </div>
-            <h2 class="blog-card__title">The art of writing software that lasts</h2>
-            <p class="blog-card__excerpt">Thoughts on longevity in code — why most software dies young and what separates the code that endures from the code that decays.</p>
-            <span class="blog-card__read">5 min read</span>
-          </a>
-        </article>
-
-        <!-- Add new tech posts above this comment -->
+      <!-- Cards are injected from blog/posts.json by blog.js — no manual edits needed -->
+      <div class="blog-grid" data-local-category="tech" role="list">
       </div>
     </div>
   </main>

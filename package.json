@@ -1,0 +1,10 @@
+{
+  "name": "iyashsoni-github-io",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate:posts": "node scripts/generate-posts.js",
+    "setup": "git config core.hooksPath .githooks && node scripts/generate-posts.js && echo 'Done. Pre-commit hook active — posts.json will auto-regenerate on every commit.'"
+  }
+}

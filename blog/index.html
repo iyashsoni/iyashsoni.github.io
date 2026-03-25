@@ -114,52 +114,8 @@
         <button class="filter-btn" data-filter="devto">Blogs on Dev.to</button>
       </div>
 
-      <div class="blog-grid" role="list">
-        <!--
-          HOW TO ADD A NEW POST:
-          Copy one of the <article> blocks below and update:
-          - data-category: "tech" | "life" | "travel"
-          - The link href pointing to your post's HTML file
-          - blog-card__category class: blog-card__category--tech/life/travel
-          - Date, title, excerpt, read time
-        -->
-
-        <article class="blog-card reveal" data-category="tech" role="listitem">
-          <a href="/blog/tech/writing-software-that-lasts/" style="display:contents">
-            <div class="blog-card__meta">
-              <span class="blog-card__category blog-card__category--tech">Tech</span>
-              <span class="blog-card__date">Mar 2025</span>
-            </div>
-            <h2 class="blog-card__title">The art of writing software that lasts</h2>
-            <p class="blog-card__excerpt">Thoughts on longevity in code — why most software dies young and what separates the code that endures from the code that decays.</p>
-            <span class="blog-card__read">5 min read</span>
-          </a>
-        </article>
-
-        <article class="blog-card reveal" data-category="life" role="listitem">
-          <a href="/blog/life/doing-nothing-well/" style="display:contents">
-            <div class="blog-card__meta">
-              <span class="blog-card__category blog-card__category--life">Life</span>
-              <span class="blog-card__date">Feb 2025</span>
-            </div>
-            <h2 class="blog-card__title">On the value of doing nothing well</h2>
-            <p class="blog-card__excerpt">A defence of rest, boredom, and the lost art of simply being present without an agenda or a productivity metric in sight.</p>
-            <span class="blog-card__read">4 min read</span>
-          </a>
-        </article>
-
-        <article class="blog-card reveal" data-category="travel" role="listitem">
-          <a href="/blog/travel/thirty-days-without-a-plan/" style="display:contents">
-            <div class="blog-card__meta">
-              <span class="blog-card__category blog-card__category--travel">Travel</span>
-              <span class="blog-card__date">Jan 2025</span>
-            </div>
-            <h2 class="blog-card__title">Thirty days without a plan</h2>
-            <p class="blog-card__excerpt">What I found when I stopped itinerary-ing my way through a country and started actually seeing it with fresh, unhurried eyes.</p>
-            <span class="blog-card__read">7 min read</span>
-          </a>
-        </article>
-
+      <!-- Cards are injected from blog/posts.json by blog.js — no manual edits needed -->
+      <div class="blog-grid" data-local-category="all" role="list">
         <div class="blog-empty" aria-live="polite">No posts in this category yet. Check back soon.</div>
       </div>
     </div>
