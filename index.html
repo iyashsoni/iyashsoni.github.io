@@ -75,6 +75,24 @@
   <link rel="stylesheet" href="/css/animations.css">
   <link rel="stylesheet" href="/css/pages/portfolio.css">
   <link rel="stylesheet" href="/css/responsive.css">
+  <style>
+    .projects__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(1.25rem, 2.5vw, 2rem);
+    }
+    .projects__header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 0;
+    }
+    .projects__header .section__heading { margin-bottom: 3rem; }
+    .project-card { text-decoration: none; color: inherit; display: flex; flex-direction: column; }
+    @media (max-width: 768px) {
+      .projects__grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
@@ -83,6 +101,7 @@
       <a href="/" class="nav__logo" aria-label="Yash Soni — home">YS</a>
       <ul class="nav__links" role="list">
         <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
         <li><a href="/blog/">Blog</a></li>
         <li><a href="#contact" class="btn btn--sm btn--ghost">Say hi</a></li>
       </ul>
@@ -94,6 +113,7 @@
 
   <nav class="nav__mobile" id="mobile-menu" aria-label="Mobile navigation">
     <a href="#about">About</a>
+    <a href="#projects">Projects</a>
     <a href="/blog/">Blog</a>
     <a href="#contact">Contact</a>
   </nav>
@@ -159,7 +179,7 @@
               <span class="stat__label">Current home</span>
             </div>
             <div class="stat">
-              <span class="stat__number">∞</span>
+              <span class="stat__number">&infin;</span>
               <span class="stat__label">Questions asked</span>
             </div>
           </div>
@@ -185,7 +205,7 @@
           <ul class="expertise-card__tags" role="list">
             <li>System Design</li>
             <li>Tech Leadership</li>
-            <li>Cloud & Backend</li>
+            <li>Cloud &amp; Backend</li>
           </ul>
         </div>
         <div class="expertise-card reveal">
@@ -194,7 +214,7 @@
               <path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
             </svg>
           </div>
-          <h3>Finance & Growth</h3>
+          <h3>Finance &amp; Growth</h3>
           <p>Markets, money, and mental models. I believe financial literacy is a superpower — and productivity isn't about doing more, it's about doing what matters.</p>
           <ul class="expertise-card__tags" role="list">
             <li>Investing</li>
@@ -209,7 +229,7 @@
               <path d="M17 4a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2"/>
             </svg>
           </div>
-          <h3>Mind & Spirit</h3>
+          <h3>Mind &amp; Spirit</h3>
           <p>Philosophy, meditation, and the deep mysteries of existence. India's wisdom traditions meet modern introspection — all soundtracked by the greatest decade in music: the 90s.</p>
           <ul class="expertise-card__tags" role="list">
             <li>Meditation</li>
@@ -217,6 +237,85 @@
             <li>90s Music</li>
           </ul>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Projects ───────────────────────────────────── -->
+  <section class="section" id="projects">
+    <div class="container">
+      <div class="projects__header">
+        <div>
+          <span class="section__label reveal">Side projects</span>
+          <h2 class="section__heading reveal">Built with intention.</h2>
+        </div>
+        <a href="/projects/" class="btn btn--ghost reveal">All projects &rarr;</a>
+      </div>
+      <div class="projects__grid stagger">
+        <a href="/projects/airmesh/" class="project-card reveal">
+          <div class="project-card__meta">
+            <span class="project-card__year">2025</span>
+            <span class="project-card__type">P2P &middot; WebRTC</span>
+          </div>
+          <h3 class="project-card__title">AirMesh</h3>
+          <p class="project-card__desc">Peer-to-peer file sharing in your browser. WebRTC transport, QR-code pairing, end-to-end encrypted. No servers, no signup, no upload limits.</p>
+          <div class="project-card__footer">
+            <div class="project-card__stack">
+              <span>React</span><span>TypeScript</span><span>WebRTC</span><span>PeerJS</span>
+            </div>
+            <span class="project-card__link" aria-label="View AirMesh">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+            </span>
+          </div>
+        </a>
+        <a href="/projects/flint/" class="project-card reveal">
+          <div class="project-card__meta">
+            <span class="project-card__year">2025</span>
+            <span class="project-card__type">Habit Tracker &middot; PWA</span>
+          </div>
+          <h3 class="project-card__title">Flint</h3>
+          <p class="project-card__desc">A lightweight offline-first habit tracker. Build streaks, spark habits. No accounts, no cloud — your data lives entirely on your device.</p>
+          <div class="project-card__footer">
+            <div class="project-card__stack">
+              <span>React</span><span>Vite</span><span>IndexedDB</span><span>PWA</span>
+            </div>
+            <span class="project-card__link" aria-label="View Flint">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+            </span>
+          </div>
+        </a>
+        <a href="/projects/unopomo/" class="project-card reveal">
+          <div class="project-card__meta">
+            <span class="project-card__year">2025</span>
+            <span class="project-card__type">Productivity &middot; Timer</span>
+          </div>
+          <h3 class="project-card__title">Unopomo</h3>
+          <p class="project-card__desc">A premium Pomodoro focus timer. 10 visual themes with ambient soundscapes, session stats, 8 languages. Beautifully designed, fully offline.</p>
+          <div class="project-card__footer">
+            <div class="project-card__stack">
+              <span>Next.js</span><span>TypeScript</span><span>Zustand</span><span>PWA</span>
+            </div>
+            <span class="project-card__link" aria-label="View Unopomo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+            </span>
+          </div>
+        </a>
+        <a href="/projects/tinyfiles/" class="project-card reveal">
+          <div class="project-card__meta">
+            <span class="project-card__year">2025</span>
+            <span class="project-card__type">Utility &middot; Privacy</span>
+          </div>
+          <h3 class="project-card__title">tinyfiles</h3>
+          <p class="project-card__desc">Compress PDFs and images entirely in your browser. 100% private — files never leave your device. No uploads, no server, no data collection.</p>
+          <div class="project-card__footer">
+            <div class="project-card__stack">
+              <span>React</span><span>TypeScript</span><span>Vite</span><span>PWA</span>
+            </div>
+            <span class="project-card__link" aria-label="View tinyfiles">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+            </span>
+          </div>
+        </a>
       </div>
     </div>
   </section>
@@ -229,7 +328,7 @@
           <span class="section__label reveal">Writing</span>
           <h2 class="section__heading reveal">From the blog.</h2>
         </div>
-        <a href="/blog/" class="btn btn--ghost reveal">All posts →</a>
+        <a href="/blog/" class="btn btn--ghost reveal">All posts &rarr;</a>
       </div>
       <div class="blog-preview__grid stagger">
         <a href="/blog/tech/" class="blog-card reveal">
@@ -296,7 +395,7 @@
 
   <footer class="footer" role="contentinfo">
     <div class="container footer__inner">
-      <span class="footer__copy">© 2026 Yash Soni</span>
+      <span class="footer__copy">&copy; 2026 Yash Soni</span>
       <span class="footer__made">Built with intention.</span>
     </div>
   </footer>
