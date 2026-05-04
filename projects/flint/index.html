@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flint — Habit Tracker. Build Streaks, Spark Habits.</title>
+  <meta name="description" content="Flint is a lightweight offline-first habit tracker. No accounts, no cloud, no noise. Just you, your habits, and an honest streak count.">
+  <link rel="canonical" href="https://iyashsoni.github.io/projects/flint/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --paper:   #f4efe6;
+      --paper-2: #ebe4d6;
+      --card:    #fbf7ef;
+      --ink:     #1b1a17;
+      --ink-2:   #3d3a33;
+      --ink-3:   #6b665c;
+      --soft:    #a8a095;
+      --ash:     #d8d1c1;
+      --flint:   #f05b1a;
+      --ember:   #e8b340;
+      --bd:      rgba(34,31,25,0.18);
+      --bd-sub:  rgba(34,31,25,0.09);
+      --shadow:  0 1px 0 rgba(0,0,0,.04), 0 12px 28px rgba(60,45,20,.08);
+      --shadow-lg: 0 4px 24px rgba(34,31,25,0.13);
+      --r-sm: 8px;
+      --r-md: 14px;
+      --r-lg: 20px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', -apple-system, system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--ink);
+      background: var(--paper);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    img, svg { display: block; max-width: 100%; }
+
+    /* ---- Nav ---- */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding: 0 max(clamp(16px,4vw,40px), env(safe-area-inset-left));
+      background: rgba(244,239,230,0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--bd-sub);
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 17px;
+      color: var(--ink);
+    }
+
+    .nav-flame {
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 13px;
+      color: var(--ink-3);
+      transition: color 150ms;
+    }
+    .nav-back:hover { color: var(--ink-2); }
+    .nav-back svg { width: 13px; height: 13px; }
+
+    .btn-launch {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background: var(--flint);
+      color: #fff;
+      font-weight: 600;
+      font-size: 13px;
+      box-shadow: 0 4px 16px rgba(240,91,26,0.3);
+      transition: filter 150ms, transform 150ms;
+    }
+    .btn-launch:hover { filter: brightness(1.06); transform: translateY(-1px); }
+    .btn-launch svg { width: 13px; height: 13px; }
+
+    /* ---- Layout ---- */
+    .wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 clamp(16px, 4vw, 40px);
+    }
+
+    /* ---- Hero ---- */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      padding-top: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -120px;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(240,91,26,0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      padding: 5rem 0 4rem;
+      max-width: 680px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--flint);
+      margin-bottom: 1.5rem;
+      padding: 5px 12px;
+      background: rgba(240,91,26,0.08);
+      border-radius: 999px;
+      border: 1px solid rgba(240,91,26,0.18);
+    }
+
+    .hero-title {
+      font-size: clamp(2.8rem, 8vw, 6rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.0;
+      margin-bottom: 1.5rem;
+      color: var(--ink);
+    }
+
+    .hero-hand {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(3rem, 8.5vw, 6.5rem);
+      font-weight: 600;
+      color: var(--flint);
+      display: block;
+    }
+
+    .hero-tagline {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--ink-3);
+      max-width: 48ch;
+      margin-bottom: 2.5rem;
+      line-height: 1.65;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 26px;
+      border-radius: 999px;
+      background: var(--flint);
+      color: #fff;
+      font-weight: 600;
+      font-size: 15px;
+      box-shadow: 0 6px 24px rgba(240,91,26,0.3);
+      transition: filter 150ms, transform 150ms;
+    }
+    .btn-primary:hover { filter: brightness(1.06); transform: translateY(-2px); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 26px;
+      border-radius: 999px;
+      border: 1.5px solid var(--bd);
+      color: var(--ink-2);
+      font-weight: 500;
+      font-size: 15px;
+      background: transparent;
+      transition: border-color 150ms, background 150ms;
+    }
+    .btn-secondary:hover { border-color: var(--flint); background: rgba(240,91,26,0.04); }
+
+    /* ---- Section ---- */
+    .section { padding: 5rem 0; }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--flint);
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 3rem;
+    }
+
+    /* ---- Features ---- */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    @media (max-width: 720px) { .features-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 460px) { .features-grid { grid-template-columns: 1fr; } }
+
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--bd-sub);
+      border-radius: var(--r-md);
+      padding: 22px;
+      box-shadow: var(--shadow);
+      transition: transform 200ms, box-shadow 200ms;
+    }
+    .feature-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(240,91,26,0.08);
+      border: 1px solid rgba(240,91,26,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin-bottom: 14px;
+    }
+
+    .feature-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+
+    .feature-desc {
+      font-size: 13.5px;
+      color: var(--ink-3);
+      line-height: 1.55;
+    }
+
+    /* ---- Principles ---- */
+    .principles { background: var(--paper-2); border-top: 1px solid var(--bd-sub); border-bottom: 1px solid var(--bd-sub); }
+
+    .principles-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .principle {
+      display: grid;
+      grid-template-columns: 2rem 1fr;
+      gap: 16px;
+      align-items: baseline;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--bd-sub);
+    }
+    .principle:first-child { border-top: 1px solid var(--bd-sub); }
+    .principle:last-child { border-bottom: none; }
+
+    .principle-num {
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--flint);
+      line-height: 1;
+    }
+
+    .principle-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .principle-desc {
+      font-size: 14px;
+      color: var(--ink-3);
+      line-height: 1.6;
+    }
+
+    /* ---- Tech stack ---- */
+    .stack-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .stack-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--card);
+      border: 1px solid var(--bd);
+      font-size: 13px;
+      color: var(--ink-2);
+      font-weight: 500;
+      box-shadow: var(--shadow);
+    }
+
+    /* ---- CTA ---- */
+    .cta-section {
+      padding: 5rem 0 6rem;
+      text-align: center;
+    }
+
+    .cta-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      margin-bottom: 1rem;
+      line-height: 1.1;
+    }
+
+    .cta-hand {
+      font-family: 'Caveat', cursive;
+      color: var(--flint);
+    }
+
+    .cta-sub {
+      color: var(--ink-3);
+      font-size: 16px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ---- Footer ---- */
+    .footer {
+      border-top: 1px solid var(--bd-sub);
+      padding: 2rem 0;
+      background: var(--paper-2);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .footer-link {
+      font-size: 13px;
+      color: var(--ink-3);
+      transition: color 150ms;
+    }
+    .footer-link:hover { color: var(--ink-2); }
+    .footer-sep { color: var(--ash); }
+    .footer-copy { font-size: 13px; color: var(--soft); }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-brand">
+      <span class="nav-flame">&#x1F525;</span>
+      Flint
+    </div>
+    <div class="nav-links">
+      <a href="/projects/" class="nav-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        Projects
+      </a>
+      <a href="https://flint-amber.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-launch">
+        Launch
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-inner">
+        <span class="hero-eyebrow">&#x1F525; Habit Tracker &middot; Offline-first &middot; Zero accounts</span>
+        <h1 class="hero-title">
+          Build streaks.<br>
+          <span class="hero-hand">Spark habits.</span>
+        </h1>
+        <p class="hero-tagline">
+          A lightweight habit tracker that lives on your device. No cloud, no accounts, no noise — just you and the habits you’re building.
+        </p>
+        <div class="hero-actions">
+          <a href="https://flint-amber.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-primary">
+            Start tracking
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </a>
+          <a href="https://github.com/iyashsoni/flint" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            Source code
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="section">
+    <div class="wrap">
+      <span class="section-label">Features</span>
+      <h2 class="section-title">Simple tools for<br>lasting change.</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">&#x2714;</div>
+          <div class="feature-title">Daily check-ins</div>
+          <div class="feature-desc">Mark habits done or skipped — one tap, no confirmation dialogs. Skips happen; they don’t break your streak.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#x1F525;</div>
+          <div class="feature-title">Honest streaks</div>
+          <div class="feature-desc">Missing a day breaks your streak. That’s the point. A streak is only valuable if it’s real.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#x1F4C5;</div>
+          <div class="feature-title">Activity heatmap</div>
+          <div class="feature-desc">A 4-month GitHub-style calendar showing your history at a glance. Pattern recognition at its simplest.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#x1F514;</div>
+          <div class="feature-title">Daily reminders</div>
+          <div class="feature-desc">Optional per-habit notifications at a time you choose. Never nagging — only when you want them.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#x1F4F4;</div>
+          <div class="feature-title">Offline-first PWA</div>
+          <div class="feature-desc">All data lives in IndexedDB on your device. Works with no network. Add to home screen for a native feel.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#x1F510;</div>
+          <div class="feature-title">Zero accounts</div>
+          <div class="feature-desc">No sign-up, no server, no data ever leaving your device. Uninstalling the app deletes your data. Period.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Design principles -->
+  <section class="section principles">
+    <div class="wrap">
+      <span class="section-label">Design principles</span>
+      <h2 class="section-title">Radical simplicity.</h2>
+      <div class="principles-list">
+        <div class="principle">
+          <div class="principle-num">1</div>
+          <div>
+            <div class="principle-title">One screen, one job</div>
+            <div class="principle-desc">The home screen shows today’s habits. Nothing else competes for attention.</div>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">2</div>
+          <div>
+            <div class="principle-title">Friction-free logging</div>
+            <div class="principle-desc">Marking a habit done is a single tap. No confirmation dialogs, no loading spinners.</div>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">3</div>
+          <div>
+            <div class="principle-title">Honest streaks</div>
+            <div class="principle-desc">Skipping a day breaks your streak. That’s the point — the streak is only valuable if it’s real.</div>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">4</div>
+          <div>
+            <div class="principle-title">Your data, your device</div>
+            <div class="principle-desc">Everything is stored in the browser’s IndexedDB. There is no server to breach.</div>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="principle-num">5</div>
+          <div>
+            <div class="principle-title">Works everywhere</div>
+            <div class="principle-desc">Built to run on any modern mobile browser without crashing. No exotic CSS, no unguarded APIs.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech -->
+  <section class="section">
+    <div class="wrap">
+      <span class="section-label">Tech stack</span>
+      <h2 class="section-title">No backend. No database.<br>No third-party analytics.</h2>
+      <div class="stack-grid">
+        <span class="stack-tag">React 19</span>
+        <span class="stack-tag">Vite 8</span>
+        <span class="stack-tag">Vanilla CSS + design tokens</span>
+        <span class="stack-tag">IndexedDB via idb</span>
+        <span class="stack-tag">vite-plugin-pwa + Workbox</span>
+        <span class="stack-tag">Web Notifications API</span>
+        <span class="stack-tag">DM Sans + Caveat fonts</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <div class="wrap">
+      <h2 class="cta-title">Ready to build a streak?<br><span class="cta-hand">Start today.</span></h2>
+      <p class="cta-sub">Install on your home screen. No app store required.</p>
+      <a href="https://flint-amber.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-primary" style="margin: 0 auto; width: fit-content;">
+        Open Flint
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div class="footer-left">
+        <a href="/projects/" class="footer-link">&larr; All projects</a>
+        <span class="footer-sep">|</span>
+        <a href="/" class="footer-link">Portfolio</a>
+      </div>
+      <span class="footer-copy">Built by <a href="https://iyashsoni.github.io" style="color:var(--ink-2)">Yash Soni</a></span>
+    </div>
+  </footer>
+
+</body>
+</html>

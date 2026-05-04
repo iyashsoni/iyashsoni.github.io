@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>unopomo — a premium pomodoro focus timer</title>
+  <meta name="description" content="unopomo: a premium pomodoro focus timer. 10 visual themes with ambient soundscapes, session stats, 8 languages, fully offline. Beautifully designed.">
+  <link rel="canonical" href="https://iyashsoni.github.io/projects/unopomo/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:   #030712;
+      --bg-1: #0a0a14;
+      --bg-2: #0f0f1c;
+      --glass-bg: rgba(255,255,255,0.06);
+      --glass-bd: rgba(255,255,255,0.12);
+      --text-0: #ffffff;
+      --text-1: rgba(255,255,255,0.75);
+      --text-2: rgba(255,255,255,0.45);
+      --indigo: #6366f1;
+      --pink: #ec4899;
+      --grad: linear-gradient(135deg, #6366f1, #ec4899);
+      --r-sm: 10px;
+      --r-md: 16px;
+      --r-lg: 24px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Montserrat', -apple-system, system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-0);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      text-transform: lowercase;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 70% 60% at 20% -15%, rgba(99,102,241,0.12), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 85% 15%, rgba(236,72,153,0.10), transparent 55%),
+        radial-gradient(ellipse 50% 40% at 50% 100%, rgba(99,102,241,0.08), transparent 55%);
+      z-index: 0;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    img, svg { display: block; max-width: 100%; }
+
+    /* ---- Nav ---- */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding: 0 max(clamp(16px,4vw,40px), env(safe-area-inset-left));
+      background: rgba(3,7,18,0.80);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      font-weight: 600;
+      font-size: 16px;
+      letter-spacing: -0.01em;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .nav-links { display: flex; align-items: center; gap: 12px; }
+
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      color: var(--text-2);
+      transition: color 150ms;
+      text-transform: lowercase;
+    }
+    .nav-back:hover { color: var(--text-1); }
+    .nav-back svg { width: 13px; height: 13px; }
+
+    .btn-launch {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background: var(--grad);
+      color: #fff;
+      font-weight: 600;
+      font-size: 12px;
+      box-shadow: 0 4px 20px rgba(99,102,241,0.3);
+      transition: filter 150ms, transform 150ms;
+      text-transform: lowercase;
+    }
+    .btn-launch:hover { filter: brightness(1.1); transform: translateY(-1px); }
+    .btn-launch svg { width: 13px; height: 13px; }
+
+    /* ---- Layout ---- */
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 clamp(16px, 4vw, 40px);
+    }
+
+    /* ---- Hero ---- */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      padding-top: 60px;
+    }
+
+    .hero-inner {
+      padding: 5rem 0 4rem;
+      text-align: center;
+      width: 100%;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--text-2);
+      margin-bottom: 2rem;
+    }
+
+    .hero-eyebrow-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--grad);
+      background: var(--indigo);
+    }
+
+    .hero-title {
+      font-size: clamp(3.5rem, 11vw, 8rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 0.9;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title-grad {
+      background: var(--grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-tagline {
+      font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+      color: var(--text-1);
+      max-width: 52ch;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6;
+    }
+
+    /* ---- Timer ring (decorative) ---- */
+    .timer-ring {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto 3rem;
+      position: relative;
+    }
+
+    .timer-ring svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .timer-ring-track {
+      fill: none;
+      stroke: rgba(255,255,255,0.06);
+      stroke-width: 8;
+    }
+
+    .timer-ring-progress {
+      fill: none;
+      stroke: url(#ringGrad);
+      stroke-width: 8;
+      stroke-linecap: round;
+      stroke-dasharray: 535;
+      stroke-dashoffset: 133;
+      animation: ring-spin 8s linear infinite;
+    }
+
+    @keyframes ring-spin {
+      0% { stroke-dashoffset: 133; }
+      50% { stroke-dashoffset: 400; }
+      100% { stroke-dashoffset: 133; }
+    }
+
+    .timer-ring-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+    }
+
+    .timer-ring-time {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .timer-ring-label {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--text-2);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: 999px;
+      background: var(--grad);
+      color: #fff;
+      font-weight: 600;
+      font-size: 14px;
+      box-shadow: 0 8px 28px rgba(99,102,241,0.35);
+      transition: filter 150ms, transform 150ms;
+      text-transform: lowercase;
+    }
+    .btn-primary:hover { filter: brightness(1.1); transform: translateY(-2px); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--text-1);
+      font-weight: 500;
+      font-size: 14px;
+      background: rgba(255,255,255,0.04);
+      transition: border-color 150ms, color 150ms;
+      text-transform: lowercase;
+    }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.3); color: var(--text-0); }
+
+    /* ---- Sections ---- */
+    .section { padding: 5rem 0; }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      color: var(--text-2);
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      margin-bottom: 3rem;
+    }
+
+    /* ---- Themes ---- */
+    .themes-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+    @media (max-width: 600px) { .themes-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .theme-swatch {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-bd);
+      border-radius: var(--r-md);
+      padding: 16px 12px;
+      text-align: center;
+      backdrop-filter: blur(12px);
+      transition: transform 150ms, border-color 150ms;
+    }
+    .theme-swatch:hover { transform: translateY(-3px); border-color: rgba(255,255,255,0.25); }
+
+    .theme-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      margin: 0 auto 8px;
+      border: 2px solid rgba(255,255,255,0.15);
+    }
+
+    .theme-name {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-1);
+      letter-spacing: 0.02em;
+    }
+
+    /* ---- Features ---- */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    @media (max-width: 720px) { .features-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 460px) { .features-grid { grid-template-columns: 1fr; } }
+
+    .feature-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-bd);
+      border-radius: var(--r-md);
+      padding: 22px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: transform 200ms, border-color 200ms;
+    }
+    .feature-card:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.22); }
+
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(99,102,241,0.12);
+      border: 1px solid rgba(99,102,241,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin-bottom: 14px;
+    }
+
+    .feature-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .feature-desc {
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.55;
+    }
+
+    /* ---- Keyboard shortcuts ---- */
+    .shortcuts {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .shortcut {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-bd);
+      border-radius: var(--r-sm);
+      font-size: 13px;
+      color: var(--text-1);
+    }
+
+    .shortcut kbd {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 4px;
+      padding: 2px 7px;
+      font-size: 12px;
+      font-family: inherit;
+      color: var(--text-0);
+    }
+
+    /* ---- CTA ---- */
+    .cta-section {
+      padding: 5rem 0 6rem;
+      text-align: center;
+    }
+
+    .cta-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+
+    .cta-title-grad {
+      background: var(--grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .cta-sub { color: var(--text-2); font-size: 15px; margin-bottom: 2.5rem; }
+
+    /* ---- Footer ---- */
+    .footer {
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 2rem 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-left { display: flex; align-items: center; gap: 16px; }
+
+    .footer-link { font-size: 12px; color: var(--text-2); transition: color 150ms; }
+    .footer-link:hover { color: var(--text-1); }
+    .footer-sep { color: rgba(255,255,255,0.1); }
+    .footer-copy { font-size: 12px; color: var(--text-2); }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-brand">unopomo</div>
+    <div class="nav-links">
+      <a href="/projects/" class="nav-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        projects
+      </a>
+      <a href="https://unopomo.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-launch">
+        launch
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-inner">
+        <div class="hero-eyebrow">
+          <span class="hero-eyebrow-dot"></span>
+          pomodoro timer &middot; 10 themes &middot; ambient sounds &middot; offline
+        </div>
+
+        <!-- Decorative timer ring -->
+        <div class="timer-ring" aria-hidden="true">
+          <svg viewBox="0 0 200 200">
+            <defs>
+              <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#6366f1"/>
+                <stop offset="100%" stop-color="#ec4899"/>
+              </linearGradient>
+            </defs>
+            <circle class="timer-ring-track" cx="100" cy="100" r="85"/>
+            <circle class="timer-ring-progress" cx="100" cy="100" r="85"/>
+          </svg>
+          <div class="timer-ring-text">
+            <span class="timer-ring-time">25:00</span>
+            <span class="timer-ring-label">focus</span>
+          </div>
+        </div>
+
+        <h1 class="hero-title">
+          <span class="hero-title-grad">uno</span>pomo
+        </h1>
+        <p class="hero-tagline">
+          a premium pomodoro focus timer. beautifully designed, works offline, completely private.
+        </p>
+        <div class="hero-actions">
+          <a href="https://unopomo.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-primary">
+            start focusing
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </a>
+          <a href="https://github.com/iyashsoni/unopomo" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            source code
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Themes -->
+  <section class="section">
+    <div class="wrap">
+      <span class="section-label">visual themes</span>
+      <h2 class="section-title">10 worlds to focus in.</h2>
+      <div class="themes-grid">
+        <div class="theme-swatch">
+          <div class="theme-dot" style="background: linear-gradient(135deg,#0ea5e9,#0284c7)"></div>
+          <div class="theme-name">ocean</div>
+        </div>
+        <div class="theme-swatch">
+          <div class="theme-dot" style="background: linear-gradient(135deg,#22c55e,#15803d)"></div>
+          <div class="theme-name">forest</div>
+        </div>
+        <div class="theme-swatch">
+          <div class="theme-dot" style="background: linear-gradient(135deg,#38bdf8,#7dd3fc)"></div>
+          <div class="theme-name">river</div>
+        </div>
+        <div class="theme-swatch">
+          <div class="theme-dot" style="background: linear-gradient(135deg,#94a3b8,#64748b)"></div>
+          <div class="theme-name">rain</div>
+        </div>
+        <div class="theme-swatch">
+          <div class="theme-dot" style="background: linear-gradient(135deg,#a8a29e,#78716c)"></div>
+          <div class="theme-name">mountain</div>
+        </div>
+        <div class="theme-swatch">
+          <div class="theme-dot" style="background: linear-gradient(135deg,#d97706,#92400e)"></div>
+          <div class="theme-name">caf&eacute;</div>
+        </div>
+        <div class="theme-swatch">
+          <div class="theme-dot" style="background: linear-gradient(135deg,#1e1b4b,#312e81)"></div>
+          <div class="theme-name">night city</div>
+        </div>
+        <div class="theme-swatch">
+          <div class="theme-dot" style="background: linear-gradient(135deg,#fbbf24,#d97706)"></div>
+          <div class="theme-name">desert</div>
+        </div>
+        <div class="theme-swatch">
+          <div class="theme-dot" style="background: linear-gradient(135deg,#ef4444,#991b1b)"></div>
+          <div class="theme-name">fireplace</div>
+        </div>
+        <div class="theme-swatch">
+          <div class="theme-dot" style="background: linear-gradient(135deg,#0f172a,#1e3a5f)"></div>
+          <div class="theme-name">space</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="section">
+    <div class="wrap">
+      <span class="section-label">features</span>
+      <h2 class="section-title">everything a focus timer<br>should be.</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">&#x23F1;</div>
+          <div class="feature-title">3 timer modes</div>
+          <div class="feature-desc">focus (25 min), breather (5 min), recharge (15 min). cycle through them or let them auto-advance.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#x1F3B5;</div>
+          <div class="feature-title">ambient sounds</div>
+          <div class="feature-desc">each theme has a matching ambient soundscape. looping audio with volume control — set the mood and go deep.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#x1F4CA;</div>
+          <div class="feature-title">session stats</div>
+          <div class="feature-desc">today’s count, current streak, all-time total, 7-day bar chart. see your focus patterns over time.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#x1F310;</div>
+          <div class="feature-title">8 languages</div>
+          <div class="feature-desc">english, spanish, french, german, portuguese, chinese, japanese, korean. auto-detects your browser language.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#x1F4F4;</div>
+          <div class="feature-title">offline pwa</div>
+          <div class="feature-desc">installable on any device. works with no internet. all data stays in localstorage — no accounts, no backend.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#x1F512;</div>
+          <div class="feature-title">100% private</div>
+          <div class="feature-desc">everything lives in your browser. no tracking, no analytics, no data collection of any kind.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Keyboard shortcuts -->
+  <section class="section">
+    <div class="wrap">
+      <span class="section-label">keyboard shortcuts</span>
+      <h2 class="section-title">eyes on the work,<br>not the screen.</h2>
+      <div class="shortcuts">
+        <div class="shortcut"><kbd>space</kbd> start / pause</div>
+        <div class="shortcut"><kbd>r</kbd> reset timer</div>
+        <div class="shortcut"><kbd>n</kbd> skip to next</div>
+        <div class="shortcut"><kbd>m</kbd> mute sounds</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <div class="wrap">
+      <h2 class="cta-title">ready to <span class="cta-title-grad">focus?</span></h2>
+      <p class="cta-sub">pick a theme. start the timer. get things done.</p>
+      <a href="https://unopomo.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-primary" style="margin: 0 auto; width: fit-content;">
+        open unopomo
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div class="footer-left">
+        <a href="/projects/" class="footer-link">&larr; all projects</a>
+        <span class="footer-sep">|</span>
+        <a href="/" class="footer-link">portfolio</a>
+      </div>
+      <span class="footer-copy">built by <a href="https://iyashsoni.github.io" style="color:rgba(255,255,255,0.6)">yash soni</a></span>
+    </div>
+  </footer>
+
+</body>
+</html>
