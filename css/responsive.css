@@ -1,5 +1,10 @@
 /* ─── Tablet ─────────────────────────────────────── */
 @media (max-width: 1024px) {
+  .about__grid {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+  }
+  .about__image { max-width: 360px; }
 
   .work__grid { grid-template-columns: 1fr; }
   .project-card--featured { grid-column: span 1; }
@@ -42,6 +47,8 @@
     grid-column: span 1;
     flex-direction: column;
   }
+
+  .about__image-decoration { display: none; }
 
   .cursor, .cursor__dot { display: none; }
 }
