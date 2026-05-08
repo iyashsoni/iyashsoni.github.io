@@ -5,7 +5,7 @@ import {
   initCardShine,
   initParallax,
 } from './animations.js';
-import { qs, throttle } from './utils.js';
+import { qs, throttle, initBackCacheRecovery, initSmartBack } from './utils.js';
 
 function initTheme() {
   const root = document.documentElement;
@@ -42,4 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initMagnetic();
   initCardShine();
   initParallax();
+  initBackCacheRecovery();
+  initSmartBack();
 });

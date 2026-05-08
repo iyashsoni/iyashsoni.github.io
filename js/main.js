@@ -6,7 +6,7 @@ import {
   initParallax,
   initReadProgress,
 } from './animations.js';
-import { qs, qsa, throttle } from './utils.js';
+import { qs, qsa, throttle, initBackCacheRecovery, initSmartBack } from './utils.js';
 
 /* ── Theme toggle ────────────────────────────────── */
 function initTheme() {
@@ -171,4 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initParallax();
   initReadProgress();
   initPhotoFallback();
+  initBackCacheRecovery();
+  initSmartBack();
 });

@@ -19,9 +19,23 @@
 
   .nav__links { display: none; }
   .nav__toggle { display: flex; }
-  .nav__inner { grid-template-columns: auto auto; }
 
-  .hero__name { letter-spacing: -0.045em; }
+  /* Project pages have no hamburger menu — keep the back link visible. */
+  body[data-project] .nav__links { display: flex; }
+  body[data-project] .nav__toggle { display: none; }
+  body[data-project] .nav__inner { grid-template-columns: auto 1fr auto; }
+  /* logo on the left, right cluster pushed to the far right */
+  .nav__inner { grid-template-columns: auto 1fr; gap: 1rem; }
+  .nav__right .btn { padding: 0.45rem 0.85rem; font-size: 0.78rem; }
+
+  .hero { min-height: auto; padding-bottom: 3rem; }
+  .hero__content { padding: 4rem 0 4rem; }
+  .hero__name { letter-spacing: -0.045em; line-height: 0.95; }
+  .hero__pill .pill { font-size: 0.72rem; padding: 0.35rem 0.7rem; }
+  .hero__pill .pill,
+  .pill { white-space: normal; }
+  .hero__sub { font-size: clamp(1.2rem, 5vw, 1.6rem); }
+  .hero__tagline { font-size: 1rem; line-height: 1.55; }
   .hero__actions { flex-direction: column; align-items: stretch; }
   .hero__actions .btn { width: 100%; justify-content: center; }
   .scroll-cue { display: none; }
@@ -36,6 +50,65 @@
   .blog-card--large { flex-direction: column; grid-column: 1; }
 
   .cursor, .cursor__dot { display: none; }
+
+  /* Tiles: tighter on phones */
+  .tile { padding: 1.6rem; min-height: auto; }
+  .tile__head { margin-bottom: 1.1rem; }
+  .tile__icon { width: 48px; height: 48px; border-radius: 12px; }
+  .tile__title { font-size: clamp(1.5rem, 7vw, 2rem); }
+  .tile__desc { font-size: 0.95rem; }
+  .tile__foot { margin-top: 1.25rem; padding-top: 1rem; flex-wrap: wrap; }
+  .tile__cta { width: 34px; height: 34px; }
+
+  /* Section heads stack neatly with the "All" link */
+  .section__head .btn { align-self: flex-start; }
+
+  /* Avatar — sized for phones */
+  .avatar-frame { max-width: 360px; margin: 0 auto; }
+  .about__image { display: flex; justify-content: center; }
+
+  /* Project page hero — compact on phones */
+  .proj-hero { min-height: auto; padding: calc(var(--nav-h) + 2.5rem) 0 2rem; }
+  .proj-hero__title { font-size: clamp(2.5rem, 11vw, 4rem); }
+  .proj-hero__lead { font-size: 1rem; margin-bottom: 1.75rem; }
+  .proj-hero__visual { min-height: 280px; }
+  .device { width: clamp(200px, 60vw, 260px); }
+
+  /* Page header subpages */
+  .page-header { padding-top: calc(var(--nav-h) + 2.5rem); padding-bottom: 2.5rem; }
+  .page-header__title { font-size: clamp(2.25rem, 9vw, 3.5rem); }
+  .page-header__sub { font-size: 1rem; }
+  .page-header__back { margin-bottom: 1.25rem; }
+
+  /* Marquee — slightly slower / smaller on small screens */
+  .marquee { padding: 1rem 0; }
+  .marquee__item { font-size: clamp(1.1rem, 5vw, 1.6rem); }
+
+  /* Section eyebrow + heading: tighter */
+  .section__heading { font-size: clamp(2rem, 8vw, 2.75rem); }
+  .section__head { margin-bottom: 2.25rem; }
+
+  /* Manifesto */
+  .manifesto__quote { font-size: clamp(1.4rem, 6vw, 2rem); }
+
+  /* Contact */
+  .contact__heading { font-size: clamp(2rem, 9vw, 3rem); }
+  .contact__email { font-size: clamp(1.2rem, 6vw, 1.8rem); }
+  .contact__social a { width: 40px; height: 40px; }
+
+  /* Project subpages: stack feature/step grids */
+  .proj-features { grid-template-columns: 1fr; }
+  .proj-step { grid-template-columns: 56px 1fr; gap: 1rem; padding: 1.5rem 0; }
+  .proj-step__num { font-size: 1.5rem; }
+}
+
+/* ─── Tiny phones (≤ 380px) ──────────────────────── */
+@media (max-width: 380px) {
+  .nav__right .btn--ghost { display: none; }
+  .container { padding: 0 1rem; }
+  .hero__name { letter-spacing: -0.05em; }
+  .tile { padding: 1.35rem; }
+  .stat { padding: 1.5rem 0.75rem; }
 }
 
 /* ─── Large screens ──────────────────────────────── */
