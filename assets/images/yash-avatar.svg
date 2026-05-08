@@ -1,304 +1,322 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" role="img" aria-label="Stylised portrait illustration of Yash Soni in a café">
   <defs>
-    <!-- Background orbs -->
-    <radialGradient id="orb1" cx="75%" cy="18%" r="55%">
-      <stop offset="0%" stop-color="#7c6fee" stop-opacity="0.2"/>
-      <stop offset="100%" stop-color="#7c6fee" stop-opacity="0"/>
+    <!-- Warm café atmosphere -->
+    <radialGradient id="ambient" cx="50%" cy="38%" r="70%">
+      <stop offset="0%"  stop-color="#7a4e2a" stop-opacity="0.95"/>
+      <stop offset="55%" stop-color="#2a1a14" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#0d0807" stop-opacity="1"/>
     </radialGradient>
-    <radialGradient id="orb2" cx="22%" cy="82%" r="48%">
-      <stop offset="0%" stop-color="#06d6a0" stop-opacity="0.13"/>
-      <stop offset="100%" stop-color="#06d6a0" stop-opacity="0"/>
-    </radialGradient>
-    <!-- Skin tone — warm South Asian brown -->
-    <radialGradient id="skin" cx="42%" cy="32%" r="65%">
-      <stop offset="0%" stop-color="#cc8050"/>
-      <stop offset="55%" stop-color="#b86c38"/>
-      <stop offset="100%" stop-color="#9e5828"/>
-    </radialGradient>
-    <!-- Ear / neck skin (slightly darker) -->
-    <radialGradient id="skinDark" cx="50%" cy="50%" r="60%">
-      <stop offset="0%" stop-color="#b87040"/>
-      <stop offset="100%" stop-color="#905028"/>
-    </radialGradient>
-    <!-- Hair — very dark brown/black -->
-    <linearGradient id="hair" x1="25%" y1="0%" x2="75%" y2="100%">
-      <stop offset="0%" stop-color="#16110a"/>
-      <stop offset="100%" stop-color="#060402"/>
+
+    <!-- Arch — burnished copper -->
+    <linearGradient id="arch" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#7a4220"/>
+      <stop offset="55%"  stop-color="#9a5a2a"/>
+      <stop offset="100%" stop-color="#3a1f10"/>
     </linearGradient>
-    <!-- Shirt — dark navy -->
-    <linearGradient id="shirt" x1="0%" y1="0%" x2="30%" y2="100%">
-      <stop offset="0%" stop-color="#1f2f58"/>
-      <stop offset="100%" stop-color="#0d1838"/>
+    <linearGradient id="archInner" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"  stop-color="#3a2618" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#150c08" stop-opacity="1"/>
     </linearGradient>
-    <!-- Laptop screen -->
-    <linearGradient id="lapscreen" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#141e44"/>
-      <stop offset="100%" stop-color="#080f28"/>
-    </linearGradient>
-    <!-- Screen glow from below -->
-    <radialGradient id="screenGlow" cx="50%" cy="100%" r="65%">
-      <stop offset="0%" stop-color="#7c6fee" stop-opacity="0.28"/>
-      <stop offset="100%" stop-color="#7c6fee" stop-opacity="0"/>
+
+    <!-- Distant cafe interior glow through arch -->
+    <radialGradient id="interiorGlow" cx="50%" cy="65%" r="60%">
+      <stop offset="0%"   stop-color="#ffb169" stop-opacity="0.42"/>
+      <stop offset="60%"  stop-color="#7a3815" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#1a0b06" stop-opacity="0"/>
     </radialGradient>
-    <!-- Subtle code element glow -->
-    <filter id="codeGlow" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="3.5" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
+
+    <!-- Industrial ceiling rails (top) -->
+    <linearGradient id="ceiling" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"  stop-color="#2a1f1a"/>
+      <stop offset="100%" stop-color="#0d0807" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Shirt — maroon / burgundy -->
+    <linearGradient id="shirt" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%"  stop-color="#a44a5a"/>
+      <stop offset="55%" stop-color="#7d2e3f"/>
+      <stop offset="100%" stop-color="#4a1626"/>
+    </linearGradient>
+    <linearGradient id="shirtShade" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"  stop-color="#3a0e1a" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#280812" stop-opacity="0.65"/>
+    </linearGradient>
+
+    <!-- Trousers — warm cream/white -->
+    <linearGradient id="pants" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"  stop-color="#efe6d4"/>
+      <stop offset="100%" stop-color="#b6a78a"/>
+    </linearGradient>
+
+    <!-- Floor reflection -->
+    <linearGradient id="floor" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"  stop-color="#3a261a" stop-opacity="0.0"/>
+      <stop offset="100%" stop-color="#2a1810" stop-opacity="0.85"/>
+    </linearGradient>
+
+    <!-- Rim light — warm key -->
+    <linearGradient id="rimLight" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"  stop-color="#ffc890" stop-opacity="0.35"/>
+      <stop offset="60%" stop-color="#ffc890" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Skin (head silhouette only — no features) -->
+    <radialGradient id="skinSil" cx="48%" cy="40%" r="65%">
+      <stop offset="0%"   stop-color="#5a3422" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#1f0e08" stop-opacity="1"/>
+    </radialGradient>
+
+    <!-- Soft head halo light -->
+    <radialGradient id="headHalo" cx="58%" cy="32%" r="55%">
+      <stop offset="0%"  stop-color="#ffd9a8" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#ffd9a8" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Brushy noise on background -->
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="7"/>
+      <feColorMatrix values="0 0 0 0 0.2  0 0 0 0 0.13  0 0 0 0 0.08  0 0 0 0.18 0"/>
+      <feComposite in2="SourceGraphic" operator="in"/>
     </filter>
+
+    <!-- Soft blur for atmosphere -->
+    <filter id="softBlur" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+
+    <!-- Mask: only show interior glow inside the arch -->
+    <clipPath id="archClip">
+      <path d="
+        M 168 332
+        Q 168 196 300 196
+        Q 432 196 432 332
+        L 432 612
+        L 168 612 Z"/>
+    </clipPath>
   </defs>
 
-  <!-- ── Background ── -->
-  <rect width="600" height="800" fill="#07070f"/>
-  <rect width="600" height="800" fill="url(#orb1)"/>
-  <rect width="600" height="800" fill="url(#orb2)"/>
-  <rect width="600" height="800" fill="url(#screenGlow)"/>
+  <!-- ── Backdrop ───────────────────────────────── -->
+  <rect width="600" height="800" fill="url(#ambient)"/>
+  <rect width="600" height="800" fill="url(#ambient)" filter="url(#grain)" opacity="0.6"/>
 
-  <!-- Subtle dot grid -->
-  <circle cx="82"  cy="88"  r="1.5" fill="#fff" fill-opacity="0.06"/>
-  <circle cx="162" cy="88"  r="1.5" fill="#fff" fill-opacity="0.05"/>
-  <circle cx="438" cy="88"  r="1.5" fill="#fff" fill-opacity="0.05"/>
-  <circle cx="518" cy="88"  r="1.5" fill="#fff" fill-opacity="0.06"/>
-  <circle cx="82"  cy="168" r="1.5" fill="#fff" fill-opacity="0.04"/>
-  <circle cx="518" cy="168" r="1.5" fill="#fff" fill-opacity="0.04"/>
-  <circle cx="62"  cy="490" r="1.5" fill="#fff" fill-opacity="0.04"/>
-  <circle cx="62"  cy="570" r="1.5" fill="#fff" fill-opacity="0.04"/>
-  <circle cx="538" cy="490" r="1.5" fill="#fff" fill-opacity="0.04"/>
-  <circle cx="538" cy="570" r="1.5" fill="#fff" fill-opacity="0.04"/>
-  <circle cx="82"  cy="740" r="1.5" fill="#fff" fill-opacity="0.03"/>
-  <circle cx="518" cy="740" r="1.5" fill="#fff" fill-opacity="0.03"/>
+  <!-- Industrial ceiling slats hint -->
+  <g opacity="0.55">
+    <rect x="0" y="0" width="600" height="120" fill="url(#ceiling)"/>
+    <line x1="40"  y1="22" x2="200" y2="22"  stroke="#1a120c" stroke-width="3" opacity="0.7"/>
+    <line x1="220" y1="22" x2="400" y2="22"  stroke="#1a120c" stroke-width="3" opacity="0.6"/>
+    <line x1="420" y1="22" x2="580" y2="22"  stroke="#1a120c" stroke-width="3" opacity="0.7"/>
+    <line x1="80"  y1="60" x2="520" y2="60"  stroke="#1a120c" stroke-width="2" opacity="0.45"/>
+    <!-- hanging filament bulbs -->
+    <line x1="180" y1="0" x2="180" y2="86" stroke="#3a2a1c" stroke-width="1"/>
+    <circle cx="180" cy="92" r="5" fill="#ffce82" opacity="0.85"/>
+    <circle cx="180" cy="92" r="14" fill="#ffce82" opacity="0.18" filter="url(#softBlur)"/>
+    <line x1="420" y1="0" x2="420" y2="100" stroke="#3a2a1c" stroke-width="1"/>
+    <circle cx="420" cy="106" r="5" fill="#ffce82" opacity="0.85"/>
+    <circle cx="420" cy="106" r="14" fill="#ffce82" opacity="0.18" filter="url(#softBlur)"/>
+    <line x1="300" y1="0" x2="300" y2="68" stroke="#3a2a1c" stroke-width="1"/>
+    <circle cx="300" cy="74" r="4" fill="#ffce82" opacity="0.7"/>
+  </g>
 
-  <!-- ── Floating code decorations ── -->
-
-  <!-- Top-left: { brace -->
-  <text x="50" y="130" font-family="'Courier New',Courier,monospace" font-size="60" font-weight="700"
-        fill="#7c6fee" fill-opacity="0.28" filter="url(#codeGlow)">{</text>
-
-  <!-- Top-right: /> -->
-  <text x="462" y="162" font-family="'Courier New',Courier,monospace" font-size="36" font-weight="700"
-        fill="#06d6a0" fill-opacity="0.30" filter="url(#codeGlow)">/&gt;</text>
-
-  <!-- Right side: const snippet -->
-  <text x="490" y="395" font-family="'Courier New',Courier,monospace" font-size="11"
-        fill="#7c6fee" fill-opacity="0.32">const</text>
-  <text x="490" y="412" font-family="'Courier New',Courier,monospace" font-size="11"
-        fill="#e8e8f8" fill-opacity="0.20">  build</text>
-  <text x="490" y="429" font-family="'Courier New',Courier,monospace" font-size="11"
-        fill="#06d6a0" fill-opacity="0.30">  = ∞;</text>
-
-  <!-- Left: git-commit dot chain -->
-  <circle cx="66" cy="318" r="5.5" fill="#06d6a0" fill-opacity="0.55" filter="url(#codeGlow)"/>
-  <line x1="66" y1="324" x2="66" y2="348" stroke="#06d6a0" stroke-width="1.5" stroke-opacity="0.30"/>
-  <circle cx="66" cy="353" r="5.5" fill="#06d6a0" fill-opacity="0.42"/>
-  <line x1="66" y1="359" x2="66" y2="383" stroke="#06d6a0" stroke-width="1.5" stroke-opacity="0.30"/>
-  <circle cx="66" cy="388" r="5.5" fill="#7c6fee" fill-opacity="0.50" filter="url(#codeGlow)"/>
-
-  <!-- Bottom-right: } -->
-  <text x="534" y="734" font-family="'Courier New',Courier,monospace" font-size="46" font-weight="700"
-        fill="#06d6a0" fill-opacity="0.18">}</text>
-
-  <!-- ── Laptop (bottom, partially behind body) ── -->
-  <!-- Screen panel -->
-  <rect x="142" y="650" width="316" height="112" rx="7" fill="url(#lapscreen)"/>
-  <rect x="142" y="650" width="316" height="112" rx="7" fill="none" stroke="#2a3c72" stroke-width="1.2"/>
-  <!-- Code lines on screen -->
-  <rect x="160" y="666" width="130" height="4" rx="2" fill="#7c6fee" fill-opacity="0.65"/>
-  <rect x="160" y="678" width="85"  height="4" rx="2" fill="#06d6a0" fill-opacity="0.55"/>
-  <rect x="170" y="690" width="155" height="4" rx="2" fill="#5a8fff" fill-opacity="0.45"/>
-  <rect x="170" y="702" width="105" height="4" rx="2" fill="#7c6fee" fill-opacity="0.40"/>
-  <rect x="160" y="714" width="65"  height="4" rx="2" fill="#06d6a0" fill-opacity="0.55"/>
-  <!-- Cursor -->
-  <rect x="228" y="714" width="9" height="4" rx="1" fill="#f0f0f8" fill-opacity="0.80"/>
-  <!-- Laptop hinge line -->
-  <rect x="142" y="762" width="316" height="10" rx="3" fill="#16203c"/>
-  <!-- Keyboard base -->
-  <rect x="110" y="772" width="380" height="14" rx="5" fill="#101828"/>
-  <!-- Touchpad -->
-  <rect x="255" y="775" width="90" height="8"  rx="3" fill="#18233a" stroke="#242e4a" stroke-width="0.6"/>
-
-  <!-- ── BODY / SHIRT ── -->
-  <!-- Main torso -->
+  <!-- ── Café Arch ──────────────────────────────── -->
+  <!-- Arch outer frame (burnished metal) -->
   <path d="
-    M 300 500
-    Q 252 497 212 512
-    Q 168 530 148 562
-    L 118 800
-    L 482 800
-    L 452 562
-    Q 432 530 388 512
-    Q 348 497 300 500
-    Z
-  " fill="url(#shirt)"/>
+    M 130 332
+    Q 130 168 300 168
+    Q 470 168 470 332
+    L 470 660
+    L 130 660 Z"
+    fill="url(#arch)"/>
 
-  <!-- Shirt shadow folds -->
-  <path d="M 148 562 L 118 800 L 192 800 L 212 576 Z" fill="#080f28" fill-opacity="0.35"/>
-  <path d="M 452 562 L 482 800 L 408 800 L 388 576 Z" fill="#080f28" fill-opacity="0.35"/>
+  <!-- Arch inner cutout (interior view) -->
+  <g clip-path="url(#archClip)">
+    <rect x="160" y="170" width="280" height="450" fill="url(#archInner)"/>
+    <rect x="160" y="170" width="280" height="450" fill="url(#interiorGlow)"/>
+    <!-- Distant bar / shelves silhouette -->
+    <rect x="178" y="430" width="244" height="120" fill="#2a1810" opacity="0.85"/>
+    <rect x="178" y="430" width="244" height="14" fill="#0e0807"/>
+    <!-- Bottle rows -->
+    <g fill="#ffc88a" opacity="0.5">
+      <rect x="195" y="460" width="6" height="22" rx="1.5"/>
+      <rect x="207" y="458" width="6" height="24" rx="1.5"/>
+      <rect x="219" y="462" width="6" height="20" rx="1.5"/>
+      <rect x="231" y="458" width="6" height="24" rx="1.5"/>
+      <rect x="243" y="464" width="6" height="18" rx="1.5"/>
+      <rect x="255" y="460" width="6" height="22" rx="1.5"/>
+      <rect x="267" y="458" width="6" height="24" rx="1.5"/>
+      <rect x="279" y="462" width="6" height="20" rx="1.5"/>
+      <rect x="291" y="460" width="6" height="22" rx="1.5"/>
+      <rect x="303" y="458" width="6" height="24" rx="1.5"/>
+      <rect x="315" y="462" width="6" height="20" rx="1.5"/>
+      <rect x="327" y="458" width="6" height="24" rx="1.5"/>
+      <rect x="339" y="464" width="6" height="18" rx="1.5"/>
+      <rect x="351" y="460" width="6" height="22" rx="1.5"/>
+      <rect x="363" y="458" width="6" height="24" rx="1.5"/>
+      <rect x="375" y="462" width="6" height="20" rx="1.5"/>
+      <rect x="387" y="460" width="6" height="22" rx="1.5"/>
+      <rect x="399" y="458" width="6" height="24" rx="1.5"/>
+    </g>
+    <!-- Soft warm halo behind subject -->
+    <ellipse cx="300" cy="380" rx="170" ry="150" fill="#ffb169" opacity="0.22" filter="url(#softBlur)"/>
+  </g>
 
-  <!-- Collar V-neck detail -->
-  <path d="M 272 498 L 300 536 L 328 498" fill="none" stroke="#16203c" stroke-width="2.2" stroke-linejoin="round"/>
-  <path d="M 272 498 L 285 514 L 300 536" fill="#0a1328" fill-opacity="0.45"/>
-  <path d="M 328 498 L 315 514 L 300 536" fill="#0a1328" fill-opacity="0.45"/>
-
-  <!-- Center button placket -->
-  <line x1="300" y1="536" x2="300" y2="800" stroke="#182240" stroke-width="1.5"/>
-
-  <!-- Left arm -->
+  <!-- Arch inner edge highlight -->
   <path d="
-    M 148 562
-    Q 118 590 108 635
-    Q 102 658 112 678
-    L 146 672
-    Q 140 652 144 630
-    Q 150 596 172 572
-    Z
-  " fill="url(#shirt)"/>
+    M 168 332
+    Q 168 196 300 196
+    Q 432 196 432 332"
+    fill="none" stroke="#d99a5a" stroke-opacity="0.55" stroke-width="2"/>
 
-  <!-- Right arm -->
+  <!-- Plant — left side ornament -->
+  <g transform="translate(70 540)" opacity="0.85">
+    <ellipse cx="0" cy="44" rx="38" ry="10" fill="#1a100a" opacity="0.6"/>
+    <path d="M -16 30 L -14 -10 L 16 -12 L 18 32 Z" fill="#2c1a0e"/>
+    <path d="M -10 30 L -8 -8 L 12 -10 L 14 30 Z" fill="#3a2316"/>
+    <!-- leaves -->
+    <path d="M -2 -8 Q -28 -42 -22 -68 Q -6 -52 -2 -10 Z" fill="#2d4a32"/>
+    <path d="M  2 -8 Q  28 -42  22 -68 Q  6 -52  2 -10 Z" fill="#1f3624"/>
+    <path d="M -1 -10 Q -8 -56 6 -82 Q 12 -54 1 -10 Z" fill="#345840"/>
+    <path d="M  3 -10 Q 22 -56 8 -86 Q 0 -54 3 -10 Z" fill="#264028"/>
+  </g>
+
+  <!-- Floor reflection -->
+  <rect x="0" y="660" width="600" height="140" fill="url(#floor)"/>
+  <ellipse cx="300" cy="700" rx="180" ry="14" fill="#000" opacity="0.55"/>
+
+  <!-- ── Subject — stylised silhouette ─────────── -->
+
+  <!-- Soft warm rim from behind -->
+  <ellipse cx="300" cy="360" rx="120" ry="200" fill="#ffb169" opacity="0.18" filter="url(#softBlur)"/>
+
+  <!-- Trousers (white/cream) -->
   <path d="
-    M 452 562
-    Q 482 590 492 635
-    Q 498 658 488 678
-    L 454 672
-    Q 460 652 456 630
-    Q 450 596 428 572
-    Z
-  " fill="url(#shirt)"/>
-
-  <!-- Watch — left wrist -->
-  <rect x="113" y="663" width="30" height="14" rx="5" fill="#252e52" stroke="#323d68" stroke-width="0.8"/>
-  <rect x="117" y="666" width="22" height="8"  rx="2" fill="#141c3a"/>
-  <circle cx="128" cy="670" r="3" fill="#06d6a0" fill-opacity="0.65"/>
-
-  <!-- ── NECK ── -->
-  <path d="M 274 448 L 270 498 L 330 498 L 326 448 Z" fill="#b87040"/>
-  <path d="M 314 448 L 326 448 L 330 498 L 320 498 Z" fill="#905028" fill-opacity="0.45"/>
-  <path d="M 274 448 L 286 448 L 280 498 L 270 498 Z" fill="#905028" fill-opacity="0.38"/>
-
-  <!-- ── HEAD ── -->
-
-  <!-- Head base — slightly oval, wider at cheeks -->
-  <ellipse cx="300" cy="308" rx="102" ry="112" fill="url(#skin)"/>
-
-  <!-- Cheek blush (warm highlight) -->
-  <ellipse cx="226" cy="342" rx="30" ry="20" fill="#c08050" fill-opacity="0.22"/>
-  <ellipse cx="374" cy="342" rx="30" ry="20" fill="#c08050" fill-opacity="0.22"/>
-
-  <!-- Jaw / chin shading -->
-  <ellipse cx="300" cy="410" rx="78" ry="18" fill="#905028" fill-opacity="0.22"/>
-
-  <!-- Temple shadows -->
-  <ellipse cx="208" cy="282" rx="26" ry="44" fill="#905028" fill-opacity="0.18"/>
-  <ellipse cx="392" cy="282" rx="26" ry="44" fill="#905028" fill-opacity="0.18"/>
-
-  <!-- ── EARS ── -->
-  <!-- Left ear -->
-  <ellipse cx="199" cy="322" rx="15" ry="21" fill="#b06838"/>
-  <path d="M 206 310 Q 213 322 206 334" fill="none" stroke="#905028" stroke-width="1.8" stroke-linecap="round"/>
-  <!-- Right ear -->
-  <ellipse cx="401" cy="322" rx="15" ry="21" fill="#b06838"/>
-  <path d="M 394 310 Q 387 322 394 334" fill="none" stroke="#905028" stroke-width="1.8" stroke-linecap="round"/>
-
-  <!-- ── HAIR ── -->
-  <!-- Hair behind/shadow layer -->
-  <ellipse cx="300" cy="214" rx="110" ry="40" fill="#0d0907"/>
-  <path d="M 196 260 Q 182 296 186 336 Q 188 316 194 300 Q 200 282 208 265 Z" fill="#0d0907"/>
-  <path d="M 404 260 Q 418 296 414 336 Q 412 316 406 300 Q 400 282 392 265 Z" fill="#0d0907"/>
-
-  <!-- Main hair cap (short, close-cropped, slight volume at top) -->
+    M 246 540
+    L 240 760
+    L 280 760
+    L 290 545
+    Z" fill="url(#pants)"/>
   <path d="
-    M 196 286
-    Q 198 214 248 198
-    Q 273 190 300 189
-    Q 327 190 352 198
-    Q 402 214 404 286
-    Q 392 248 368 230
-    Q 340 214 300 212
-    Q 260 214 232 230
-    Q 208 248 196 286
-    Z
-  " fill="url(#hair)"/>
+    M 354 540
+    L 360 760
+    L 320 760
+    L 310 545
+    Z" fill="url(#pants)"/>
+  <!-- Trouser shadow inner crease -->
+  <path d="M 255 555 L 252 760 L 264 760 L 268 555 Z" fill="#7d6f55" opacity="0.35"/>
+  <path d="M 345 555 L 348 760 L 336 760 L 332 555 Z" fill="#7d6f55" opacity="0.35"/>
 
-  <!-- Hair hairline front edge (natural recede for adult male) -->
-  <path d="M 215 272 Q 240 252 270 246 Q 300 243 330 246 Q 360 252 385 272"
-        fill="none" stroke="#0d0907" stroke-width="1.2" stroke-opacity="0.5"/>
+  <!-- Sneakers -->
+  <ellipse cx="260" cy="772" rx="32" ry="11" fill="#0c0805" opacity="0.7"/>
+  <ellipse cx="340" cy="772" rx="32" ry="11" fill="#0c0805" opacity="0.7"/>
+  <path d="M 234 762 Q 234 750 248 748 L 282 750 Q 290 760 286 770 Q 268 776 240 772 Z" fill="#f0e9da"/>
+  <path d="M 366 762 Q 366 750 352 748 L 318 750 Q 310 760 314 770 Q 332 776 360 772 Z" fill="#f0e9da"/>
+  <line x1="246" y1="757" x2="280" y2="757" stroke="#cabe9e" stroke-width="1"/>
+  <line x1="320" y1="757" x2="354" y2="757" stroke="#cabe9e" stroke-width="1"/>
 
-  <!-- Subtle hair parting / shine -->
-  <path d="M 285 200 Q 290 218 288 244" fill="none" stroke="#251808" stroke-width="2" stroke-opacity="0.4" stroke-linecap="round"/>
+  <!-- Shirt — short sleeves, casual button-up -->
+  <path d="
+    M 300 380
+    Q 250 380 224 408
+    Q 206 432 200 472
+    L 198 545
+    Q 250 558 300 558
+    Q 350 558 402 545
+    L 400 472
+    Q 394 432 376 408
+    Q 350 380 300 380 Z" fill="url(#shirt)"/>
+  <!-- Shadow under shirt -->
+  <path d="
+    M 198 545
+    Q 250 558 300 558
+    Q 350 558 402 545
+    L 400 472
+    L 198 472 Z" fill="url(#shirtShade)"/>
 
-  <!-- ── EYEBROWS — slightly arched, natural male ── -->
-  <!-- Left -->
-  <path d="M 237 283 Q 256 273 278 277" stroke="#180e08" stroke-width="6" stroke-linecap="round" fill="none"/>
-  <!-- Right -->
-  <path d="M 322 277 Q 344 273 363 283" stroke="#180e08" stroke-width="6" stroke-linecap="round" fill="none"/>
+  <!-- Sleeve cuffs (rolled) -->
+  <path d="M 190 460 Q 196 444 220 442 L 232 472 Q 220 478 200 476 Z" fill="#5e1a2c"/>
+  <path d="M 410 460 Q 404 444 380 442 L 368 472 Q 380 478 400 476 Z" fill="#5e1a2c"/>
 
-  <!-- ── EYES ── -->
-  <!-- Left eye -->
-  <ellipse cx="257" cy="304" rx="22" ry="13" fill="#f4eeea"/>
-  <circle  cx="259" cy="305" r="13" fill="#3c1e0c"/>
-  <circle  cx="260" cy="305" r="9"  fill="#180a04"/>
-  <circle  cx="264" cy="301" r="3.8" fill="#ffffff" fill-opacity="0.90"/>
-  <circle  cx="257" cy="310" r="1.8" fill="#ffffff" fill-opacity="0.38"/>
-  <!-- Left lid shadow -->
-  <path d="M 235 297 Q 257 288 279 297" fill="none" stroke="#c07848" stroke-width="1.8" stroke-opacity="0.40"/>
-  <!-- Left lower lid line -->
-  <path d="M 235 316 Q 257 324 279 316" fill="none" stroke="#8a4820" stroke-width="1.2" stroke-opacity="0.35"/>
+  <!-- Arms — disappearing into pockets -->
+  <path d="
+    M 196 472
+    Q 184 510 196 540
+    L 222 542
+    Q 224 510 230 478 Z" fill="#7d2e3f"/>
+  <path d="
+    M 404 472
+    Q 416 510 404 540
+    L 378 542
+    Q 376 510 370 478 Z" fill="#7d2e3f"/>
 
-  <!-- Right eye -->
-  <ellipse cx="343" cy="304" rx="22" ry="13" fill="#f4eeea"/>
-  <circle  cx="341" cy="305" r="13" fill="#3c1e0c"/>
-  <circle  cx="340" cy="305" r="9"  fill="#180a04"/>
-  <circle  cx="336" cy="301" r="3.8" fill="#ffffff" fill-opacity="0.90"/>
-  <circle  cx="343" cy="310" r="1.8" fill="#ffffff" fill-opacity="0.38"/>
-  <!-- Right lid shadow -->
-  <path d="M 321 297 Q 343 288 365 297" fill="none" stroke="#c07848" stroke-width="1.8" stroke-opacity="0.40"/>
-  <!-- Right lower lid line -->
-  <path d="M 321 316 Q 343 324 365 316" fill="none" stroke="#8a4820" stroke-width="1.2" stroke-opacity="0.35"/>
+  <!-- Hands tucked into pockets — pocket flaps -->
+  <path d="M 218 535 Q 230 540 246 540 L 250 555 Q 235 555 220 552 Z" fill="#5e1a2c"/>
+  <path d="M 382 535 Q 370 540 354 540 L 350 555 Q 365 555 380 552 Z" fill="#5e1a2c"/>
+  <!-- Tiny watch hint -->
+  <rect x="408" y="528" width="14" height="6" rx="1.5" fill="#1a1410"/>
+  <rect x="410" y="529" width="10" height="4" rx="1" fill="#2a201a"/>
 
-  <!-- ── NOSE ── -->
-  <!-- Nose bridge shadow line (very subtle) -->
-  <path d="M 294 316 Q 288 338 284 358" fill="none" stroke="#a05828" stroke-width="1.8" stroke-opacity="0.38" stroke-linecap="round"/>
-  <!-- Nose base / tip -->
-  <path d="M 278 360 Q 288 372 300 374 Q 312 372 322 360 Q 312 376 300 376 Q 288 376 278 360 Z"
-        fill="#904820" fill-opacity="0.42"/>
-  <!-- Nostrils -->
-  <ellipse cx="283" cy="366" rx="9"   ry="6"   fill="#884020" fill-opacity="0.48"/>
-  <ellipse cx="317" cy="366" rx="9"   ry="6"   fill="#884020" fill-opacity="0.48"/>
-  <!-- Nose highlight -->
-  <ellipse cx="300" cy="360" rx="11"  ry="7.5" fill="#c88050" fill-opacity="0.35"/>
+  <!-- Collar V-neck -->
+  <path d="M 280 380 L 300 412 L 320 380" fill="none" stroke="#3a0e1a" stroke-width="2.4" stroke-linejoin="round"/>
+  <path d="M 280 380 L 290 396 L 300 412 L 290 380 Z" fill="#3a0e1a" opacity="0.6"/>
+  <path d="M 320 380 L 310 396 L 300 412 L 310 380 Z" fill="#3a0e1a" opacity="0.6"/>
+  <!-- Center placket / button line -->
+  <line x1="300" y1="412" x2="300" y2="556" stroke="#3a0e1a" stroke-width="1.2" opacity="0.7"/>
 
-  <!-- ── MOUTH / SMILE ── warm, wide, genuine showing teeth ── -->
-  <!-- Smile nasolabial folds -->
-  <path d="M 254 382 Q 256 398 260 408" fill="none" stroke="#905028" stroke-width="1.8" stroke-opacity="0.42" stroke-linecap="round"/>
-  <path d="M 346 382 Q 344 398 340 408" fill="none" stroke="#905028" stroke-width="1.8" stroke-opacity="0.42" stroke-linecap="round"/>
-  <!-- Upper lip -->
-  <path d="M 264 384 Q 282 379 300 381 Q 318 379 336 384" fill="none" stroke="#883818" stroke-width="1.8" stroke-linecap="round"/>
-  <!-- Smile curve (wide, warm) -->
-  <path d="M 260 394 Q 282 420 300 422 Q 318 420 340 394"
-        fill="none" stroke="#7a3215" stroke-width="3.5" stroke-linecap="round"/>
-  <!-- Teeth fill -->
-  <path d="M 266 400 Q 300 418 334 400 Q 300 414 266 400 Z" fill="#f8f0ec" fill-opacity="0.88"/>
-  <!-- Teeth separation line hint -->
-  <line x1="266" y1="407" x2="334" y2="407" stroke="#d8c8be" stroke-width="0.8" stroke-opacity="0.55"/>
-  <!-- Lower lip -->
-  <path d="M 270 422 Q 300 434 330 422" fill="none" stroke="#8a4428" stroke-width="2.2" stroke-linecap="round" fill-opacity="0.65"/>
+  <!-- Buttons -->
+  <circle cx="300" cy="438" r="2" fill="#2a0a14"/>
+  <circle cx="300" cy="468" r="2" fill="#2a0a14"/>
+  <circle cx="300" cy="498" r="2" fill="#2a0a14"/>
+  <circle cx="300" cy="528" r="2" fill="#2a0a14"/>
 
-  <!-- ── MUSTACHE (thin, subtle — visible in photo) ── -->
-  <path d="M 270 381 Q 284 386 300 384 Q 316 386 330 381"
-        fill="none" stroke="#120c06" stroke-width="2.8" stroke-linecap="round" fill-opacity="0.88"/>
-  <!-- Subtle shadow area under nose/above lip -->
-  <ellipse cx="299" cy="377" rx="22" ry="4" fill="#18100a" fill-opacity="0.18"/>
+  <!-- Neck -->
+  <path d="M 282 348 L 280 380 L 320 380 L 318 348 Z" fill="#3a1f12"/>
+  <path d="M 308 348 L 318 348 L 320 380 L 312 380 Z" fill="#1a0c06" opacity="0.6"/>
 
-  <!-- ── Floating badge decorations ── -->
-  <!-- "IBM" badge top-right of head -->
-  <rect x="412" y="230" width="72" height="28" rx="14" fill="#7c6fee" fill-opacity="0.12" stroke="#7c6fee" stroke-opacity="0.32" stroke-width="1"/>
-  <text x="448" y="249" font-family="'Courier New',Courier,monospace" font-size="12" font-weight="700"
-        fill="#7c6fee" fill-opacity="0.78" text-anchor="middle">IBM</text>
+  <!-- Head — stylised silhouette, soft rim, no features -->
+  <ellipse cx="300" cy="288" rx="62" ry="76" fill="url(#skinSil)"/>
+  <!-- Hair shape — short, slightly volumed -->
+  <path d="
+    M 246 270
+    Q 248 218 286 210
+    Q 300 207 314 210
+    Q 352 218 354 270
+    Q 348 244 326 232
+    Q 308 224 300 224
+    Q 292 224 274 232
+    Q 252 244 246 270 Z" fill="#0a0604"/>
+  <!-- Subtle warm rim light on right side of head -->
+  <path d="
+    M 358 270
+    Q 360 234 332 218
+    Q 332 248 358 270 Z" fill="#ffd9a8" opacity="0.22"/>
+  <!-- Rim along jaw -->
+  <path d="M 358 296 Q 354 332 332 354 Q 354 326 360 296 Z" fill="#ffb169" opacity="0.22"/>
+  <!-- Halo glow over head -->
+  <ellipse cx="318" cy="264" rx="80" ry="76" fill="url(#headHalo)"/>
 
-  <!-- "10+ yrs" badge, left side near arm -->
-  <rect x="108" y="614" width="74" height="26" rx="13" fill="#06d6a0" fill-opacity="0.10" stroke="#06d6a0" stroke-opacity="0.28" stroke-width="1"/>
-  <text x="145" y="632" font-family="'Courier New',Courier,monospace" font-size="11"
-        fill="#06d6a0" fill-opacity="0.72" text-anchor="middle">10+ yrs</text>
+  <!-- Subtle abstract face suggestion (no real features) — minimal hint of cheek glow only -->
+  <ellipse cx="324" cy="296" rx="14" ry="8" fill="#ffb78a" opacity="0.16"/>
 
+  <!-- Ground glow under figure -->
+  <ellipse cx="300" cy="690" rx="120" ry="10" fill="#ffb169" opacity="0.18" filter="url(#softBlur)"/>
+
+  <!-- Bokeh dots (cafe lights) -->
+  <g fill="#ffce82" opacity="0.85">
+    <circle cx="486" cy="222" r="6" filter="url(#softBlur)"/>
+    <circle cx="486" cy="222" r="2.5"/>
+    <circle cx="118" cy="248" r="5" filter="url(#softBlur)"/>
+    <circle cx="118" cy="248" r="2"/>
+    <circle cx="76"  cy="402" r="4" filter="url(#softBlur)"/>
+    <circle cx="540" cy="378" r="5" filter="url(#softBlur)"/>
+    <circle cx="540" cy="378" r="2"/>
+  </g>
+
+  <!-- Frame highlight on rim light side -->
+  <rect x="0" y="0" width="600" height="800" fill="url(#rimLight)"/>
+
+  <!-- Vignette -->
+  <radialGradient id="vignette" cx="50%" cy="50%" r="80%">
+    <stop offset="60%" stop-color="#000" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#000" stop-opacity="0.6"/>
+  </radialGradient>
+  <rect width="600" height="800" fill="url(#vignette)"/>
 </svg>
