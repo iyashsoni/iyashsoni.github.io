@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)">
 
   <!-- Primary SEO -->
   <title>Yash Soni — Software Engineer Lead at IBM | Bangalore</title>
@@ -66,124 +68,156 @@
     "description": "Software Engineer Lead at IBM with 10+ years of experience designing and building distributed, cloud-scale systems. MTech from IIIT-Bangalore."
   }
   </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/layout.css">
   <link rel="stylesheet" href="/css/components.css">
   <link rel="stylesheet" href="/css/animations.css">
   <link rel="stylesheet" href="/css/pages/portfolio.css">
   <link rel="stylesheet" href="/css/responsive.css">
-  <style>
-    .projects__grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: clamp(1.25rem, 2.5vw, 2rem);
-    }
-    .projects__header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 0;
-    }
-    .projects__header .section__heading { margin-bottom: 3rem; }
-    .project-card { text-decoration: none; color: inherit; display: flex; flex-direction: column; }
-    @media (max-width: 768px) {
-      .projects__grid { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 640px) {
-      .projects__header { flex-direction: column; align-items: flex-start; gap: 0; }
-      .projects__header .btn { align-self: flex-start; }
-    }
-  </style>
+
+  <script>
+    (function() {
+      try {
+        var saved = localStorage.getItem('theme');
+        var system = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', saved || system);
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
 
+  <!-- ── Top nav ─────────────────────────────────────── -->
   <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
     <div class="nav__inner container">
-      <a href="/" class="nav__logo" aria-label="Yash Soni — home">YS</a>
+      <a href="/" class="nav__logo" aria-label="Yash Soni — home">
+        <span class="nav__logo-mark" aria-hidden="true"></span>
+        <span>Yash Soni</span>
+      </a>
       <ul class="nav__links" role="list">
         <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="/blog/">Blog</a></li>
-        <li><a href="#contact" class="btn btn--sm btn--ghost">Say hi</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#writing">Writing</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
-      <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-        <span></span><span></span><span></span>
-      </button>
+      <div class="nav__right">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+        <a href="#contact" class="btn btn--sm btn--ghost">Say hi</a>
+        <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </nav>
 
   <nav class="nav__mobile" id="mobile-menu" aria-label="Mobile navigation">
     <a href="#about">About</a>
-    <a href="#projects">Projects</a>
+    <a href="#work">Work</a>
+    <a href="#writing">Writing</a>
     <a href="/blog/">Blog</a>
     <a href="#contact">Contact</a>
   </nav>
 
-  <!-- ── Hero ───────────────────────────────────────── -->
+  <!-- ── Hero ────────────────────────────────────────── -->
   <section class="hero" id="home" aria-label="Introduction">
     <div class="hero__bg" aria-hidden="true">
+      <div class="hero__grid"></div>
       <div class="orb orb--1"></div>
       <div class="orb orb--2"></div>
       <div class="orb orb--3"></div>
     </div>
     <div class="container hero__content">
-      <div class="hero__tag reveal">Software Engineer Lead · IBM · Bangalore</div>
-      <h1 class="hero__name reveal">
-        <span>Yash<br></span>
-        <span class="accent">Soni</span>
+      <div class="hero__pill hero__line">
+        <span class="pill"><span class="dot"></span> Software Engineer Lead · IBM · Bangalore</span>
+      </div>
+      <h1 class="hero__name">
+        <span class="stack hero__line delay-1">Yash</span>
+        <span class="stack grad hero__line delay-2">Soni.</span>
       </h1>
-      <p class="hero__tagline reveal">
+      <p class="hero__sub hero__line delay-3">
         <span id="typewriter"></span>
       </p>
-      <div class="hero__actions reveal">
-        <a href="#about" class="btn btn--primary">Know me</a>
-        <a href="#contact" class="btn btn--ghost">Let's talk</a>
+      <p class="hero__tagline hero__line delay-4">
+        Engineer at heart. Thinker by habit. I build systems that age well — and I write about life, markets, and the questions that keep me up.
+      </p>
+      <div class="hero__actions hero__line delay-5">
+        <a href="#work" class="btn btn--primary btn--magnetic">
+          See my work
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </a>
+        <a href="#contact" class="btn btn--ghost btn--magnetic">Let's talk</a>
       </div>
     </div>
-    <div class="hero__scroll" aria-hidden="true">
-      <div class="scroll-indicator">
-        <span>Scroll</span>
-        <div class="scroll-line"></div>
-      </div>
+    <div class="scroll-cue" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="scroll-cue__line"></div>
     </div>
   </section>
 
-  <!-- ── About ──────────────────────────────────────── -->
-  <section class="about section" id="about">
+  <!-- ── Marquee — what I think about ────────────────── -->
+  <section class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span class="marquee__item">Distributed Systems <span class="dot"></span></span>
+      <span class="marquee__item">Cloud Object Storage <span class="dot"></span></span>
+      <span class="marquee__item">Software Architecture <span class="dot"></span></span>
+      <span class="marquee__item">Personal Finance <span class="dot"></span></span>
+      <span class="marquee__item">Meditation &amp; Stillness <span class="dot"></span></span>
+      <span class="marquee__item">90s Indie Music <span class="dot"></span></span>
+      <span class="marquee__item">Asking Better Questions <span class="dot"></span></span>
+      <!-- duplicate for seamless loop -->
+      <span class="marquee__item">Distributed Systems <span class="dot"></span></span>
+      <span class="marquee__item">Cloud Object Storage <span class="dot"></span></span>
+      <span class="marquee__item">Software Architecture <span class="dot"></span></span>
+      <span class="marquee__item">Personal Finance <span class="dot"></span></span>
+      <span class="marquee__item">Meditation &amp; Stillness <span class="dot"></span></span>
+      <span class="marquee__item">90s Indie Music <span class="dot"></span></span>
+      <span class="marquee__item">Asking Better Questions <span class="dot"></span></span>
+    </div>
+  </section>
+
+  <!-- ── About ───────────────────────────────────────── -->
+  <section class="section" id="about" aria-label="About">
     <div class="container">
       <div class="about__grid">
-        <div class="about__image reveal">
-          <div class="about__photo-frame">
-            <img
-              src="/assets/images/yash-avatar.svg"
-              alt="Yash Soni — illustrated avatar"
-              class="about__photo"
-              loading="eager"
-            >
+        <div class="about__image reveal reveal--blur">
+          <div class="avatar-frame floats">
+            <img src="/assets/images/yash-avatar.svg" alt="Yash Soni — illustrated avatar" loading="eager">
+            <div class="avatar-frame__badge">
+              <span class="pulse" aria-hidden="true"></span>
+              Available for thoughtful conversations
+            </div>
           </div>
-          <div class="about__image-decoration" aria-hidden="true"></div>
         </div>
         <div class="about__text">
-          <span class="section__label reveal">About me</span>
-          <h2 class="section__heading reveal">Born curious,<br>built different.</h2>
-          <div class="about__bio reveal">
-            <p>I'm Yash — raised in Ahmedabad, forged in Bangalore. BE in IT from VGEC and an MTech from IIIT-Bangalore later, I've spent a decade turning hard problems into elegant systems.</p>
-            <p>Today I'm a Software Engineer Lead at IBM, spearheading COS. When I'm not deep in architecture decisions, you'll find me obsessing over markets, meditating on existence, hunting for the perfect 90s track, or asking questions that have no clean answers.</p>
+          <span class="section__eyebrow reveal">About me</span>
+          <h2 class="section__heading reveal">Born curious.<br>Built different.</h2>
+          <div class="about__bio reveal stagger">
+            <p class="reveal">I'm Yash — raised in Ahmedabad, forged in Bangalore. A BE in IT from VGEC and an MTech from IIIT-Bangalore later, I've spent a decade turning hard problems into elegant systems.</p>
+            <p class="reveal">Today I'm a Software Engineer Lead at IBM, spearheading Cloud Object Storage. When I'm not deep in architecture decisions, you'll find me obsessing over markets, meditating on existence, hunting for the perfect 90s track, or asking questions that have no clean answers.</p>
           </div>
-          <div class="about__stats reveal stagger">
+          <div class="stats reveal">
             <div class="stat">
-              <span class="stat__number">10+</span>
+              <span class="stat__num">10<span class="text-grad">+</span></span>
               <span class="stat__label">Years in tech</span>
             </div>
             <div class="stat">
-              <span class="stat__number">IBM</span>
+              <span class="stat__num">IBM</span>
               <span class="stat__label">Current home</span>
             </div>
             <div class="stat">
-              <span class="stat__number">&infin;</span>
+              <span class="stat__num"><span class="text-grad">∞</span></span>
               <span class="stat__label">Questions asked</span>
             </div>
           </div>
@@ -192,130 +226,147 @@
     </div>
   </section>
 
-  <!-- ── What I Do ──────────────────────────────────── -->
-  <section class="expertise section" id="expertise">
+  <!-- ── Capabilities ────────────────────────────────── -->
+  <section class="section" id="capabilities" aria-label="What I do">
     <div class="container">
-      <span class="section__label reveal">What I do</span>
-      <h2 class="section__heading reveal">More than just code.</h2>
-      <div class="expertise__grid grid-3 stagger">
-        <div class="expertise-card reveal">
-          <div class="expertise-card__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+      <div class="section__head reveal">
+        <div>
+          <span class="section__eyebrow">What I do</span>
+          <h2 class="section__heading">More than just code.</h2>
+        </div>
+      </div>
+      <div class="grid grid-3 stagger">
+        <article class="cap reveal">
+          <div class="cap__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 9l3 3-3 3m5 0h3"/>
+              <rect x="3" y="4" width="18" height="16" rx="2"/>
             </svg>
           </div>
           <h3>Engineering</h3>
-          <p>Software Engineer Lead at IBM, driving COS. A decade of building scalable, production-grade systems — from VGEC labs to IIIT-B research to enterprise architecture.</p>
-          <ul class="expertise-card__tags" role="list">
-            <li>System Design</li>
-            <li>Tech Leadership</li>
-            <li>Cloud &amp; Backend</li>
+          <p>A decade of building scalable, production-grade systems — from VGEC labs to IIIT-B research to enterprise architecture at IBM.</p>
+          <ul class="cap__tags" role="list">
+            <li>System Design</li><li>Tech Leadership</li><li>Cloud &amp; Backend</li>
           </ul>
-        </div>
-        <div class="expertise-card reveal">
-          <div class="expertise-card__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+        </article>
+        <article class="cap cap--life reveal">
+          <div class="cap__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 17l6-6 4 4 8-8"/>
+              <path d="M14 7h7v7"/>
             </svg>
           </div>
           <h3>Finance &amp; Growth</h3>
-          <p>Markets, money, and mental models. I believe financial literacy is a superpower — and productivity isn't about doing more, it's about doing what matters.</p>
-          <ul class="expertise-card__tags" role="list">
-            <li>Investing</li>
-            <li>Personal Finance</li>
-            <li>Productivity</li>
+          <p>Markets, money, and mental models. Financial literacy is a superpower; productivity isn't doing more — it's doing what matters.</p>
+          <ul class="cap__tags" role="list">
+            <li>Investing</li><li>Personal Finance</li><li>Productivity</li>
           </ul>
-        </div>
-        <div class="expertise-card reveal">
-          <div class="expertise-card__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"/>
-              <path d="M17 4a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2"/>
+        </article>
+        <article class="cap cap--mind reveal">
+          <div class="cap__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3a7.5 7.5 0 0 0 8.31 12.45A9 9 0 1 1 12 3z"/>
+              <path d="M17 4a2 2 0 0 0 2 2a2 2 0 0 0-2 2a2 2 0 0 0-2-2a2 2 0 0 0 2-2"/>
             </svg>
           </div>
           <h3>Mind &amp; Spirit</h3>
-          <p>Philosophy, meditation, and the deep mysteries of existence. India's wisdom traditions meet modern introspection — all soundtracked by the greatest decade in music: the 90s.</p>
-          <ul class="expertise-card__tags" role="list">
-            <li>Meditation</li>
-            <li>Philosophy</li>
-            <li>90s Music</li>
+          <p>Philosophy, meditation, and the deep mysteries of existence. India's wisdom traditions meet modern introspection — soundtracked by the 90s.</p>
+          <ul class="cap__tags" role="list">
+            <li>Meditation</li><li>Philosophy</li><li>90s Music</li>
           </ul>
-        </div>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- ── Projects ───────────────────────────────────── -->
-  <section class="section" id="projects">
+  <!-- ── Manifesto / quote ───────────────────────────── -->
+  <section class="manifesto reveal" aria-label="Manifesto">
     <div class="container">
-      <div class="projects__header">
+      <p class="manifesto__quote">
+        Good engineering isn't about clever code.<br>
+        It's about <em>decisions that age well.</em>
+      </p>
+      <p class="manifesto__attribution">— A note to my younger self</p>
+    </div>
+  </section>
+
+  <!-- ── Work / Projects ─────────────────────────────── -->
+  <section class="section" id="work" aria-label="Selected work">
+    <div class="container">
+      <div class="section__head">
         <div>
-          <span class="section__label reveal">Side projects</span>
+          <span class="section__eyebrow reveal">Selected work</span>
           <h2 class="section__heading reveal">Built with intention.</h2>
         </div>
-        <a href="/projects/" class="btn btn--ghost reveal">All projects &rarr;</a>
+        <a href="/projects/" class="btn btn--ghost btn--sm reveal">All projects
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </a>
       </div>
+
       <div class="projects__grid stagger">
-        <a href="/projects/airmesh/" class="project-card reveal">
-          <div class="project-card__meta">
-            <span class="project-card__year">2025</span>
-            <span class="project-card__type">P2P &middot; WebRTC</span>
+        <a href="/projects/airmesh/" class="tile tile--airmesh reveal">
+          <div class="tile__meta">
+            <span class="tile__chip">P2P · WebRTC</span>
+            <span>2025</span>
           </div>
-          <h3 class="project-card__title">AirMesh</h3>
-          <p class="project-card__desc">Peer-to-peer file sharing in your browser. WebRTC transport, QR-code pairing, end-to-end encrypted. No servers, no signup, no upload limits.</p>
-          <div class="project-card__footer">
-            <div class="project-card__stack">
+          <h3 class="tile__title">AirMesh</h3>
+          <p class="tile__desc">Peer-to-peer file sharing in your browser. WebRTC transport, QR-code pairing, end-to-end encrypted. No servers, no signup, no upload limits.</p>
+          <div class="tile__foot">
+            <div class="tile__stack">
               <span>React</span><span>TypeScript</span><span>WebRTC</span><span>PeerJS</span>
             </div>
-            <span class="project-card__link" aria-label="View AirMesh">
+            <span class="tile__cta" aria-label="View AirMesh">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
             </span>
           </div>
         </a>
-        <a href="/projects/flint/" class="project-card reveal">
-          <div class="project-card__meta">
-            <span class="project-card__year">2025</span>
-            <span class="project-card__type">Habit Tracker &middot; PWA</span>
+
+        <a href="/projects/flint/" class="tile tile--flint reveal">
+          <div class="tile__meta">
+            <span class="tile__chip">Habit Tracker · PWA</span>
+            <span>2025</span>
           </div>
-          <h3 class="project-card__title">Flint</h3>
-          <p class="project-card__desc">A lightweight offline-first habit tracker. Build streaks, spark habits. No accounts, no cloud — your data lives entirely on your device.</p>
-          <div class="project-card__footer">
-            <div class="project-card__stack">
+          <h3 class="tile__title">Flint</h3>
+          <p class="tile__desc">A lightweight offline-first habit tracker. Build streaks, spark habits. No accounts, no cloud — your data lives entirely on your device.</p>
+          <div class="tile__foot">
+            <div class="tile__stack">
               <span>React</span><span>Vite</span><span>IndexedDB</span><span>PWA</span>
             </div>
-            <span class="project-card__link" aria-label="View Flint">
+            <span class="tile__cta" aria-label="View Flint">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
             </span>
           </div>
         </a>
-        <a href="/projects/unopomo/" class="project-card reveal">
-          <div class="project-card__meta">
-            <span class="project-card__year">2025</span>
-            <span class="project-card__type">Productivity &middot; Timer</span>
+
+        <a href="/projects/unopomo/" class="tile tile--unopomo reveal">
+          <div class="tile__meta">
+            <span class="tile__chip">Productivity · Timer</span>
+            <span>2025</span>
           </div>
-          <h3 class="project-card__title">Unopomo</h3>
-          <p class="project-card__desc">A premium Pomodoro focus timer. 10 visual themes with ambient soundscapes, session stats, 8 languages. Beautifully designed, fully offline.</p>
-          <div class="project-card__footer">
-            <div class="project-card__stack">
+          <h3 class="tile__title">Unopomo</h3>
+          <p class="tile__desc">A premium Pomodoro focus timer. Ten visual themes with ambient soundscapes, session stats, eight languages. Beautifully designed, fully offline.</p>
+          <div class="tile__foot">
+            <div class="tile__stack">
               <span>Next.js</span><span>TypeScript</span><span>Zustand</span><span>PWA</span>
             </div>
-            <span class="project-card__link" aria-label="View Unopomo">
+            <span class="tile__cta" aria-label="View Unopomo">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
             </span>
           </div>
         </a>
-        <a href="/projects/tinyfiles/" class="project-card reveal">
-          <div class="project-card__meta">
-            <span class="project-card__year">2025</span>
-            <span class="project-card__type">Utility &middot; Privacy</span>
+
+        <a href="/projects/tinyfiles/" class="tile tile--tinyfiles reveal">
+          <div class="tile__meta">
+            <span class="tile__chip">Utility · Privacy</span>
+            <span>2025</span>
           </div>
-          <h3 class="project-card__title">tinyfiles</h3>
-          <p class="project-card__desc">Compress PDFs and images entirely in your browser. 100% private — files never leave your device. No uploads, no server, no data collection.</p>
-          <div class="project-card__footer">
-            <div class="project-card__stack">
+          <h3 class="tile__title">tinyfiles</h3>
+          <p class="tile__desc">Compress PDFs and images entirely in your browser. 100% private — files never leave your device. No uploads, no server, no data collection.</p>
+          <div class="tile__foot">
+            <div class="tile__stack">
               <span>React</span><span>TypeScript</span><span>Vite</span><span>PWA</span>
             </div>
-            <span class="project-card__link" aria-label="View tinyfiles">
+            <span class="tile__cta" aria-label="View tinyfiles">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
             </span>
           </div>
@@ -324,34 +375,36 @@
     </div>
   </section>
 
-  <!-- ── Blog Preview ───────────────────────────────── -->
-  <section class="blog-preview section" id="blog">
+  <!-- ── Writing ─────────────────────────────────────── -->
+  <section class="section" id="writing" aria-label="Writing">
     <div class="container">
-      <div class="blog-preview__header">
+      <div class="section__head">
         <div>
-          <span class="section__label reveal">Writing</span>
-          <h2 class="section__heading reveal">From the blog.</h2>
+          <span class="section__eyebrow reveal">Writing</span>
+          <h2 class="section__heading reveal">From the journal.</h2>
         </div>
-        <a href="/blog/" class="btn btn--ghost reveal">All posts &rarr;</a>
+        <a href="/blog/" class="btn btn--ghost btn--sm reveal">All posts
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </a>
       </div>
       <div class="blog-preview__grid stagger">
+        <a href="/blog/life/gratitude-but-not-the-rehearsed-kind/" class="blog-card reveal">
+          <div class="blog-card__meta">
+            <span class="blog-card__category blog-card__category--life">Life</span>
+            <span class="blog-card__date">Mar 2026</span>
+          </div>
+          <h3 class="blog-card__title">Gratitude, but not the rehearsed kind</h3>
+          <p class="blog-card__excerpt">On reflex answers, quiet honesty, and learning to stop arguing with reality.</p>
+          <span class="blog-card__read">5 min read</span>
+        </a>
         <a href="/blog/tech/" class="blog-card reveal">
           <div class="blog-card__meta">
             <span class="blog-card__category blog-card__category--tech">Tech</span>
             <span class="blog-card__date">Coming soon</span>
           </div>
           <h3 class="blog-card__title">The art of writing software that lasts</h3>
-          <p class="blog-card__excerpt">A decade in, here's what I know: good engineering isn't about clever code — it's about decisions that age well. What separates systems that endure from ones that decay.</p>
+          <p class="blog-card__excerpt">A decade in: good engineering isn't clever code — it's decisions that age well. What separates systems that endure from ones that decay.</p>
           <span class="blog-card__read">5 min read</span>
-        </a>
-        <a href="/blog/life/" class="blog-card reveal">
-          <div class="blog-card__meta">
-            <span class="blog-card__category blog-card__category--life">Life</span>
-            <span class="blog-card__date">Coming soon</span>
-          </div>
-          <h3 class="blog-card__title">Why I meditate, invest, and listen to 90s music</h3>
-          <p class="blog-card__excerpt">Three habits that seem unrelated but share a single thread — patience. On stillness, compounding, and why the 90s understood the human condition better than any algorithm.</p>
-          <span class="blog-card__read">4 min read</span>
         </a>
         <a href="/blog/travel/" class="blog-card reveal">
           <div class="blog-card__meta">
@@ -359,48 +412,91 @@
             <span class="blog-card__date">Coming soon</span>
           </div>
           <h3 class="blog-card__title">What India keeps teaching me</h3>
-          <p class="blog-card__excerpt">Born here, built here, still discovering it. India isn't a place — it's a living philosophy. Notes from a decade of asking why this country makes you feel everything at once.</p>
+          <p class="blog-card__excerpt">Born here, built here, still discovering it. India isn't a place — it's a living philosophy.</p>
           <span class="blog-card__read">7 min read</span>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- ── Contact ────────────────────────────────────── -->
-  <section class="contact section" id="contact">
+  <!-- ── Contact ─────────────────────────────────────── -->
+  <section class="section contact" id="contact" aria-label="Contact">
+    <div class="halo" aria-hidden="true"></div>
     <div class="container">
       <div class="contact__inner">
-        <span class="section__label reveal">Contact</span>
+        <span class="section__eyebrow reveal">Contact</span>
         <h2 class="contact__heading reveal">Let's make<br>something together.</h2>
         <p class="contact__sub reveal">Whether it's a project, an idea, or just a good conversation — I'm all ears.</p>
-        <div class="contact__links reveal">
+        <div class="contact__email-block reveal">
+          <span class="contact__email-label">Email</span>
           <a href="mailto:iyashsoni@outlook.com" class="contact__email">iyashsoni@outlook.com</a>
-          <div class="contact__social">
-            <a href="https://github.com/iyashsoni" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
-              </svg>
-            </a>
-            <a href="https://x.com/iYash_Soni" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-              </svg>
-            </a>
-            <a href="https://linkedin.com/in/iyashsoni" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-              </svg>
-            </a>
-          </div>
+        </div>
+        <div class="contact__social reveal" role="list">
+          <a href="https://github.com/iyashsoni" target="_blank" rel="noopener noreferrer" aria-label="GitHub" role="listitem">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+            </svg>
+          </a>
+          <a href="https://x.com/iYash_Soni" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" role="listitem">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </a>
+          <a href="https://linkedin.com/in/iyashsoni" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" role="listitem">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+          <a href="https://medium.com/@iyashsoni" target="_blank" rel="noopener noreferrer" aria-label="Medium" role="listitem">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M2.846 6.887c.03-.295-.083-.586-.303-.784l-2.24-2.7v-.403h6.958l5.378 11.795 4.728-11.795H24v.403l-1.917 1.837c-.165.126-.247.333-.213.538v13.498c-.034.204.048.41.213.537l1.871 1.837v.403h-9.412v-.403l1.939-1.882c.19-.19.19-.246.19-.537V7.794L11.36 20.825h-.71L5.74 7.794v8.733c-.052.388.077.778.347 1.058l2.521 3.061v.404H1.46v-.404l2.521-3.061c.27-.279.39-.67.325-1.058z"/>
+            </svg>
+          </a>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ── Footer ──────────────────────────────────────── -->
   <footer class="footer" role="contentinfo">
-    <div class="container footer__inner">
-      <span class="footer__copy">&copy; 2026 Yash Soni</span>
-      <span class="footer__made">Built with intention.</span>
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand-col">
+          <div class="footer__brand">Yash Soni</div>
+          <p class="footer__tagline">Software Engineer Lead at IBM, Bangalore. Building intentional things and writing about life.</p>
+        </div>
+        <div class="footer__col">
+          <h4>Sitemap</h4>
+          <ul role="list">
+            <li><a href="#about">About</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#writing">Writing</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Projects</h4>
+          <ul role="list">
+            <li><a href="/projects/airmesh/">AirMesh</a></li>
+            <li><a href="/projects/flint/">Flint</a></li>
+            <li><a href="/projects/unopomo/">Unopomo</a></li>
+            <li><a href="/projects/tinyfiles/">tinyfiles</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Elsewhere</h4>
+          <ul role="list">
+            <li><a href="https://github.com/iyashsoni" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
+            <li><a href="https://linkedin.com/in/iyashsoni" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li>
+            <li><a href="https://x.com/iYash_Soni" target="_blank" rel="noopener noreferrer">X / Twitter ↗</a></li>
+            <li><a href="https://medium.com/@iyashsoni" target="_blank" rel="noopener noreferrer">Medium ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2026 Yash Soni · Crafted with intention</span>
+        <span>Bangalore · India</span>
+      </div>
     </div>
   </footer>
 

@@ -1,5 +1,13 @@
-import { initReveal, revealElements, initCursor } from './animations.js';
-import { qs, qsa } from './utils.js';
+import {
+  initReveal,
+  revealElements,
+  initCursor,
+  initMagnetic,
+  initCardShine,
+  initReadProgress,
+  initParallax,
+} from './animations.js';
+import { qs, qsa, throttle } from './utils.js';
 
 const MEDIUM_RSS_PROXY =
   'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40iyashsoni';
@@ -7,13 +15,34 @@ const MEDIUM_RSS_PROXY =
 const DEVTO_RSS_PROXY =
   'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fdev.to%2Ffeed%2Fiyashsoni';
 
+/* ── Theme toggle (matches portfolio) ───────────── */
+function initTheme() {
+  const root = document.documentElement;
+  const toggle = qs('#theme-toggle');
+  const mq = window.matchMedia('(prefers-color-scheme: light)');
+  mq.addEventListener?.('change', e => {
+    if (!localStorage.getItem('theme')) {
+      root.setAttribute('data-theme', e.matches ? 'light' : 'dark');
+    }
+  });
+  if (!toggle) return;
+  toggle.addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch {}
+  });
+}
+
 function initNav() {
   const nav = qs('.nav');
   if (!nav) return;
 
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 30);
-  }, { passive: true });
+  const onScroll = throttle(() => {
+    nav.classList.toggle('scrolled', window.scrollY > 24);
+  }, 80);
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 
   const toggle = qs('.nav__toggle');
   const mobile = qs('.nav__mobile');
@@ -23,6 +52,7 @@ function initNav() {
     const open = mobile.classList.toggle('active');
     nav.classList.toggle('menu-active', open);
     document.body.classList.toggle('menu-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
   });
 
   mobile.querySelectorAll('a').forEach(a => {
@@ -35,7 +65,6 @@ function initNav() {
 }
 
 function applyFilter(filter) {
-  // Live query — includes dynamically inserted cards AND loader/error divs
   const cards = qsa('[data-category]');
   const empty = qs('.blog-empty');
   let visible = 0;
@@ -122,7 +151,6 @@ async function loadLocalPosts() {
     const cards = filtered.map(buildLocalCard);
     const frag  = document.createDocumentFragment();
     cards.forEach(c => frag.appendChild(c));
-    // Insert local posts at the top of the grid (before external / empty)
     grid.insertBefore(frag, empty ?? grid.firstChild);
     revealElements(cards);
 
@@ -146,20 +174,21 @@ function estimateReadTime(text) {
   return Math.max(1, Math.round(text.split(/\s+/).length / 200));
 }
 
-function buildDevtoCard(item) {
-  const text = extractText(item.description);
+function buildExternalCard(item, kind) {
+  const text = extractText(item.description || item.content || '');
   const excerpt = text.length > 200 ? text.slice(0, 200).trimEnd() + '…' : text;
   const readMins = estimateReadTime(text);
   const date = formatDate(item.pubDate);
+  const label = kind === 'medium' ? 'Medium' : 'Dev.to';
 
   const article = document.createElement('article');
   article.className = 'blog-card reveal';
-  article.dataset.category = 'devto';
+  article.dataset.category = kind;
   article.setAttribute('role', 'listitem');
   article.innerHTML = `
     <a href="${item.link}" target="_blank" rel="noopener noreferrer" style="display:contents">
       <div class="blog-card__meta">
-        <span class="blog-card__category blog-card__category--devto">Dev.to</span>
+        <span class="blog-card__category blog-card__category--${kind}">${label}</span>
         <span class="blog-card__date">${date}</span>
       </div>
       <h2 class="blog-card__title">${item.title}</h2>
@@ -170,130 +199,59 @@ function buildDevtoCard(item) {
   return article;
 }
 
-async function fetchDevtoPosts() {
+async function fetchExternalFeed(url, kind, profileUrl, profileLabel) {
   const grid = qs('.blog-grid');
   const empty = qs('.blog-empty');
   if (!grid) return;
 
   const loader = document.createElement('div');
-  loader.id = 'devto-loader';
-  loader.dataset.category = 'devto';
+  loader.id = `${kind}-loader`;
+  loader.dataset.category = kind;
   loader.className = 'medium-loader';
-  loader.textContent = 'Loading articles from Dev.to…';
+  loader.textContent = `Loading articles from ${kind === 'medium' ? 'Medium' : 'Dev.to'}…`;
   grid.insertBefore(loader, empty);
 
   const activeFilter = qs('.filter-btn.active')?.dataset.filter ?? 'all';
-  if (activeFilter !== 'all' && activeFilter !== 'devto') {
+  if (activeFilter !== 'all' && activeFilter !== kind) {
     loader.classList.add('blog-card--hidden');
   }
 
   try {
-    const res = await fetch(DEVTO_RSS_PROXY);
+    const res = await fetch(url);
     if (!res.ok) throw new Error('Network error');
     const { status, items } = await res.json();
     if (status !== 'ok' || !Array.isArray(items) || !items.length) {
       throw new Error('Empty or invalid feed');
     }
-
     loader.remove();
 
-    const cards = items.map(buildDevtoCard);
+    const cards = items.map(item => buildExternalCard(item, kind));
     cards.forEach(card => grid.insertBefore(card, empty));
     revealElements(cards);
 
     const currentFilter = qs('.filter-btn.active')?.dataset.filter ?? 'all';
     applyFilter(currentFilter);
-
-  } catch (err) {
-    console.error('[Dev.to]', err);
-    loader.className = 'medium-loader medium-loader--error';
-    loader.innerHTML =
-      'Couldn\'t load Dev.to articles right now. ' +
-      '<a href="https://dev.to/iyashsoni" target="_blank" rel="noopener noreferrer" ' +
-      'style="color:var(--accent)">Visit profile →</a>';
-  }
-}
-
-function buildMediumCard(item) {
-  const text = extractText(item.description);
-  const excerpt = text.length > 200 ? text.slice(0, 200).trimEnd() + '…' : text;
-  const readMins = estimateReadTime(text);
-  const date = formatDate(item.pubDate);
-
-  const article = document.createElement('article');
-  article.className = 'blog-card reveal';
-  article.dataset.category = 'medium';
-  article.setAttribute('role', 'listitem');
-  article.innerHTML = `
-    <a href="${item.link}" target="_blank" rel="noopener noreferrer" style="display:contents">
-      <div class="blog-card__meta">
-        <span class="blog-card__category blog-card__category--medium">Medium</span>
-        <span class="blog-card__date">${date}</span>
-      </div>
-      <h2 class="blog-card__title">${item.title}</h2>
-      <p class="blog-card__excerpt">${excerpt}</p>
-      <span class="blog-card__read">↗ ${readMins} min read</span>
-    </a>
-  `;
-  return article;
-}
-
-async function fetchMediumPosts() {
-  const grid = qs('.blog-grid');
-  const empty = qs('.blog-empty');
-  if (!grid) return;
-
-  // Insert loading indicator
-  const loader = document.createElement('div');
-  loader.id = 'medium-loader';
-  loader.dataset.category = 'medium';
-  loader.className = 'medium-loader';
-  loader.textContent = 'Loading articles from Medium…';
-  grid.insertBefore(loader, empty);
-
-  // Hide loader if current filter isn't all/medium
-  const activeFilter = qs('.filter-btn.active')?.dataset.filter ?? 'all';
-  if (activeFilter !== 'all' && activeFilter !== 'medium') {
-    loader.classList.add('blog-card--hidden');
-  }
-
-  try {
-    const res = await fetch(MEDIUM_RSS_PROXY);
-    if (!res.ok) throw new Error('Network error');
-    const { status, items } = await res.json();
-    if (status !== 'ok' || !Array.isArray(items) || !items.length) {
-      throw new Error('Empty or invalid feed');
-    }
-
-    loader.remove();
-
-    const cards = items.map(buildMediumCard);
-    cards.forEach(card => grid.insertBefore(card, empty));
-
-    // Observe reveal for new cards
-    revealElements(cards);
-
-    // Respect the currently active filter
-    const currentFilter = qs('.filter-btn.active')?.dataset.filter ?? 'all';
-    applyFilter(currentFilter);
-
   } catch {
     loader.className = 'medium-loader medium-loader--error';
     loader.innerHTML =
-      'Couldn\'t load Medium articles right now. ' +
-      '<a href="https://iyashsoni.medium.com" target="_blank" rel="noopener noreferrer" ' +
-      'style="color:var(--accent)">Visit profile →</a>';
+      `Couldn't load articles right now. ` +
+      `<a href="${profileUrl}" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Visit ${profileLabel} →</a>`;
   }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
   initReveal();
   initCursor();
   initNav();
   initFilter();
+  initMagnetic();
+  initCardShine();
+  initParallax();
+  initReadProgress();
   initExternalNavTab('nav-medium-tab', 'mobile-medium-tab', 'medium');
   initExternalNavTab('nav-devto-tab', 'mobile-devto-tab', 'devto');
   loadLocalPosts();
-  fetchMediumPosts();
-  fetchDevtoPosts();
+  fetchExternalFeed(MEDIUM_RSS_PROXY, 'medium', 'https://medium.com/@iyashsoni', 'Medium');
+  fetchExternalFeed(DEVTO_RSS_PROXY, 'devto', 'https://dev.to/iyashsoni', 'Dev.to');
 });

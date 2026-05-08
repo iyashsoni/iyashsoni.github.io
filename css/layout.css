@@ -1,3 +1,4 @@
+/* ─── Containers ────────────────────────────────── */
 .container {
   width: 100%;
   max-width: var(--container);
@@ -5,34 +6,121 @@
   padding: 0 clamp(1.25rem, 4vw, 2.5rem);
 }
 
+.container--narrow { max-width: var(--container-narrow); }
+.container--wide   { max-width: var(--container-wide); }
+.container--bleed  { max-width: var(--container-bleed); }
+
+/* ─── Sections ──────────────────────────────────── */
 .section {
-  padding: var(--section-gap) 0;
+  padding: var(--section-pad) 0;
+  position: relative;
 }
 
-.section__label {
-  font-size: 0.75rem;
+.section--tight { padding: clamp(3rem, 6vw, 5rem) 0; }
+
+.section__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-text);
+  font-size: var(--fs-eyebrow);
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 1rem;
-  display: block;
+  color: var(--ink-2);
+  margin-bottom: 1.25rem;
+}
+
+.section__eyebrow::before {
+  content: '';
+  width: 22px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
 }
 
 .section__heading {
-  font-size: clamp(2rem, 4.5vw, 3.25rem);
-  letter-spacing: -0.02em;
-  margin-bottom: 3rem;
+  font-size: var(--fs-h2);
+  letter-spacing: var(--tracking-tighter);
+  line-height: 1.02;
+  margin-bottom: 1.25rem;
+  max-width: 18ch;
 }
 
-.grid-2 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: clamp(1.5rem, 3vw, 2.5rem);
+.section__heading--center { margin-left: auto; margin-right: auto; }
+
+.section__lead {
+  font-size: var(--fs-lead);
+  color: var(--ink-2);
+  max-width: 56ch;
+  line-height: 1.55;
+  margin-bottom: 3.5rem;
 }
 
-.grid-3 {
+.section__head {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(1.25rem, 2.5vw, 2rem);
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 1.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.section__head .section__heading,
+.section__head .section__lead { margin-bottom: 0; }
+
+@media (max-width: 720px) {
+  .section__head { grid-template-columns: 1fr; align-items: start; }
+}
+
+/* ─── Grid utilities ────────────────────────────── */
+.grid {
+  display: grid;
+  gap: clamp(1.25rem, 2.4vw, 2rem);
+}
+
+.grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+.flex { display: flex; }
+.flex--center { align-items: center; justify-content: center; }
+.flex--between { align-items: center; justify-content: space-between; }
+.flex--col { flex-direction: column; }
+.flex--wrap { flex-wrap: wrap; }
+.gap-sm { gap: 0.5rem; }
+.gap-md { gap: 1rem; }
+.gap-lg { gap: 1.5rem; }
+
+/* ─── Apple-style hairline rule ─────────────────── */
+.rule {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, var(--hairline-strong), transparent);
+  border: 0;
+}
+
+/* ─── Type accent (gradient text) ───────────────── */
+.text-grad {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2) 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.text-mono { font-family: var(--font-mono); }
+
+/* ─── Reading-progress bar ──────────────────────── */
+.read-progress {
+  position: fixed;
+  left: 0; top: 0; right: 0;
+  height: 2px;
+  z-index: 200;
+  pointer-events: none;
+}
+.read-progress__fill {
+  height: 100%;
+  width: var(--p, 0%);
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: width 80ms linear;
 }

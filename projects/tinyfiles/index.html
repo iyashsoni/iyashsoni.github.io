@@ -2,572 +2,222 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>tinyfiles — Compress PDFs &amp; Images in Your Browser</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)">
+  <title>tinyfiles — Compress PDFs &amp; images in your browser</title>
   <meta name="description" content="tinyfiles: compress PDFs and images instantly. 100% private — everything processed locally in your browser. No uploads, no server, no data collection.">
   <link rel="canonical" href="https://iyashsoni.github.io/projects/tinyfiles/">
+
   <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  <link rel="stylesheet" href="/css/pages/project.css">
+  <link rel="stylesheet" href="/css/responsive.css">
 
-    :root {
-      --bg:    #08080f;
-      --bg-1:  #0d0d1a;
-      --bg-2:  #111124;
-      --line:  rgba(255,255,255,0.07);
-      --line-strong: rgba(255,255,255,0.14);
-      --text-0: #f0f0fa;
-      --text-1: #b8b8d0;
-      --text-2: #6b6b8a;
-      --violet: #7c3aed;
-      --violet-light: #a78bfa;
-      --pink:   #ec4899;
-      --grad: linear-gradient(135deg, #a78bfa 0%, #ec4899 100%);
-      --grad-bg: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
-      --r-sm: 10px;
-      --r-md: 16px;
-      --r-lg: 24px;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
-      font-size: 15px;
-      line-height: 1.65;
-      color: var(--text-0);
-      background: var(--bg);
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(ellipse 55% 45% at 20% -5%, rgba(124,58,237,0.14), transparent 55%),
-        radial-gradient(ellipse 50% 40% at 85% 20%, rgba(236,72,153,0.10), transparent 55%),
-        radial-gradient(ellipse 45% 35% at 50% 105%, rgba(124,58,237,0.08), transparent 55%);
-      z-index: 0;
-    }
-
-    a { color: inherit; text-decoration: none; }
-    ul { list-style: none; }
-    img, svg { display: block; max-width: 100%; }
-
-    /* ---- Nav ---- */
-    .nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      padding: 0 max(clamp(16px,4vw,40px), env(safe-area-inset-left));
-      background: rgba(8,8,15,0.80);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--line);
-      justify-content: space-between;
-    }
-
-    .nav-brand {
-      font-weight: 700;
-      font-size: 16px;
-      letter-spacing: -0.02em;
-    }
-
-    .nav-brand-tiny { color: var(--text-0); }
-    .nav-brand-files {
-      background: var(--grad);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .nav-links { display: flex; align-items: center; gap: 12px; }
-
-    .nav-back {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 13px;
-      color: var(--text-2);
-      transition: color 150ms;
-    }
-    .nav-back:hover { color: var(--text-1); }
-    .nav-back svg { width: 13px; height: 13px; }
-
-    .btn-launch {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 18px;
-      border-radius: 999px;
-      background: var(--grad-bg);
-      color: #fff;
-      font-weight: 600;
-      font-size: 13px;
-      box-shadow: 0 4px 20px rgba(124,58,237,0.3);
-      transition: filter 150ms, transform 150ms;
-    }
-    .btn-launch:hover { filter: brightness(1.1); transform: translateY(-1px); }
-    .btn-launch svg { width: 13px; height: 13px; }
-
-    /* ---- Layout ---- */
-    .wrap {
-      position: relative;
-      z-index: 1;
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 0 clamp(16px, 4vw, 40px);
-    }
-
-    /* ---- Hero ---- */
-    .hero {
-      min-height: 100svh;
-      display: flex;
-      align-items: center;
-      padding-top: 60px;
-    }
-
-    .hero-inner {
-      padding: 5rem 0 4rem;
-    }
-
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--violet-light);
-      margin-bottom: 1.5rem;
-      padding: 5px 12px;
-      background: rgba(124,58,237,0.1);
-      border-radius: 999px;
-      border: 1px solid rgba(124,58,237,0.2);
-    }
-
-    .hero-title {
-      font-size: clamp(3rem, 10vw, 7.5rem);
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 0.92;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero-title-tiny { color: var(--text-0); }
-    .hero-title-files {
-      background: var(--grad);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .hero-tagline {
-      font-size: clamp(1rem, 2.5vw, 1.25rem);
-      color: var(--text-1);
-      max-width: 48ch;
-      margin-bottom: 2.5rem;
-      line-height: 1.65;
-    }
-
-    /* ---- Dropzone visual (decorative) ---- */
-    .dropzone-demo {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      padding: 32px 48px;
-      border: 2px dashed rgba(124,58,237,0.4);
-      border-radius: var(--r-lg);
-      background: rgba(124,58,237,0.05);
-      margin-bottom: 2.5rem;
-      color: var(--text-2);
-      font-size: 14px;
-      transition: border-color 200ms;
-      cursor: default;
-    }
-    .dropzone-demo:hover { border-color: rgba(124,58,237,0.65); }
-
-    .dropzone-demo-icon {
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      background: rgba(124,58,237,0.12);
-      border: 1px solid rgba(124,58,237,0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-    }
-
-    .dropzone-demo-title { font-weight: 600; color: var(--text-1); font-size: 15px; }
-
-    .hero-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 26px;
-      border-radius: 999px;
-      background: var(--grad-bg);
-      color: #fff;
-      font-weight: 600;
-      font-size: 15px;
-      box-shadow: 0 8px 28px rgba(124,58,237,0.35);
-      transition: filter 150ms, transform 150ms;
-    }
-    .btn-primary:hover { filter: brightness(1.08); transform: translateY(-2px); }
-
-    .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 26px;
-      border-radius: 999px;
-      border: 1px solid var(--line-strong);
-      color: var(--text-1);
-      font-weight: 500;
-      font-size: 15px;
-      background: rgba(255,255,255,0.03);
-      transition: border-color 150ms, color 150ms;
-    }
-    .btn-secondary:hover { border-color: var(--violet-light); color: var(--text-0); }
-
-    /* ---- Sections ---- */
-    .section { padding: 5rem 0; }
-
-    .section-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--text-2);
-      margin-bottom: 0.75rem;
-      display: block;
-    }
-
-    .section-title {
-      font-size: clamp(1.75rem, 4vw, 2.5rem);
-      font-weight: 700;
-      letter-spacing: -0.025em;
-      line-height: 1.1;
-      margin-bottom: 3rem;
-    }
-
-    /* ---- Features ---- */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-    @media (max-width: 720px) { .features-grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 460px) { .features-grid { grid-template-columns: 1fr; } }
-
-    .feature-card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
-      border: 1px solid var(--line);
-      border-radius: var(--r-md);
-      padding: 22px;
-      transition: border-color 200ms, transform 200ms;
-    }
-    .feature-card:hover { border-color: rgba(124,58,237,0.3); transform: translateY(-2px); }
-
-    .feature-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      background: rgba(124,58,237,0.1);
-      border: 1px solid rgba(124,58,237,0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      margin-bottom: 14px;
-    }
-
-    .feature-title {
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .feature-desc {
-      font-size: 13.5px;
-      color: var(--text-2);
-      line-height: 1.55;
-    }
-
-    /* ---- Supported formats ---- */
-    .formats-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 1rem;
-    }
-
-    .format-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-    }
-
-    .format-badge--pdf { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.25); color: #fca5a5; }
-    .format-badge--img { background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.25); color: var(--violet-light); }
-
-    /* ---- Steps ---- */
-    .steps {
-      display: flex;
-      flex-direction: column;
-      max-width: 600px;
-    }
-
-    .step {
-      display: grid;
-      grid-template-columns: 48px 1fr;
-      gap: 20px;
-      padding: 26px 0;
-      border-bottom: 1px solid var(--line);
-    }
-    .step:first-child { border-top: 1px solid var(--line); }
-
-    .step-num {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: 1px solid rgba(124,58,237,0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 14px;
-      background: var(--grad);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      flex-shrink: 0;
-    }
-
-    .step-title { font-size: 16px; font-weight: 600; margin-bottom: 5px; }
-    .step-desc { font-size: 14px; color: var(--text-2); line-height: 1.6; }
-
-    /* ---- CTA ---- */
-    .cta-section {
-      padding: 5rem 0 6rem;
-      text-align: center;
-    }
-
-    .cta-title {
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      margin-bottom: 1rem;
-    }
-
-    .cta-title-grad {
-      background: var(--grad);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .cta-sub { color: var(--text-2); font-size: 15px; margin-bottom: 2.5rem; }
-
-    /* ---- Footer ---- */
-    .footer {
-      border-top: 1px solid var(--line);
-      padding: 2rem 0;
-    }
-
-    .footer-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .footer-left { display: flex; align-items: center; gap: 16px; }
-    .footer-link { font-size: 13px; color: var(--text-2); transition: color 150ms; }
-    .footer-link:hover { color: var(--text-1); }
-    .footer-sep { color: var(--line-strong); }
-    .footer-copy { font-size: 13px; color: var(--text-2); }
-  </style>
+  <script>
+    (function() {
+      try {
+        var saved = localStorage.getItem('theme');
+        var system = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', saved || system);
+      } catch (e) {}
+    })();
+  </script>
 </head>
-<body>
+<body data-project="tinyfiles">
 
-  <nav class="nav">
-    <div class="nav-brand">
-      <span class="nav-brand-tiny">tiny</span><span class="nav-brand-files">files</span>
-    </div>
-    <div class="nav-links">
-      <a href="/projects/" class="nav-back">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-        Projects
-      </a>
-      <a href="https://tinyfiles.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-launch">
-        Launch
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-      </a>
+  <nav class="nav nav--solid" id="nav" role="navigation" aria-label="tinyfiles navigation">
+    <div class="nav__inner container">
+      <span class="proj-brand">
+        <span class="proj-brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/></svg>
+        </span>
+        tinyfiles
+      </span>
+      <ul class="nav__links" role="list">
+        <li><a href="/projects/" class="nav__proj-back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          All projects
+        </a></li>
+      </ul>
+      <div class="nav__right">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a href="https://tinyfiles.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn--sm btn--proj">Launch</a>
+      </div>
     </div>
   </nav>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="wrap">
-      <div class="hero-inner">
-        <span class="hero-eyebrow">&#x1F4E6; File Compressor &middot; 100% Private &middot; No Uploads</span>
-        <h1 class="hero-title">
-          <span class="hero-title-tiny">tiny</span><span class="hero-title-files">files</span>
-        </h1>
-        <p class="hero-tagline">
-          Make your files tiny instantly. Everything is processed right in your browser — no uploads, no servers, no data ever leaving your device.
-        </p>
-
-        <!-- Decorative dropzone -->
-        <div class="dropzone-demo" aria-hidden="true">
-          <div class="dropzone-demo-icon">&#x1F4C1;</div>
-          <div class="dropzone-demo-title">Drop files here</div>
-          <div>PDF, JPG, PNG, WebP, GIF &middot; up to 20 files</div>
-        </div>
-
-        <div class="hero-actions">
-          <a href="https://tinyfiles.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-primary">
-            Compress files
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Supported formats -->
-  <section class="section">
-    <div class="wrap">
-      <span class="section-label">Supported formats</span>
-      <h2 class="section-title">PDFs and images,<br>all in one place.</h2>
-      <div class="formats-row">
-        <span class="format-badge format-badge--pdf">&#x1F4C4; PDF</span>
-        <span class="format-badge format-badge--img">&#x1F5BC; JPG</span>
-        <span class="format-badge format-badge--img">&#x1F5BC; PNG</span>
-        <span class="format-badge format-badge--img">&#x1F5BC; WebP</span>
-        <span class="format-badge format-badge--img">&#x1F5BC; GIF</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Features -->
-  <section class="section">
-    <div class="wrap">
-      <span class="section-label">Features</span>
-      <h2 class="section-title">Tiny by design.<br>Private by default.</h2>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">&#x1F512;</div>
-          <div class="feature-title">100% private</div>
-          <div class="feature-desc">Files are processed using WebAssembly in your browser tab. Nothing is ever uploaded to any server.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">&#x26A1;</div>
-          <div class="feature-title">Instant compression</div>
-          <div class="feature-desc">No upload wait times. Processing happens locally at full CPU speed, so results are near-instant.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">&#x1F4E6;</div>
-          <div class="feature-title">Batch + ZIP download</div>
-          <div class="feature-desc">Compress up to 20 files at once and download them all in a single ZIP. Ideal for bulk workflows.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">&#x1F39A;</div>
-          <div class="feature-title">Quality presets</div>
-          <div class="feature-desc">Adjustable quality slider lets you find the right balance between file size and visual fidelity.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">&#x1F4F4;</div>
-          <div class="feature-title">Works offline</div>
-          <div class="feature-desc">Once the page loads, no network required. Compress files anywhere — on a plane, in the field, wherever.</div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">&#x1F194;</div>
-          <div class="feature-title">No account needed</div>
-          <div class="feature-desc">Open the page and start compressing. No email, no sign-up, no payment. Just free and fast.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- How it works -->
-  <section class="section">
-    <div class="wrap">
-      <span class="section-label">How it works</span>
-      <h2 class="section-title">Drop. Compress. Done.</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">1</div>
-          <div>
-            <div class="step-title">Drop your files</div>
-            <div class="step-desc">Drag and drop PDFs or images onto the page, or click to select. Up to 20 files at a time.</div>
+  <main>
+    <!-- Hero -->
+    <section class="proj-hero">
+      <div class="proj-hero__bg" aria-hidden="true"></div>
+      <div class="container proj-hero__grid">
+        <div class="proj-hero__copy">
+          <span class="proj-hero__pill"><span class="dot"></span> File compressor · 100% private · No uploads</span>
+          <h1 class="proj-hero__title"><span class="grad">tiny</span>files.</h1>
+          <p class="proj-hero__lead">Compress PDFs and images entirely in your browser. Files never leave your device — there's no server, no upload, no data collection.</p>
+          <div class="proj-hero__actions">
+            <a href="https://tinyfiles.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn--proj btn--magnetic">
+              Open tinyfiles
+              <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+            </a>
+            <a href="#how" class="btn btn--ghost btn--magnetic">How it works</a>
           </div>
         </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <div>
-            <div class="step-title">Adjust quality</div>
-            <div class="step-desc">Choose a quality preset or use the slider to fine-tune the compression. See the estimated size reduction in real time.</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <div>
-            <div class="step-title">Download compressed files</div>
-            <div class="step-desc">Download each file individually or grab them all in a ZIP. Your originals are untouched.</div>
+        <div class="proj-hero__visual" aria-hidden="true">
+          <div class="device floats">
+            <div class="device__screen">
+              <div>
+                <div class="device__brand">−72%</div>
+                <div class="device__cap">drop. compress. done.</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- CTA -->
-  <div class="cta-section">
-    <div class="wrap">
-      <h2 class="cta-title">Your files, <span class="cta-title-grad">smaller.</span></h2>
-      <p class="cta-sub">Private, instant, free. No strings attached.</p>
-      <a href="https://tinyfiles.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-primary" style="margin: 0 auto; width: fit-content;">
-        Open tinyfiles
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-      </a>
-    </div>
-  </div>
-
-  <footer class="footer">
-    <div class="wrap footer-inner">
-      <div class="footer-left">
-        <a href="/projects/" class="footer-link">&larr; All projects</a>
-        <span class="footer-sep">|</span>
-        <a href="/" class="footer-link">Portfolio</a>
+    <!-- Features -->
+    <section class="proj-section">
+      <div class="container">
+        <div class="proj-section__head">
+          <span class="proj-section__eyebrow">Features</span>
+          <h2 class="proj-section__title">Tiny by design.<br>Private by default.</h2>
+        </div>
+        <div class="proj-features">
+          <article class="proj-feat reveal">
+            <div class="proj-feat__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>100% private</h3>
+            <p>Files are processed using WebAssembly in your browser tab. Nothing is ever uploaded to any server.</p>
+          </article>
+          <article class="proj-feat reveal">
+            <div class="proj-feat__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg>
+            </div>
+            <h3>Instant compression</h3>
+            <p>No upload wait. Processing happens locally at full CPU speed, so results are near-instant.</p>
+          </article>
+          <article class="proj-feat reveal">
+            <div class="proj-feat__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+            </div>
+            <h3>Batch + ZIP</h3>
+            <p>Compress up to 20 files at once and download them all in a single ZIP. Ideal for bulk workflows.</p>
+          </article>
+          <article class="proj-feat reveal">
+            <div class="proj-feat__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18M3 12h18M21 3v18"/></svg>
+            </div>
+            <h3>Quality presets</h3>
+            <p>Adjustable quality slider lets you find the right balance between file size and visual fidelity.</p>
+          </article>
+          <article class="proj-feat reveal">
+            <div class="proj-feat__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
+            </div>
+            <h3>Works offline</h3>
+            <p>Once the page loads, no network is required. Compress files anywhere — on a plane, in the field, anywhere.</p>
+          </article>
+          <article class="proj-feat reveal">
+            <div class="proj-feat__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+            </div>
+            <h3>No account needed</h3>
+            <p>Open the page and start compressing. No email, no sign-up, no payment. Just free and fast.</p>
+          </article>
+        </div>
       </div>
-      <span class="footer-copy">Built by <a href="https://iyashsoni.github.io" style="color:var(--text-1)">Yash Soni</a></span>
+    </section>
+
+    <!-- How -->
+    <section class="proj-section" id="how">
+      <div class="container">
+        <div class="proj-section__head">
+          <span class="proj-section__eyebrow">How it works</span>
+          <h2 class="proj-section__title">Drop. Compress. Done.</h2>
+        </div>
+        <div class="proj-steps">
+          <div class="proj-step reveal">
+            <div class="proj-step__num">01</div>
+            <div>
+              <h3>Drop your files</h3>
+              <p>Drag and drop PDFs or images onto the page, or click to select. Up to 20 files at a time.</p>
+            </div>
+          </div>
+          <div class="proj-step reveal">
+            <div class="proj-step__num">02</div>
+            <div>
+              <h3>Adjust quality</h3>
+              <p>Choose a preset or use the slider to fine-tune compression. See the estimated size reduction in real time.</p>
+            </div>
+          </div>
+          <div class="proj-step reveal">
+            <div class="proj-step__num">03</div>
+            <div>
+              <h3>Download compressed files</h3>
+              <p>Download each file individually or grab them all in a ZIP. Your originals are untouched.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech stack -->
+    <section class="proj-section">
+      <div class="container">
+        <div class="proj-section__head">
+          <span class="proj-section__eyebrow">Tech stack</span>
+          <h2 class="proj-section__title">All client-side.</h2>
+        </div>
+        <div class="proj-stack">
+          <span>React</span>
+          <span>TypeScript</span>
+          <span>Vite</span>
+          <span>WebAssembly</span>
+          <span>pdf-lib · pdf.js</span>
+          <span>browser-image-compression</span>
+          <span>JSZip</span>
+          <span>PWA · Service Worker</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="proj-cta">
+      <div class="container">
+        <h2 class="proj-cta__title">Your files, <span class="grad">smaller.</span></h2>
+        <p class="proj-cta__sub">Private, instant, free. No strings attached.</p>
+        <a href="https://tinyfiles.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn--proj btn--lg btn--magnetic">
+          Open tinyfiles
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__bottom">
+        <span>© 2026 Yash Soni · Crafted with intention</span>
+        <span><a href="/projects/">All projects</a> · <a href="/">Portfolio</a></span>
+      </div>
     </div>
   </footer>
 
+  <script type="module" src="/js/project.js"></script>
 </body>
 </html>
