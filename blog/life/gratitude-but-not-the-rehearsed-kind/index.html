@@ -2,38 +2,65 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)">
   <meta name="description" content="On reflex answers, quiet honesty, and learning to stop arguing with reality — Yash Soni">
   <title>Gratitude, But Not the Rehearsed Kind — Yash Soni</title>
+  <link rel="canonical" href="https://iyashsoni.github.io/blog/life/gratitude-but-not-the-rehearsed-kind/">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/layout.css">
   <link rel="stylesheet" href="/css/components.css">
   <link rel="stylesheet" href="/css/animations.css">
   <link rel="stylesheet" href="/css/pages/blog.css">
   <link rel="stylesheet" href="/css/responsive.css">
+
+  <script>
+    (function() {
+      try {
+        var saved = localStorage.getItem('theme');
+        var system = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', saved || system);
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
 
-  <nav class="nav scrolled" role="navigation" aria-label="Main navigation">
+  <nav class="nav nav--solid" id="nav" role="navigation" aria-label="Main navigation">
     <div class="nav__inner container">
-      <a href="/" class="nav__logo" aria-label="Yash Soni — home">YS</a>
+      <a href="/" class="nav__logo" aria-label="Yash Soni — home">
+        <span class="nav__logo-mark" aria-hidden="true"></span>
+        <span>Yash Soni</span>
+      </a>
       <ul class="nav__links" role="list">
         <li>
           <nav class="blog-cat-nav" aria-label="Blog categories">
             <a href="/blog/">All</a>
             <a href="/blog/tech/">Tech</a>
-            <a href="/blog/life/">Life</a>
+            <a href="/blog/life/" class="active">Life</a>
             <a href="/blog/travel/">Travel</a>
           </nav>
         </li>
-        <li><a href="/blog/" class="btn btn--sm btn--ghost">← All posts</a></li>
       </ul>
-      <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-        <span></span><span></span><span></span>
-      </button>
+      <div class="nav__right">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a href="/blog/" class="btn btn--sm btn--ghost">← All posts</a>
+        <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -46,7 +73,12 @@
   </nav>
 
   <header class="post-header">
+    <div class="halo" aria-hidden="true"></div>
     <div class="container">
+      <a href="/blog/" class="post-header__back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        All posts
+      </a>
       <div class="post-header__meta">
         <a href="/blog/life/" class="blog-card__category blog-card__category--life">Life</a>
         <span>·</span>
@@ -54,7 +86,7 @@
         <span>·</span>
         <span>5 min read</span>
       </div>
-      <h1 class="post-header__title">Gratitude, But Not the Rehearsed Kind</h1>
+      <h1 class="post-header__title">Gratitude, but not the rehearsed kind</h1>
       <p class="post-header__subtitle">On reflex answers, quiet honesty, and learning to stop arguing with reality.</p>
     </div>
   </header>
@@ -196,9 +228,11 @@
   </main>
 
   <footer class="footer" role="contentinfo">
-    <div class="container footer__inner">
-      <span class="footer__copy">© 2025 Yash Soni</span>
-      <a href="/blog/" class="footer__made" style="color:var(--text-3)">← All posts</a>
+    <div class="container">
+      <div class="footer__bottom">
+        <span>© 2026 Yash Soni · Crafted with intention</span>
+        <a href="/blog/">← All posts</a>
+      </div>
     </div>
   </footer>
 

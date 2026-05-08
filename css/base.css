@@ -1,96 +1,236 @@
+/* ─────────────────────────────────────────────────────────
+   Design tokens — Apple-inspired system
+   Dual theme (dark default, light variant), motion tokens,
+   dynamic type scale, color semantics.
+   ───────────────────────────────────────────────────────── */
+
 :root {
-  --bg: #07070b;
-  --bg-2: #0d0d14;
-  --bg-card: #111119;
-  --bg-card-hover: #15151f;
+  /* — Spectrum (theme agnostic) — */
+  --tone-50:  #fbfbfd;
+  --tone-100: #f5f5f7;
+  --tone-200: #e8e8ed;
+  --tone-300: #c7c7cc;
+  --tone-400: #8e8e93;
+  --tone-500: #636366;
+  --tone-600: #3a3a3c;
+  --tone-700: #1d1d1f;
+  --tone-800: #111113;
+  --tone-900: #06070a;
 
-  --accent: #7c6fee;
-  --accent-2: #06d6a0;
-  --accent-life: #f4845f;
-  --accent-tech: #7c6fee;
-  --accent-travel: #06d6a0;
+  --hue-blue:   #0a84ff;
+  --hue-indigo: #5e5ce6;
+  --hue-violet: #bf5af2;
+  --hue-pink:   #ff375f;
+  --hue-orange: #ff9f0a;
+  --hue-mint:   #66d4cf;
+  --hue-green:  #30d158;
 
-  --text: #eeeef5;
-  --text-2: #8888a4;
-  --text-3: #50505e;
+  /* — Theme: Dark (default, Apple Pro Display calm) — */
+  --surface-0: #000;
+  --surface-1: #0b0b0f;
+  --surface-2: #131318;
+  --surface-3: #1c1c22;
+  --surface-elev: rgba(255, 255, 255, 0.04);
+  --surface-glass: rgba(12, 12, 16, 0.55);
+  --surface-glass-strong: rgba(8, 8, 12, 0.72);
 
-  --border: rgba(255, 255, 255, 0.07);
-  --border-2: rgba(255, 255, 255, 0.13);
+  --ink-0: #f5f5f7;
+  --ink-1: rgba(245, 245, 247, 0.86);
+  --ink-2: rgba(245, 245, 247, 0.62);
+  --ink-3: rgba(245, 245, 247, 0.42);
+  --ink-4: rgba(245, 245, 247, 0.18);
 
-  --font-heading: 'Syne', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --hairline:        rgba(255, 255, 255, 0.08);
+  --hairline-strong: rgba(255, 255, 255, 0.14);
 
-  --r-sm: 6px;
-  --r-md: 12px;
-  --r-lg: 20px;
-  --r-full: 9999px;
+  --accent:    #6e6cff;
+  --accent-2:  #66d4cf;
+  --accent-soft: rgba(110, 108, 255, 0.18);
+  --accent-glow: rgba(110, 108, 255, 0.32);
 
-  --ease: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-out: cubic-bezier(0, 0, 0.2, 1);
-  --t: 0.3s var(--ease);
-  --t-slow: 0.6s var(--ease);
+  --tech-accent:   #6e8cff;
+  --life-accent:   #ff8a6b;
+  --travel-accent: #66d4cf;
 
-  --nav-h: 72px;
-  --container: 1200px;
-  --section-gap: clamp(5rem, 10vw, 9rem);
+  /* — Type system (SF Pro / Inter fallback) — */
+  --font-display: 'SF Pro Display', 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-text:    'SF Pro Text', 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-mono:    ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+
+  --tracking-tight: -0.022em;
+  --tracking-tighter: -0.035em;
+  --tracking-tightest: -0.045em;
+  --tracking-wide: 0.04em;
+  --tracking-eyebrow: 0.18em;
+
+  /* — Fluid type scale (clamp(min, fluid, max)) — */
+  --fs-eyebrow: 0.78rem;
+  --fs-body:    1.0625rem;     /* 17px Apple body */
+  --fs-lead:    clamp(1.125rem, 1.6vw, 1.35rem);
+  --fs-h6:      clamp(1.05rem, 1.5vw, 1.2rem);
+  --fs-h5:      clamp(1.2rem, 2vw, 1.5rem);
+  --fs-h4:      clamp(1.5rem, 2.6vw, 2rem);
+  --fs-h3:      clamp(1.875rem, 3.4vw, 2.75rem);
+  --fs-h2:      clamp(2.5rem, 5vw, 4.25rem);
+  --fs-h1:      clamp(3rem, 7vw, 6rem);
+  --fs-display: clamp(4rem, 12vw, 11rem);
+
+  /* — Radii — */
+  --r-xs: 8px;
+  --r-sm: 12px;
+  --r-md: 18px;
+  --r-lg: 24px;
+  --r-xl: 32px;
+  --r-pill: 999px;
+
+  /* — Shadows (depth ladder) — */
+  --shadow-sm:  0 1px 2px rgba(0,0,0,0.16), 0 1px 1px rgba(0,0,0,0.08);
+  --shadow-md:  0 6px 18px rgba(0,0,0,0.28), 0 2px 6px rgba(0,0,0,0.14);
+  --shadow-lg:  0 24px 60px rgba(0,0,0,0.45), 0 8px 18px rgba(0,0,0,0.28);
+  --shadow-glow: 0 0 0 1px var(--hairline), 0 30px 80px -20px var(--accent-glow);
+
+  /* — Motion — */
+  --ease:        cubic-bezier(0.32, 0.72, 0, 1);   /* Apple's signature curve */
+  --ease-spring: cubic-bezier(0.5, 1.6, 0.4, 1);
+  --ease-in:     cubic-bezier(0.6, 0, 0.94, 0.4);
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --t-1: 180ms;
+  --t-2: 280ms;
+  --t-3: 480ms;
+  --t-4: 720ms;
+  --t-5: 1100ms;
+
+  /* — Layout — */
+  --nav-h: 56px;
+  --container-narrow: 760px;
+  --container: 1180px;
+  --container-wide: 1320px;
+  --container-bleed: 1480px;
+  --section-pad: clamp(5rem, 10vw, 9rem);
 }
 
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* — Light theme — */
+:root[data-theme="light"] {
+  --surface-0: #ffffff;
+  --surface-1: #fbfbfd;
+  --surface-2: #f5f5f7;
+  --surface-3: #ececf0;
+  --surface-elev: rgba(0, 0, 0, 0.03);
+  --surface-glass: rgba(255, 255, 255, 0.72);
+  --surface-glass-strong: rgba(255, 255, 255, 0.88);
+
+  --ink-0: #1d1d1f;
+  --ink-1: rgba(29, 29, 31, 0.88);
+  --ink-2: rgba(29, 29, 31, 0.62);
+  --ink-3: rgba(29, 29, 31, 0.4);
+  --ink-4: rgba(29, 29, 31, 0.14);
+
+  --hairline:        rgba(0, 0, 0, 0.08);
+  --hairline-strong: rgba(0, 0, 0, 0.14);
+
+  --accent:    #5856ec;
+  --accent-2:  #16a39c;
+  --accent-soft: rgba(88, 86, 236, 0.12);
+  --accent-glow: rgba(88, 86, 236, 0.18);
+
+  --tech-accent:   #4565f5;
+  --life-accent:   #e7613f;
+  --travel-accent: #14a39c;
+
+  --shadow-sm:  0 1px 2px rgba(0,0,0,0.05), 0 1px 1px rgba(0,0,0,0.03);
+  --shadow-md:  0 8px 24px rgba(15, 23, 42, 0.08), 0 2px 6px rgba(15, 23, 42, 0.04);
+  --shadow-lg:  0 28px 60px rgba(15, 23, 42, 0.14), 0 8px 18px rgba(15, 23, 42, 0.06);
 }
+
+/* ─── Reset ─────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  color-scheme: dark;
 }
+
+:root[data-theme="light"] html { color-scheme: light; }
+
+html, body { background: var(--surface-0); }
 
 body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-body);
-  font-size: 1rem;
-  line-height: 1.7;
-  overflow-x: hidden;
+  font-family: var(--font-text);
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--ink-0);
+  font-feature-settings: "ss01", "cv11";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  letter-spacing: -0.01em;
+  transition: background var(--t-3) var(--ease), color var(--t-3) var(--ease);
 }
 
-body.menu-open {
-  overflow: hidden;
-}
+body.menu-open { overflow: hidden; }
 
+/* ─── Subtle film grain (depth) ─────────────────── */
 body::after {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  mix-blend-mode: overlay;
   pointer-events: none;
   z-index: 9999;
 }
 
-h1, h2, h3, h4 {
-  font-family: var(--font-heading);
-  line-height: 1.1;
-  font-weight: 700;
-  color: var(--text);
+:root[data-theme="light"] body::after { opacity: 0.05; mix-blend-mode: multiply; }
+
+/* ─── Typography ────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.05;
+  color: var(--ink-0);
+  letter-spacing: var(--tracking-tight);
 }
+
+h1 { font-size: var(--fs-h1); letter-spacing: var(--tracking-tightest); }
+h2 { font-size: var(--fs-h2); letter-spacing: var(--tracking-tighter); }
+h3 { font-size: var(--fs-h3); }
+h4 { font-size: var(--fs-h4); }
+h5 { font-size: var(--fs-h5); }
+
+p { line-height: 1.6; color: var(--ink-1); }
+strong { font-weight: 600; color: var(--ink-0); }
 
 a {
   color: inherit;
   text-decoration: none;
+  transition: color var(--t-1) var(--ease), opacity var(--t-1) var(--ease);
 }
 
-img, svg {
-  display: block;
-  max-width: 100%;
-}
-
-ul { list-style: none; }
-button { background: none; border: none; cursor: pointer; font: inherit; }
+img, svg, video { display: block; max-width: 100%; }
+ul, ol { list-style: none; }
+button { background: none; border: none; cursor: pointer; font: inherit; color: inherit; }
 
 ::selection {
   background: var(--accent);
   color: #fff;
+}
+
+/* ─── Focus ─────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ─── Reduced motion ────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

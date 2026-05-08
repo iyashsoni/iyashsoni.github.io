@@ -2,40 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)">
 
-  <!-- Primary SEO -->
-  <title>Blog — Yash Soni | Engineering, Finance & Life</title>
+  <title>Blog — Yash Soni | Engineering, Finance &amp; Life</title>
   <meta name="description" content="Writing by Yash Soni — unfiltered thoughts on software engineering, personal finance, travel, and the art of living well. Published on Medium and Dev.to.">
   <meta name="author" content="Yash Soni">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="https://iyashsoni.github.io/blog/">
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Blog — Yash Soni | Engineering, Finance & Life">
+  <meta property="og:title" content="Blog — Yash Soni | Engineering, Finance &amp; Life">
   <meta property="og:description" content="Unfiltered writing on software engineering, personal finance, travel, and life by Yash Soni — Software Engineer Lead at IBM.">
   <meta property="og:url" content="https://iyashsoni.github.io/blog/">
-  <meta property="og:image" content="https://iyashsoni.github.io/assets/images/yash.jpg">
-  <meta property="og:image:alt" content="Yash Soni — Writing">
+  <meta property="og:image" content="https://iyashsoni.github.io/assets/images/yash-avatar.svg">
   <meta property="og:site_name" content="Yash Soni">
   <meta property="og:locale" content="en_IN">
 
-  <!-- Twitter / X Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@iYash_Soni">
   <meta name="twitter:creator" content="@iYash_Soni">
   <meta name="twitter:title" content="Blog — Yash Soni">
   <meta name="twitter:description" content="Writing on engineering, finance, travel, and life by Yash Soni, Software Engineer Lead at IBM.">
-  <meta name="twitter:image" content="https://iyashsoni.github.io/assets/images/yash.jpg">
+  <meta name="twitter:image" content="https://iyashsoni.github.io/assets/images/yash-avatar.svg">
 
-  <!-- Favicons -->
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 
-  <!-- JSON-LD: Blog schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -43,45 +38,60 @@
     "name": "Yash Soni — Writing",
     "url": "https://iyashsoni.github.io/blog/",
     "description": "Unfiltered thoughts on software engineering, finance, travel, and life by Yash Soni.",
-    "author": {
-      "@type": "Person",
-      "name": "Yash Soni",
-      "url": "https://iyashsoni.github.io"
-    }
+    "author": { "@type": "Person", "name": "Yash Soni", "url": "https://iyashsoni.github.io" }
   }
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/layout.css">
   <link rel="stylesheet" href="/css/components.css">
   <link rel="stylesheet" href="/css/animations.css">
   <link rel="stylesheet" href="/css/pages/blog.css">
   <link rel="stylesheet" href="/css/responsive.css">
+
+  <script>
+    (function() {
+      try {
+        var saved = localStorage.getItem('theme');
+        var system = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', saved || system);
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
 
-  <nav class="nav scrolled" role="navigation" aria-label="Main navigation">
+  <nav class="nav nav--solid" id="nav" role="navigation" aria-label="Main navigation">
     <div class="nav__inner container">
-      <a href="/" class="nav__logo" aria-label="Yash Soni — home">YS</a>
+      <a href="/" class="nav__logo" aria-label="Yash Soni — home">
+        <span class="nav__logo-mark" aria-hidden="true"></span>
+        <span>Yash Soni</span>
+      </a>
       <ul class="nav__links" role="list">
         <li>
           <nav class="blog-cat-nav" aria-label="Blog categories">
-            <a href="/blog/">All</a>
+            <a href="/blog/" class="active">All</a>
             <a href="/blog/tech/">Tech</a>
             <a href="/blog/life/">Life</a>
             <a href="/blog/travel/">Travel</a>
-            <a href="#" id="nav-medium-tab">Blogs on Medium</a>
-            <a href="#" id="nav-devto-tab">Blogs on Dev.to</a>
+            <a href="#" id="nav-medium-tab">Medium</a>
+            <a href="#" id="nav-devto-tab">Dev.to</a>
           </nav>
         </li>
-        <li><a href="/" class="btn btn--sm btn--ghost">← Portfolio</a></li>
       </ul>
-      <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-        <span></span><span></span><span></span>
-      </button>
+      <div class="nav__right">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a href="/" class="btn btn--sm btn--ghost">← Portfolio</a>
+        <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -90,12 +100,13 @@
     <a href="/blog/tech/">Tech</a>
     <a href="/blog/life/">Life</a>
     <a href="/blog/travel/">Travel</a>
-    <a href="#" id="mobile-medium-tab">Blogs on Medium</a>
-    <a href="#" id="mobile-devto-tab">Blogs on Dev.to</a>
+    <a href="#" id="mobile-medium-tab">Medium</a>
+    <a href="#" id="mobile-devto-tab">Dev.to</a>
     <a href="/">← Portfolio</a>
   </nav>
 
   <header class="blog-header">
+    <div class="halo" aria-hidden="true"></div>
     <div class="container blog-header__inner">
       <span class="blog-header__label reveal">Writing</span>
       <h1 class="blog-header__title reveal">All posts.</h1>
@@ -110,11 +121,10 @@
         <button class="filter-btn" data-filter="tech">Tech</button>
         <button class="filter-btn" data-filter="life">Life</button>
         <button class="filter-btn" data-filter="travel">Travel</button>
-        <button class="filter-btn" data-filter="medium">Blogs on Medium</button>
-        <button class="filter-btn" data-filter="devto">Blogs on Dev.to</button>
+        <button class="filter-btn" data-filter="medium">Medium</button>
+        <button class="filter-btn" data-filter="devto">Dev.to</button>
       </div>
 
-      <!-- Cards are injected from blog/posts.json by blog.js — no manual edits needed -->
       <div class="blog-grid" data-local-category="all" role="list">
         <div class="blog-empty" aria-live="polite">No posts in this category yet. Check back soon.</div>
       </div>
@@ -122,9 +132,11 @@
   </main>
 
   <footer class="footer" role="contentinfo">
-    <div class="container footer__inner">
-      <span class="footer__copy">© 2025 Yash Soni</span>
-      <a href="/" class="footer__made" style="color:var(--text-3); transition: color var(--t)">← Back to portfolio</a>
+    <div class="container">
+      <div class="footer__bottom">
+        <span>© 2026 Yash Soni · Crafted with intention</span>
+        <a href="/">← Back to portfolio</a>
+      </div>
     </div>
   </footer>
 
