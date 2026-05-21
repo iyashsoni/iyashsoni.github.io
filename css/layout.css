@@ -3,9 +3,9 @@
   width: 100%;
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0 clamp(1.5rem, 5vw, 2.5rem);
-  padding-left: max(clamp(1.5rem, 5vw, 2.5rem), env(safe-area-inset-left));
-  padding-right: max(clamp(1.5rem, 5vw, 2.5rem), env(safe-area-inset-right));
+  padding: 0 clamp(1.75rem, 6vw, 2.5rem);
+  padding-left: max(clamp(1.75rem, 6vw, 2.5rem), env(safe-area-inset-left));
+  padding-right: max(clamp(1.75rem, 6vw, 2.5rem), env(safe-area-inset-right));
 }
 
 .container--narrow { max-width: var(--container-narrow); }
