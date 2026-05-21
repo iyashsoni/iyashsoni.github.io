@@ -106,8 +106,8 @@
 @media (max-width: 380px) {
   .nav__right .btn--ghost { display: none; }
   .container {
-    padding-left: max(1.25rem, env(safe-area-inset-left));
-    padding-right: max(1.25rem, env(safe-area-inset-right));
+    padding-left: max(1.5rem, env(safe-area-inset-left));
+    padding-right: max(1.5rem, env(safe-area-inset-right));
   }
   .hero__name { letter-spacing: -0.05em; }
   .tile { padding: 1.35rem; }
