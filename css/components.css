@@ -5,20 +5,22 @@
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 100;
-  height: var(--nav-h);
+  /* Extend up under the status-bar safe area so content scrolling
+     beneath can never peek above the bar on notched phones. */
+  height: var(--nav-total);
+  padding-top: env(safe-area-inset-top, 0px);
   display: flex;
   align-items: center;
   background: transparent;
   border-bottom: 1px solid transparent;
   transition: background var(--t-2) var(--ease),
               backdrop-filter var(--t-2) var(--ease),
-              border-color var(--t-2) var(--ease),
-              height var(--t-2) var(--ease);
+              border-color var(--t-2) var(--ease);
 }
 
 .nav.scrolled,
 .nav--solid {
-  background: var(--surface-glass);
+  background: var(--nav-bg);
   backdrop-filter: saturate(180%) blur(28px);
   -webkit-backdrop-filter: saturate(180%) blur(28px);
   border-color: var(--hairline);
@@ -909,7 +911,7 @@
 
 /* ─── Page header (used on subpages) ───────────── */
 .page-header {
-  padding: calc(var(--nav-h) + clamp(4rem, 10vh, 7rem)) 0 clamp(3rem, 6vw, 5rem);
+  padding: calc(var(--nav-total) + clamp(4rem, 10vh, 7rem)) 0 clamp(3rem, 6vw, 5rem);
   border-bottom: 1px solid var(--hairline);
   position: relative;
   overflow: hidden;
@@ -921,17 +923,37 @@
   z-index: 1;
 }
 
+/* Block-level flex + fit-content guarantees the eyebrow/label below it
+   starts on its own line (fixes the "← Back … — LABEL" collision), and
+   the chip styling reads as a clear, tappable control. */
 .page-header__back {
-  display: inline-flex;
+  display: flex;
+  width: fit-content;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.45rem;
   font-size: 0.82rem;
   color: var(--ink-2);
   margin-bottom: 1.75rem;
-  transition: color var(--t-1) var(--ease);
+  padding: 0.5rem 0.95rem 0.5rem 0.8rem;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-pill);
+  background: var(--surface-elev);
+  transition: color var(--t-1) var(--ease),
+              background var(--t-1) var(--ease),
+              border-color var(--t-1) var(--ease),
+              transform var(--t-1) var(--ease-spring);
 }
-.page-header__back:hover { color: var(--ink-0); }
-.page-header__back svg { width: 14px; height: 14px; }
+.page-header__back:hover {
+  color: var(--ink-0);
+  border-color: var(--hairline-strong);
+  background: var(--surface-2);
+}
+.page-header__back:active { transform: scale(0.97); }
+.page-header__back svg {
+  width: 15px; height: 15px;
+  transition: transform var(--t-2) var(--ease);
+}
+.page-header__back:hover svg { transform: translateX(-2px); }
 
 .page-header__title {
   font-size: var(--fs-h1);

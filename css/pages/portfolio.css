@@ -6,7 +6,7 @@
   min-height: 100svh;
   display: flex;
   align-items: center;
-  padding-top: var(--nav-h);
+  padding-top: var(--nav-total);
   overflow: hidden;
   isolation: isolate;
 }

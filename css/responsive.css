@@ -68,14 +68,14 @@
   .about__image { display: flex; justify-content: center; }
 
   /* Project page hero — compact on phones */
-  .proj-hero { min-height: auto; padding: calc(var(--nav-h) + 2.5rem) 0 2rem; }
+  .proj-hero { min-height: auto; padding: calc(var(--nav-total) + 2.5rem) 0 2rem; }
   .proj-hero__title { font-size: clamp(2.5rem, 11vw, 4rem); }
   .proj-hero__lead { font-size: 1rem; margin-bottom: 1.75rem; }
   .proj-hero__visual { min-height: 280px; }
   .device { width: clamp(200px, 60vw, 260px); }
 
   /* Page header subpages */
-  .page-header { padding-top: calc(var(--nav-h) + 2.5rem); padding-bottom: 2.5rem; }
+  .page-header { padding-top: calc(var(--nav-total) + 2.5rem); padding-bottom: 2.5rem; }
   .page-header__title { font-size: clamp(2.25rem, 9vw, 3.5rem); }
   .page-header__sub { font-size: 1rem; }
   .page-header__back { margin-bottom: 1.25rem; }
@@ -105,12 +105,8 @@
 /* ─── Tiny phones (≤ 380px) ──────────────────────── */
 @media (max-width: 380px) {
   .nav__right .btn--ghost { display: none; }
-  .container {
-    padding-left: max(1.5rem, env(safe-area-inset-left));
-    padding-right: max(1.5rem, env(safe-area-inset-right));
-  }
   .hero__name { letter-spacing: -0.05em; }
-  .tile { padding: 1.35rem; }
+  .tile { padding: 1.5rem; }
   .stat { padding: 1.5rem 0.75rem; }
 }
 

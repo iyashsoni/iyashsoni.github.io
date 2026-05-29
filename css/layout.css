@@ -1,11 +1,13 @@
 /* ─── Containers ────────────────────────────────── */
 .container {
+  --gutter: clamp(1.5rem, 5vw, 2.75rem);
   width: 100%;
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0 clamp(1.75rem, 6vw, 2.5rem);
-  padding-left: max(clamp(1.75rem, 6vw, 2.5rem), env(safe-area-inset-left));
-  padding-right: max(clamp(1.75rem, 6vw, 2.5rem), env(safe-area-inset-right));
+  /* Generous, consistent breathing room — never tighter than 24px,
+     and always clears the device safe-area on notched phones. */
+  padding-left: max(var(--gutter), env(safe-area-inset-left));
+  padding-right: max(var(--gutter), env(safe-area-inset-right));
 }
 
 .container--narrow { max-width: var(--container-narrow); }
@@ -17,6 +19,9 @@
   padding: var(--section-pad) 0;
   position: relative;
 }
+
+/* Anchored sections land below the fixed nav, not tucked under it. */
+[id] { scroll-margin-top: calc(var(--nav-total) + 1.25rem); }
 
 .section--tight { padding: clamp(3rem, 6vw, 5rem) 0; }
 
