@@ -3,190 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
-  <meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)">
 
+  <!-- This standalone listing was retired: the homepage Work section is now
+       the single, canonical showcase for all projects. Redirect there. -->
   <title>Projects — Yash Soni</title>
-  <meta name="description" content="Side projects built with intention — P2P file sharing, habit tracking, focus timers, and file compression. By Yash Soni.">
-  <link rel="canonical" href="https://iyashsoni.github.io/projects/">
+  <link rel="canonical" href="https://iyashsoni.github.io/#work">
+  <meta name="robots" content="noindex, follow">
+  <meta http-equiv="refresh" content="0; url=/#work">
+  <script>window.location.replace('/#work');</script>
+
   <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/base.css">
-  <link rel="stylesheet" href="/css/layout.css">
-  <link rel="stylesheet" href="/css/components.css">
-  <link rel="stylesheet" href="/css/animations.css">
-  <link rel="stylesheet" href="/css/pages/portfolio.css">
-  <link rel="stylesheet" href="/css/responsive.css">
-
-  <script>
-    (function() {
-      try {
-        var saved = localStorage.getItem('theme');
-        var system = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', saved || system);
-      } catch (e) {}
-    })();
-  </script>
+  <style>
+    html, body { height: 100%; margin: 0; background: #000; color: #f5f5f7;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif; }
+    @media (prefers-color-scheme: light) { html, body { background: #fbfbfd; color: #1d1d1f; } }
+    .wrap { min-height: 100%; display: grid; place-items: center; text-align: center; padding: 2rem; }
+    a { color: #6e6cff; text-decoration: none; font-weight: 500; }
+    p { opacity: 0.7; font-size: 0.95rem; }
+  </style>
 </head>
 <body>
-
-  <nav class="nav nav--solid" id="nav" role="navigation" aria-label="Main navigation">
-    <div class="nav__inner container">
-      <a href="/" class="nav__logo" aria-label="Yash Soni — home">
-        <span class="nav__logo-mark" aria-hidden="true"></span>
-        <span>Yash Soni</span>
-      </a>
-      <ul class="nav__links" role="list">
-        <li><a href="/#about">About</a></li>
-        <li><a href="/projects/" class="is-active">Work</a></li>
-        <li><a href="/blog/">Writing</a></li>
-        <li><a href="/#contact">Contact</a></li>
-      </ul>
-      <div class="nav__right">
-        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        </button>
-        <a href="/#contact" class="btn btn--sm btn--ghost">Say hi</a>
-        <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </div>
-  </nav>
-
-  <nav class="nav__mobile" id="mobile-menu" aria-label="Mobile navigation">
-    <a href="/#about">About</a>
-    <a href="/projects/">Work</a>
-    <a href="/blog/">Writing</a>
-    <a href="/#contact">Contact</a>
-  </nav>
-
-  <main>
-    <header class="page-header">
-      <div class="halo" aria-hidden="true"></div>
-      <div class="container">
-        <a href="/" class="page-header__back" data-smart-back>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-          Back to portfolio
-        </a>
-        <span class="section__eyebrow">All projects</span>
-        <h1 class="page-header__title">Tiny projects.<br><span class="text-grad">Big ideas.</span></h1>
-        <p class="page-header__sub">Things I build to scratch my own itch — small, focused, and done with intention.</p>
-      </div>
-    </header>
-
-    <section class="section">
-      <div class="container">
-        <div class="projects__grid stagger">
-
-          <a href="/projects/airmesh/" class="tile tile--airmesh reveal">
-            <div class="tile__head">
-              <span class="tile__icon" aria-hidden="true">
-                <img src="/assets/images/projects/airmesh.svg" alt="" loading="lazy" width="56" height="56">
-              </span>
-              <div class="tile__meta">
-                <span class="tile__chip">P2P · WebRTC</span>
-                <span>2026</span>
-              </div>
-            </div>
-            <h2 class="tile__title">AirMesh</h2>
-            <p class="tile__desc">Peer-to-peer file sharing in your browser. WebRTC transport, QR-code pairing, end-to-end encrypted. No servers, no signup, no upload limits.</p>
-            <div class="tile__foot">
-              <div class="tile__stack">
-                <span>React</span><span>TypeScript</span><span>WebRTC</span><span>PeerJS</span>
-              </div>
-              <span class="tile__cta" aria-label="View AirMesh">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-              </span>
-            </div>
-          </a>
-
-          <a href="/projects/flint/" class="tile tile--flint reveal">
-            <div class="tile__head">
-              <span class="tile__icon" aria-hidden="true">
-                <img src="/assets/images/projects/flint.svg" alt="" loading="lazy" width="56" height="56">
-              </span>
-              <div class="tile__meta">
-                <span class="tile__chip">Habit Tracker · PWA</span>
-                <span>2026</span>
-              </div>
-            </div>
-            <h2 class="tile__title">Flint</h2>
-            <p class="tile__desc">A lightweight offline-first habit tracker. Build streaks, spark habits. No accounts, no cloud — your data lives entirely on your device.</p>
-            <div class="tile__foot">
-              <div class="tile__stack">
-                <span>React</span><span>Vite</span><span>IndexedDB</span><span>PWA</span>
-              </div>
-              <span class="tile__cta" aria-label="View Flint">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-              </span>
-            </div>
-          </a>
-
-          <a href="/projects/unopomo/" class="tile tile--unopomo reveal">
-            <div class="tile__head">
-              <span class="tile__icon" aria-hidden="true">
-                <img src="/assets/images/projects/unopomo.svg" alt="" loading="lazy" width="56" height="56">
-              </span>
-              <div class="tile__meta">
-                <span class="tile__chip">Productivity · Timer</span>
-                <span>2026</span>
-              </div>
-            </div>
-            <h2 class="tile__title">Unopomo</h2>
-            <p class="tile__desc">A premium Pomodoro focus timer. Ten visual themes with ambient soundscapes, session stats, eight languages. Beautifully designed, fully offline.</p>
-            <div class="tile__foot">
-              <div class="tile__stack">
-                <span>Next.js</span><span>TypeScript</span><span>Zustand</span><span>PWA</span>
-              </div>
-              <span class="tile__cta" aria-label="View Unopomo">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-              </span>
-            </div>
-          </a>
-
-          <a href="/projects/tinyfiles/" class="tile tile--tinyfiles reveal">
-            <div class="tile__head">
-              <span class="tile__icon" aria-hidden="true">
-                <img src="/assets/images/projects/tinyfiles.svg" alt="" loading="lazy" width="56" height="56">
-              </span>
-              <div class="tile__meta">
-                <span class="tile__chip">Utility · Privacy</span>
-                <span>2026</span>
-              </div>
-            </div>
-            <h2 class="tile__title">tinyfiles</h2>
-            <p class="tile__desc">Compress PDFs and images entirely in your browser. 100% private — files never leave your device. No uploads, no server, no data collection.</p>
-            <div class="tile__foot">
-              <div class="tile__stack">
-                <span>React</span><span>TypeScript</span><span>Vite</span><span>PWA</span>
-              </div>
-              <span class="tile__cta" aria-label="View tinyfiles">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-              </span>
-            </div>
-          </a>
-
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer" role="contentinfo">
-    <div class="container">
-      <div class="footer__bottom">
-        <span>© 2026 Yash Soni · Crafted with intention</span>
-        <a href="/">← Back to portfolio</a>
-      </div>
-    </div>
-  </footer>
-
-  <script type="module" src="/js/main.js"></script>
+  <div class="wrap">
+    <p>Taking you to the work&nbsp;…<br><a href="/#work">View all projects →</a></p>
+  </div>
 </body>
 </html>

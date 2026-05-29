@@ -57,7 +57,7 @@
 .proj-hero {
   position: relative;
   min-height: 92svh;
-  padding: calc(var(--nav-h) + 4rem) 0 3rem;
+  padding: calc(var(--nav-total) + 4rem) 0 3rem;
   display: flex;
   align-items: center;
   overflow: hidden;
