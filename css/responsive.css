@@ -29,7 +29,7 @@
   .nav__right .btn { padding: 0.45rem 0.85rem; font-size: 0.78rem; }
 
   .hero { min-height: auto; padding-bottom: 3rem; }
-  .hero__content { padding: 4rem 0 4rem; }
+  .hero__content { padding-top: 4rem; padding-bottom: 4rem; }
   .hero__name { letter-spacing: -0.045em; line-height: 0.95; }
   .hero__pill .pill { font-size: 0.72rem; padding: 0.35rem 0.7rem; }
   .hero__pill .pill,
