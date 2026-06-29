@@ -727,8 +727,8 @@
   background: var(--hairline);
 }
 
-.tile--grove   { --tile-chip: #30d158; --tile-glow: rgba(48,209,88,0.14); --tile-edge: rgba(48,209,88,0.32); --tile-edge-2: rgba(102,212,207,0.2); }
-.tile--samara  { --tile-chip: #bf5af2; --tile-glow: rgba(191,90,242,0.14); --tile-edge: rgba(191,90,242,0.32); --tile-edge-2: rgba(110,108,255,0.2); }
+.tile--grove   { --tile-chip: #5fa566; --tile-glow: rgba(95,165,102,0.16); --tile-edge: rgba(95,165,102,0.34); --tile-edge-2: rgba(139,180,106,0.22); }
+.tile--samara  { --tile-chip: #cb8a45; --tile-glow: rgba(199,125,60,0.15); --tile-edge: rgba(199,125,60,0.34); --tile-edge-2: rgba(176,86,111,0.22); }
 
 .tile__badge {
   display: inline-flex;

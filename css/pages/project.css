@@ -15,6 +15,8 @@
 [data-project="flint"]     { --proj-accent: #ff9f0a; --proj-accent-2: #ff5e3a; }
 [data-project="unopomo"]   { --proj-accent: #66d4cf; --proj-accent-2: #6e6cff; }
 [data-project="tinyfiles"] { --proj-accent: #6e8cff; --proj-accent-2: #b15bff; }
+[data-project="grove"]     { --proj-accent: #5f8d63; --proj-accent-2: #8bb46a; }
+[data-project="samara"]    { --proj-accent: #c77d3c; --proj-accent-2: #b0566f; }
 
 /* ── Project nav brand ─────────────────────────── */
 .proj-brand {
@@ -345,6 +347,18 @@
   line-height: 1.55;
 }
 
+.proj-feat__sub {
+  display: inline-block;
+  margin-left: 0.5rem;
+  font-family: var(--font-text);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--proj-accent);
+  vertical-align: middle;
+}
+
 @media (max-width: 760px) {
   .proj-features { grid-template-columns: 1fr; }
 }
@@ -448,6 +462,13 @@
   margin-bottom: 2.5rem;
   max-width: 50ch;
   margin-inline: auto;
+}
+
+.proj-cta__note {
+  margin-top: 2rem;
+  font-size: 0.82rem;
+  color: var(--ink-3);
+  letter-spacing: 0.01em;
 }
 
 /* ── Project nav variants ──────────────────────── */

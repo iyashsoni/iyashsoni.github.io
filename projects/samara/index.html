@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)">
+  <title>Samara — A path through 5,000 years of stillness</title>
+  <meta name="description" content="Every other meditation app is a library. Samara is a path. Rooted in the Vigyan Bhairav Tantra — 112 ancient techniques, made modern. Live in your browser; native iOS &amp; iPadOS in 2026.">
+  <link rel="canonical" href="https://iyashsoni.github.io/projects/samara/">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  <link rel="stylesheet" href="/css/pages/project.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+
+  <script>
+    (function() {
+      try {
+        var saved = localStorage.getItem('theme');
+        var system = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', saved || system);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body data-project="samara">
+
+  <nav class="nav nav--solid" id="nav" role="navigation" aria-label="Samara navigation">
+    <div class="nav__inner container">
+      <span class="proj-brand">
+        <span class="proj-brand__mark proj-brand__mark--img" aria-hidden="true">
+          <img src="/assets/images/projects/samara.svg" alt="" width="24" height="24">
+        </span>
+        Samara
+      </span>
+      <ul class="nav__links" role="list">
+        <li><a href="/#work" class="nav__proj-back" data-smart-back>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          Back to work
+        </a></li>
+      </ul>
+      <div class="nav__right">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a href="https://samara-meditation.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn--sm btn--proj">Open</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero -->
+    <section class="proj-hero">
+      <div class="proj-hero__bg" aria-hidden="true"></div>
+      <div class="container proj-hero__grid">
+        <div class="proj-hero__copy">
+          <span class="proj-hero__pill"><span class="dot"></span> Vigyan Bhairav Tantra · 112 keys · One path</span>
+          <h1 class="proj-hero__title">A path through<br><span class="grad">5,000 years</span><br>of stillness.</h1>
+          <p class="proj-hero__lead">Every other meditation app is a library. Samara is a path. Rooted in the Vigyan Bhairav Tantra — 112 ancient techniques, made modern. Not 70,000 tracks; one transmission, deepening.</p>
+          <div class="proj-hero__actions">
+            <a href="https://samara-meditation.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn--proj btn--magnetic">
+              Open Samara
+              <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+            </a>
+            <a href="#features" class="btn btn--ghost btn--magnetic">The techniques</a>
+          </div>
+        </div>
+        <div class="proj-hero__visual" aria-hidden="true">
+          <div class="device floats">
+            <div class="device__screen">
+              <div>
+                <div class="device__brand">Samara</div>
+                <div class="device__cap">112 keys. One path.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features / techniques -->
+    <section class="proj-section" id="features">
+      <div class="container">
+        <div class="proj-section__head">
+          <span class="proj-section__eyebrow">A few of the techniques</span>
+          <h2 class="proj-section__title">Curated to excellence,<br>not dumped by the hundred.</h2>
+          <p class="proj-section__lead">Each technique is mapped to a real need — sleep, anxiety, focus — and grounded in both the scripture and the science. This is a taste; the full path holds 112.</p>
+        </div>
+        <div class="proj-features">
+          <article class="proj-feat reveal">
+            <div class="proj-feat__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12c4 0 4-5 8-5s4 5 8 5M4 17c4 0 4-3 8-3s4 3 8 3"/></svg>
+            </div>
+            <h3>Nadi Shodhana <span class="proj-feat__sub">Breath</span></h3>
+            <p>Alternate-nostril breathing that settles the nervous system into balance.</p>
+          </article>
+          <article class="proj-feat reveal">
+            <div class="proj-feat__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c2 4 4 6 4 9a4 4 0 0 1-8 0c0-3 2-5 4-9z"/><path d="M9 21h6"/></svg>
+            </div>
+            <h3>Trataka <span class="proj-feat__sub">Light</span></h3>
+            <p>Steady gazing at a single flame, gathering scattered attention to one point.</p>
+          </article>
+          <article class="proj-feat reveal">
+            <div class="proj-feat__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h3l2-5 4 14 3-9 2 3h4"/></svg>
+            </div>
+            <h3>Bhramari <span class="proj-feat__sub">Sound</span></h3>
+            <p>A soft humming breath whose vibration quiets the thinking mind.</p>
+          </article>
+          <article class="proj-feat reveal">
+            <div class="proj-feat__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </div>
+            <h3>Yoga Nidra <span class="proj-feat__sub">Touch</span></h3>
+            <p>A voice-led journey through the body to the threshold of sleep.</p>
+          </article>
+          <article class="proj-feat reveal">
+            <div class="proj-feat__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-9-8.5C1.5 9 3.5 6 6.5 6 8.5 6 12 8 12 8s3.5-2 5.5-2c3 0 5 3 3.5 6.5C19 16.65 12 21 12 21z"/></svg>
+            </div>
+            <h3>Loving-Kindness <span class="proj-feat__sub">Emotion</span></h3>
+            <p>Cultivating warmth toward yourself and others until the heart softens.</p>
+          </article>
+          <article class="proj-feat reveal">
+            <div class="proj-feat__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <h3>Inner Silence <span class="proj-feat__sub">Thought</span></h3>
+            <p>Witnessing thoughts without following them, until silence appears.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- The dialogue -->
+    <section class="proj-section">
+      <div class="container">
+        <div class="proj-section__head">
+          <span class="proj-section__eyebrow">How a session moves</span>
+          <h2 class="proj-section__title">The dialogue itself<br>is the product.</h2>
+        </div>
+        <div class="proj-steps">
+          <div class="proj-step reveal">
+            <div class="proj-step__num">01</div>
+            <div>
+              <h3>Question</h3>
+              <p>Parvati asks — the way you do at 2am. "When the breath runs ragged with worry, how do I return?"</p>
+            </div>
+          </div>
+          <div class="proj-step reveal">
+            <div class="proj-step__num">02</div>
+            <div>
+              <h3>Technique</h3>
+              <p>Shiva answers with a method, not a mantra. One of 112, chosen for exactly this moment.</p>
+            </div>
+          </div>
+          <div class="proj-step reveal">
+            <div class="proj-step__num">03</div>
+            <div>
+              <h3>Practice</h3>
+              <p>The world dims to a single flame or breath. The light itself becomes the instruction.</p>
+            </div>
+          </div>
+          <div class="proj-step reveal">
+            <div class="proj-step__num">04</div>
+            <div>
+              <h3>Integration</h3>
+              <p>A quiet benediction. No streak confetti — "Day seven, quietly building."</p>
+            </div>
+          </div>
+          <div class="proj-step reveal">
+            <div class="proj-step__num">05</div>
+            <div>
+              <h3>Insight</h3>
+              <p>Over weeks, the path reveals its shape. One transmission, deepening.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Philosophy -->
+    <section class="proj-section">
+      <div class="container">
+        <div class="proj-section__head">
+          <span class="proj-section__eyebrow">The lineage</span>
+          <h2 class="proj-section__title">"Abandon the wandering<br>of the mind, and abide in<br>your own true state."</h2>
+          <p class="proj-section__lead">Three quiet moats make it hard to copy: 112 techniques researched and narrated with care; cultural authenticity — Devanagari used naturally, Sanskrit spoken plainly, Indian teacher voices; and a lived story — Samara was built by someone who needed it first, through anxiety and depression in 2019–2020.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech stack -->
+    <section class="proj-section">
+      <div class="container">
+        <div class="proj-section__head">
+          <span class="proj-section__eyebrow">Tech stack</span>
+          <h2 class="proj-section__title">Ancient roots, modern build.</h2>
+        </div>
+        <div class="proj-stack">
+          <span>Next.js · TypeScript <em>(web)</em></span>
+          <span>Swift · SwiftUI</span>
+          <span>Native iOS / iPadOS</span>
+          <span>Spatial audio</span>
+          <span>On-device practice data</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="proj-cta">
+      <div class="container">
+        <h2 class="proj-cta__title">Be on the path<br><span class="grad">before the doors open.</span></h2>
+        <p class="proj-cta__sub">Walk the web preview now — coming natively to iPhone &amp; iPad in 2026.</p>
+        <a href="https://samara-meditation.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn--proj btn--lg btn--magnetic">
+          Open Samara
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </a>
+        <p class="proj-cta__note">Samara is a practice companion, not a crisis service.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__bottom">
+        <span>© 2026 Yash Soni · Crafted with intention</span>
+        <span><a href="/#work">Work</a> · <a href="/">Portfolio</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/project.js"></script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)">
+  <title>Grove — A quiet place you tend.</title>
+  <meta name="description" content="Grove is a focus app built on a different idea. Not blocking harder, not piling on friction — just widening the small gap between reaching for your phone and deciding to. Live in your browser; native iOS in 2026.">
+  <link rel="canonical" href="https://iyashsoni.github.io/projects/grove/">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  <link rel="stylesheet" href="/css/pages/project.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+
+  <script>
+    (function() {
+      try {
+        var saved = localStorage.getItem('theme');
+        var system = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', saved || system);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body data-project="grove">
+
+  <nav class="nav nav--solid" id="nav" role="navigation" aria-label="Grove navigation">
+    <div class="nav__inner container">
+      <span class="proj-brand">
+        <span class="proj-brand__mark proj-brand__mark--img" aria-hidden="true">
+          <img src="/assets/images/projects/grove.svg" alt="" width="24" height="24">
+        </span>
+        Grove
+      </span>
+      <ul class="nav__links" role="list">
+        <li><a href="/#work" class="nav__proj-back" data-smart-back>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          Back to work
+        </a></li>
+      </ul>
+      <div class="nav__right">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a href="https://grove-focus.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn--sm btn--proj">Open</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero -->
+    <section class="proj-hero">
+      <div class="proj-hero__bg" aria-hidden="true"></div>
+      <div class="container proj-hero__grid">
+        <div class="proj-hero__copy">
+          <span class="proj-hero__pill"><span class="dot"></span> Focus · Screen-time · On-device</span>
+          <h1 class="proj-hero__title">A quiet place<br><span class="grad">you tend.</span></h1>
+          <p class="proj-hero__lead">A focus app built on a different idea. Not blocking harder, not piling on friction — just widening the small gap between reaching for your phone and deciding to. A second or two, every time, until the choosing becomes the habit.</p>
+          <div class="proj-hero__actions">
+            <a href="https://grove-focus.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn--proj btn--magnetic">
+              Open Grove
+              <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+            </a>
+            <a href="#features" class="btn btn--ghost btn--magnetic">How it works</a>
+          </div>
+        </div>
+        <div class="proj-hero__visual" aria-hidden="true">
+          <div class="device floats">
+            <div class="device__screen">
+              <div>
+                <div class="device__brand">Grove</div>
+                <div class="device__cap">Tend your attention.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="proj-section" id="features">
+      <div class="container">
+        <div class="proj-section__head">
+          <span class="proj-section__eyebrow">The threshold moment</span>
+          <h2 class="proj-section__title">The half-second that<br>changes everything.</h2>
+          <p class="proj-section__lead">The whole category fights your willpower or buries you in friction. Grove does something smaller and steadier — it widens the gap between the reflex and the choice.</p>
+        </div>
+        <div class="proj-features">
+          <article class="proj-feat reveal">
+            <div class="proj-feat__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            </div>
+            <h3>The threshold</h3>
+            <p>A breath-long pause sits between reaching for a distracting app and opening it. Just enough room to choose on purpose.</p>
+          </article>
+          <article class="proj-feat reveal">
+            <div class="proj-feat__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h10M4 17h7"/></svg>
+            </div>
+            <h3>Focus profiles</h3>
+            <p>Deep Work, Evenings, Sleep — set up the rules while you are calm, so the calm version of you protects the rest.</p>
+          </article>
+          <article class="proj-feat reveal">
+            <div class="proj-feat__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <h3>Commitment modes</h3>
+            <p>Gentle, Committed, Locked. Easy to plan when you're steady, deliberately hard to unwind when you're not.</p>
+          </article>
+          <article class="proj-feat reveal">
+            <div class="proj-feat__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>
+            </div>
+            <h3>Honest insights</h3>
+            <p>How many times you stepped away this week. No red, no shaming, no comparison to anyone — and all of it stays on your device.</p>
+          </article>
+          <article class="proj-feat reveal">
+            <div class="proj-feat__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a7.5 7.5 0 0 0 8.31 12.45A9 9 0 1 1 12 3z"/></svg>
+            </div>
+            <h3>Calm over clever</h3>
+            <p>No dark patterns, no manufactured urgency, no guilt. The tone is steady and adult — it never scolds, and never celebrates too hard.</p>
+          </article>
+          <article class="proj-feat reveal">
+            <div class="proj-feat__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M11 18h2"/></svg>
+            </div>
+            <h3>Native to the bone</h3>
+            <p>Widgets, Live Activities, App Intents, considered haptics. If Apple ships a way to do something well, Grove uses it.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="proj-section">
+      <div class="container">
+        <div class="proj-section__head">
+          <span class="proj-section__eyebrow">How it works</span>
+          <h2 class="proj-section__title">Three steps.<br>Then mostly silence.</h2>
+        </div>
+        <div class="proj-steps">
+          <div class="proj-step reveal">
+            <div class="proj-step__num">01</div>
+            <div>
+              <h3>Build a focus profile</h3>
+              <p>Choose the apps that pull you under and the moments that matter — Deep Work, Evenings, Sleep. Set it once, calmly.</p>
+            </div>
+          </div>
+          <div class="proj-step reveal">
+            <div class="proj-step__num">02</div>
+            <div>
+              <h3>Meet the threshold</h3>
+              <p>When you reach for a guarded app, Grove opens a brief, quiet pause — then hands the choice back to you.</p>
+            </div>
+          </div>
+          <div class="proj-step reveal">
+            <div class="proj-step__num">03</div>
+            <div>
+              <h3>Watch the gap widen</h3>
+              <p>Over days, the pause does its quiet work. The reaching slows, the choosing becomes the habit, and the app fades into the background.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Philosophy -->
+    <section class="proj-section">
+      <div class="container">
+        <div class="proj-section__head">
+          <span class="proj-section__eyebrow">What I believe</span>
+          <h2 class="proj-section__title">Discernment,<br>not suppression.</h2>
+          <p class="proj-section__lead">A product is judged by its single best interaction, not its feature list. For Grove that is the threshold moment — and everything else is in service of it. Commitments are simple to set when you're calm and deliberately resistant to unwind when you're not. That's the honest answer to "it's too easy to bypass."</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech stack -->
+    <section class="proj-section">
+      <div class="container">
+        <div class="proj-section__head">
+          <span class="proj-section__eyebrow">Tech stack</span>
+          <h2 class="proj-section__title">Built calm, built native.</h2>
+        </div>
+        <div class="proj-stack">
+          <span>Next.js · TypeScript <em>(web)</em></span>
+          <span>Swift · SwiftUI</span>
+          <span>App Intents</span>
+          <span>Widgets · Live Activities</span>
+          <span>Screen Time API</span>
+          <span>On-device only</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="proj-cta">
+      <div class="container">
+        <h2 class="proj-cta__title">Get your <span class="grad">attention back.</span></h2>
+        <p class="proj-cta__sub">Try Grove in your browser now — coming to iPhone in 2026.</p>
+        <a href="https://grove-focus.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn--proj btn--lg btn--magnetic">
+          Open Grove
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__bottom">
+        <span>© 2026 Yash Soni · Crafted with intention</span>
+        <span><a href="/#work">Work</a> · <a href="/">Portfolio</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/project.js"></script>
+</body>
+</html>
