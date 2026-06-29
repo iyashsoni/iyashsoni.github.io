@@ -147,6 +147,26 @@
 }
 .btn--proj:hover { filter: brightness(1.08); transform: translateY(-1px); }
 
+/* Non-interactive "launching soon" state */
+.btn--soon {
+  cursor: default;
+  background: var(--surface-elev);
+  color: var(--ink-2);
+  border: 1px solid var(--hairline-strong);
+  box-shadow: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.btn--soon::before {
+  content: '';
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--proj-accent, var(--accent));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--proj-accent, var(--accent)) 24%, transparent);
+}
+.btn--soon:hover { filter: none; transform: none; }
+
 /* ── Hero device mock ──────────────────────────── */
 .proj-hero__visual {
   position: relative;

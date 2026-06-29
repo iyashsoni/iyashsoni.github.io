@@ -69,10 +69,12 @@ function initTypewriter() {
 
   const phrases = [
     'Engineer. Thinker. Seeker.',
-    'Spearheading COS at IBM.',
+    'Leading COS at IBM.',
+    '~820,000 instances. One control plane.',
+    'Building with AI, every single day.',
+    'Shipping privacy-first apps solo.',
     'From Ahmedabad to Bangalore.',
     'Chasing markets, music & meaning.',
-    'IIIT-B MTech · 10 years in tech.',
     'Curious about everything.',
   ];
 
