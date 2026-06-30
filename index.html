@@ -105,7 +105,6 @@
       </a>
       <ul class="nav__links" role="list">
         <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
         <li><a href="#work">Work</a></li>
         <li><a href="#writing">Writing</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -131,7 +130,6 @@
   <nav class="nav__mobile" id="mobile-menu" aria-label="Mobile navigation">
     <a href="#about">About</a>
     <a href="#ai">AI</a>
-    <a href="#experience">Experience</a>
     <a href="#work">Work</a>
     <a href="#writing">Writing</a>
     <a href="/blog/">Blog</a>
@@ -337,89 +335,6 @@
         It's about <em>decisions that age well.</em>
       </p>
       <p class="manifesto__attribution">— A note to my younger self</p>
-    </div>
-  </section>
-
-  <!-- ── Experience ──────────────────────────────────── -->
-  <section class="section" id="experience" aria-label="Experience">
-    <div class="container">
-      <div class="section__head">
-        <div>
-          <span class="section__eyebrow reveal">Experience</span>
-          <h2 class="section__heading reveal">A decade, mostly<br>at petabyte scale.</h2>
-          <p class="section__lead reveal">Eight years at IBM — from mobile backends to owning a cloud storage control plane that quietly keeps hundreds of thousands of instances running.</p>
-        </div>
-      </div>
-
-      <!-- Impact strip -->
-      <div class="impact reveal stagger">
-        <div class="impact__item reveal">
-          <span class="impact__num">820K</span>
-          <span class="impact__label">Active COS instances under my control plane</span>
-        </div>
-        <div class="impact__item reveal">
-          <span class="impact__num">14.7M</span>
-          <span class="impact__label">Control-plane API requests handled / month</span>
-        </div>
-        <div class="impact__item reveal">
-          <span class="impact__num">PB-scale</span>
-          <span class="impact__label">Zero-downtime SoftLayer → IBM Cloud migration</span>
-        </div>
-        <div class="impact__item reveal">
-          <span class="impact__num">~$15K<span class="impact__sub">/mo</span></span>
-          <span class="impact__label">Infrastructure cost cut by consolidating workloads</span>
-        </div>
-      </div>
-
-      <ol class="timeline">
-        <li class="xp reveal">
-          <div class="xp__rail" aria-hidden="true"><span class="xp__dot"></span></div>
-          <div class="xp__body">
-            <div class="xp__head">
-              <h3 class="xp__role">Software Engineering Lead</h3>
-              <span class="xp__period">2023 — Present</span>
-            </div>
-            <p class="xp__org">IBM · Cloud Object Storage · Bangalore</p>
-            <ul class="xp__points">
-              <li>Owns the COS <strong>control plane &amp; billing</strong> — provisioning/deprovisioning, credential and HMAC issuance, IAM, and usage-based metering (Class A/B requests, storage, bandwidth, retrieval) across <strong>~820,000 active instances</strong>.</li>
-              <li>Operates the edge layer fronting the control plane (IBM Cloud Internet Services) — load balancers, origin pools, health checks, TLS, and monitoring — handling <strong>~14.7M API requests/month</strong>.</li>
-              <li>Architected and delivered a <strong>zero-downtime, petabyte-scale migration</strong> of legacy SoftLayer instances to IBM Cloud with <em>no movement of object data</em> — recreating each instance under its original UUID and migrating HMAC credentials to IAM, so customer apps kept working with the same IDs and keys, zero client-side changes.</li>
-              <li>Led the migration of IKS Classic clusters to <strong>OpenShift on VPC</strong>, modernizing the runtime and network-security posture (VPC, security groups, private workers).</li>
-              <li>Cut infrastructure cost by <strong>~$10–15K / month</strong> by consolidating workloads onto under-utilized clusters.</li>
-              <li>Designed an in-product upgrade experience for Free-tier customers that lifted Standard-tier <strong>conversion by ~10–15%</strong>.</li>
-              <li>Leads a team of <strong>8 engineers</strong>; escalation owner for premium-customer issues and runs internal enablement on COS tooling and diagnostics.</li>
-            </ul>
-          </div>
-        </li>
-
-        <li class="xp reveal">
-          <div class="xp__rail" aria-hidden="true"><span class="xp__dot"></span></div>
-          <div class="xp__body">
-            <div class="xp__head">
-              <h3 class="xp__role">Software Engineer</h3>
-              <span class="xp__period">2021 — 2023</span>
-            </div>
-            <p class="xp__org">IBM · Cloud Object Storage · Bangalore</p>
-            <ul class="xp__points">
-              <li>Built and shipped the customer-facing <strong>console UI for COS</strong> — instance management, credentials, and usage &amp; metrics views.</li>
-            </ul>
-          </div>
-        </li>
-
-        <li class="xp reveal">
-          <div class="xp__rail" aria-hidden="true"><span class="xp__dot"></span></div>
-          <div class="xp__body">
-            <div class="xp__head">
-              <h3 class="xp__role">Software Engineer</h3>
-              <span class="xp__period">2018 — 2021</span>
-            </div>
-            <p class="xp__org">IBM · MobileFirst Platform · Bangalore</p>
-            <ul class="xp__points">
-              <li>Developed client SDKs, console UI, and analytics microservices for <strong>IBM MobileFirst</strong> — a Firebase-style mobile backend platform (since retired).</li>
-            </ul>
-          </div>
-        </li>
-      </ol>
     </div>
   </section>
 
@@ -758,7 +673,6 @@
           <ul role="list">
             <li><a href="#about">About</a></li>
             <li><a href="#ai">AI</a></li>
-            <li><a href="#experience">Experience</a></li>
             <li><a href="#work">Work</a></li>
             <li><a href="#writing">Writing</a></li>
             <li><a href="#contact">Contact</a></li>
