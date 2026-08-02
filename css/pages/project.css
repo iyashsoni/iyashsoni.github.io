@@ -17,6 +17,8 @@
 [data-project="tinyfiles"] { --proj-accent: #6e8cff; --proj-accent-2: #b15bff; }
 [data-project="grove"]     { --proj-accent: #5f8d63; --proj-accent-2: #8bb46a; }
 [data-project="samara"]    { --proj-accent: #c77d3c; --proj-accent-2: #b0566f; }
+[data-project="sutra"]     { --proj-accent: #3d7df6; --proj-accent-2: #34d6f0; }
+[data-project="openscan"]  { --proj-accent: #38bdf8; --proj-accent-2: #6366f1; }
 
 /* ── Project nav brand ─────────────────────────── */
 .proj-brand {
