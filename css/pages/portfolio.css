@@ -569,6 +569,8 @@
 
 .tile--grove   { --tile-chip: #5fa566; --tile-glow: rgba(95,165,102,0.16); --tile-edge: rgba(95,165,102,0.34); --tile-edge-2: rgba(139,180,106,0.22); }
 .tile--samara  { --tile-chip: #cb8a45; --tile-glow: rgba(199,125,60,0.15); --tile-edge: rgba(199,125,60,0.34); --tile-edge-2: rgba(176,86,111,0.22); }
+.tile--sutra   { --tile-chip: #3d7df6; --tile-glow: rgba(61,125,246,0.16); --tile-edge: rgba(61,125,246,0.35); --tile-edge-2: rgba(52,214,240,0.22); }
+.tile--openscan { --tile-chip: #38bdf8; --tile-glow: rgba(56,189,248,0.15); --tile-edge: rgba(56,189,248,0.34); --tile-edge-2: rgba(99,102,241,0.22); }
 
 .tile__badge {
   display: inline-flex;
